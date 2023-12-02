@@ -6,8 +6,15 @@
     <description>Recent content on Muscial Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 04 Nov 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 04 Jun 2018 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://muscial.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NKctf</title>
+      <link>https://muscial.github.io/post/test/</link>
+      <pubDate>Mon, 04 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>https://muscial.github.io/post/test/</guid>
+      <description>babyser &amp;lt;?php error_reporting(0); class Welcome{ public $name; public $arg = &amp;#39;oww!man!!&amp;#39;; public function __construct(){ $this-&amp;gt;name = &amp;#39;ItS SO CREAZY&amp;#39;; } public function __destruct(){ if($this-&amp;gt;name == &amp;#39;welcome_to_NKCTF&amp;#39;){ echo $this-&amp;gt;arg; } } } function waf($string){ if(preg_match(&amp;#39;/f|l|a|g|\\*|\\?/i&amp;#39;, $string)){ die(&amp;#34;you are bad&amp;#34;); } } class Happy{ public $shell; public $cmd; public function __invoke(){ $shell = $this-&amp;gt;shell; $cmd = $this-&amp;gt;cmd; waf($cmd); eval($shell($cmd)); } } class Hell0{ public $func; public function __toString(){ $function = $this-&amp;gt;func; $function();</description>
+    </item>
     <item>
       <title>Welcome to Muscial Blog</title>
       <link>https://muscial.github.io/2017/11/03/hello-world/</link>
