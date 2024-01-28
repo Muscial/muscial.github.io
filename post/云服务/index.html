@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="" />
-    <meta property="og:title" content="" />
-    <meta property="twitter:title" content="" />
+    <meta name="title" content="云服务基础" />
+    <meta property="og:title" content="云服务基础" />
+    <meta property="twitter:title" content="云服务基础" />
     
 
     
@@ -34,7 +34,7 @@
     <meta name="keyword"  content="Muscial">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Muscial的博客 | 保持冷静，奋不顾身</title>
+    <title>云服务基础 | Muscial的博客 | 保持冷静，奋不顾身</title>
 
     <link rel="canonical" href="/post/%E4%BA%91%E6%9C%8D%E5%8A%A1/">
 
@@ -172,13 +172,13 @@
                     <div class="tags">
                         
                     </div>
-                    <h1></h1>
-                    <h2 class="subheading"></h2>
+                    <h1>云服务基础</h1>
+                    <h2 class="subheading">Cloud Security</h2>
                     <span class="meta">
                         
                             Posted by 
                             
-                                    Muscial Blog
+                                Muscial
                              
                             on 
                             Monday, January 1, 0001
@@ -226,7 +226,7 @@
 <p>对象存储经典s3协议，主流厂商都支持</p>
 <p>在 Amazon S3 标准下中，对象存储中可以有多个桶（Bucket），然后把对象（Object）放在桶里，对象又包含了三个部分：<code>Key</code>、<code>Data</code> 和<code>Metadata</code></p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/1.png" alt="Untitled">
 
 </p>
 <ul>
@@ -240,12 +240,12 @@
 <p>当不知道 Bucket 名称的时候，可以通过爆破获得 Bucket 名称，这有些类似于目录爆破，只不过目录爆破一般通过状态码判断，而这个通过页面的内容判断。</p>
 <p>当 Bucket 不存在时有两种返回情况，分别是 InvalidBucketName 和 NoSuchBucket</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%201.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/2.png" alt="Untitled">
 
 </p>
 <p>当 Bucket 存在时也会有两种情况，一种是列出 Object（flag metadata data</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%202.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/3.png" alt="Untitled">
 
 </p>
 <p>另一种是返回 AccessDenied</p>
@@ -302,28 +302,28 @@
 <p>网站 是s3 对象存储的云服务，但是没桶（网盘，我们就可以夺舍,夺舍了 该网站的子域名就归我们管了 可以上传文件</p>
 <p>一般没网盘 是 nosuchbuctet</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%204.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/4.png" alt="Untitled">
 
 </p>
 <p>通过 cname 记录，可以判断出这是一个 Amazon 的 S3，而且页面显示 NoSuchBucket，说明这个 Bucket 可以接管的，同时 Bucket 的名称在页面中也告诉了我们，为 <code>test.teamssix.com</code></p>
 <p>那么我们就直接在 AWS 控制台里创建一个名称为 <code>test.teamssix.com</code> 的 Bucket 就可以接管了</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%205.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/5.png" alt="Untitled">
 
 </p>
 <p>创建完 Bucket 后，再次访问发现就显示 AccessDenied 了，说明该 Bucket 已经被我们接管了。</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%206.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/6.png" alt="Untitled">
 
 </p>
 <p>将该 Bucket 设置为公开，并上传个文件试试</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%207.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/7.png" alt="Untitled">
 
 </p>
 <p>在该子域名下访问这个 test.txt 文件</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%208.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/8.png" alt="Untitled">
 
 </p>
 <p>可以看到通过接管 Bucket 成功接管了这个子域名的权限</p>
@@ -331,7 +331,7 @@
 <h2 id="对象存储的任意文件上传">对象存储的任意文件上传</h2>
 <p>配置时候把公共读写打开了，就可以通过put的http请求上传任意文件</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%209.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/9.png" alt="Untitled">
 
 </p>
 <p>一般不解析php，但是解析HTML</p>
@@ -357,7 +357,7 @@
 <p>当为 group 时，意味着授权对象为一个群组，目前只支持 group 为 QS_ALL_USERS，授权对象为所有用户，此时用户可以是在系统注册的用户，也可以是未在系统注册的用户（即跳过用户身份验证的匿名用户）。</p>
 <p>这里是用的预定义的组，grantee url 修改成alluser 任何人可读可以写</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2010.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/10.png" alt="Untitled">
 
 </p>
 <h3 id="permission-权限"><strong>permission 权限</strong></h3>
@@ -437,7 +437,7 @@
 </ul>
 <p>下面来个实例解释下bucket 策略</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2011.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/11.png" alt="Untitled">
 
 </p>
 <h3 id="本漏洞的实例">本漏洞的实例</h3>
@@ -445,7 +445,7 @@
 <p>小的url-》key定义了获得对象但是Deny</p>
 <p>这个时候修改大桶的策略就行了</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2012.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/12.png" alt="Untitled">
 
 </p>
 <h2 id="实际利用">实际利用</h2>
@@ -583,7 +583,7 @@ Oracle Cloud
 <p><a href="http://x.x.x.x/url=http://169.254.169.254/latest/metadata/iam/security-credentials/">http://x.x.x.x/url=http://169.254.169.254/latest/metadata/iam/security-credentials/</a>+rolename</p>
 <p>获取角色临时凭据的案例可参见下图:</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2013.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/13.png" alt="Untitled">
 
 </p>
 <p>然后就是看角色绑定的策略了，以及读数据，权限维持，这个等有实例的时候细说</p>
@@ -607,7 +607,7 @@ Oracle Cloud
 <p>在 AWS 下，修改用户数据需要停止实例，在 AWS 下停止实例会擦除实例存储卷上的所有数据，如果没设置弹性 IP，实例的公有 IP 也会变化，因此停止实例需谨慎。</p>
 <p>修改用户数据的位置在：操作-&gt; 实例设置-&gt;编辑用户数据</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2014.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/14.png" alt="Untitled">
 
 </p>
 <p>这里以执行 touch 命令为例，如果用户数据设置为以下内容，那么实例只有才第一次启动才会运行</p>
@@ -636,7 +636,7 @@ Oracle Cloud
 </span></span><span style="display:flex;"><span>touch <span style="color:#ff79c6">/</span>tmp<span style="color:#ff79c6">/</span>teamssix.txt
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">--</span><span style="color:#6272a4">//--
 </span></span></span></code></pre></div><p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2015.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/15.png" alt="Untitled">
 
 </p>
 <h3 id="命令行"><strong>命令行</strong></h3>
@@ -734,7 +734,7 @@ Oracle Cloud
 <h2 id="云控制台上的一套身份管理服务">云控制台上的一套身份管理服务</h2>
 <p>如果当前用户具备编辑 IAM 策略的权限，但没有某些服务权限的话，那么可以在 IAM 中开启这个服务权限，以实现提权。</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2016.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/16.png" alt="Untitled">
 
 </p>
 <h2 id="利用-iam-进行权限维持"><strong>利用 IAM 进行权限维持</strong></h2>
@@ -742,7 +742,7 @@ Oracle Cloud
 <p>例如这里选择添加用户，访问类型选择控制台密码</p>
 <p>设置权限」选择「直接附加现有策略」，策略选择「AdministratorAccess」，即表示附加所有策略</p>
 <p>
-  <img src="%E4%BA%91%E6%9C%8D%E5%8A%A1%202bc370f4b05641a7baade919fdeb6e13/Untitled%2017.png" alt="Untitled">
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/%E4%BA%91%E6%9C%8D%E5%8A%A1/17.png" alt="Untitled">
 
 </p>
 <h2 id="在-aws-下查看自己所拥有的权限"><strong>在 AWS 下查看自己所拥有的权限</strong></h2>
