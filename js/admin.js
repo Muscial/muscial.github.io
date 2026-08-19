@@ -571,7 +571,8 @@
 
   function viewBlog(main) {
     var blogs = allBlogs();
-    main.innerHTML = viewHead('FIELD NOTES / BLOG', 'NOTES / ' + blogs.length) +
+    var dbCount = (data.blogs || []).length;
+    main.innerHTML = viewHead('FIELD NOTES / BLOG', 'NOTES / ' + blogs.length + ' (' + dbCount + ' DB)') +
       '<div class="toolbar">' +
       '<button class="cbtn" id="blog-new">' + S.icon('plus') + ' NEW NOTE (DB)</button>' +
       '<span style="font-family:var(--mono);font-size:10px;color:var(--text-faint);letter-spacing:.1em">文件型笔记在 data/posts/*.md 中管理</span>' +
