@@ -361,8 +361,12 @@ button { font-family: inherit; cursor: pointer; }
   border-color: transparent; font-weight: 700;
   box-shadow: 0 0 20px rgba(110, 231, 255, 0.25);
 }
-.records-panel { display: none; }
-.records-panel.active { display: block; }
+.records-panel { display: block; padding-top: 10px; }
+.sub-heading { margin: 46px 0 8px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.sub-heading .sub-index { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.26em; color: var(--accent); border: 1px solid var(--line-strong); border-radius: 999px; padding: 3px 11px; display: inline-block; margin-bottom: 12px; }
+.sub-heading h3 { font-size: clamp(20px, 3vw, 26px); font-weight: 600; letter-spacing: 0.03em; }
+.sub-heading p { color: var(--text-dim); font-size: 13px; margin-top: 6px; }
+.records-panel + .records-panel { margin-top: 34px; border-top: 1px dashed var(--line); padding-top: 40px; }
 .search-box {
   display: flex; align-items: center; gap: 10px;
   background: var(--panel); border: 1px solid var(--line); border-radius: 999px;

@@ -124,45 +124,33 @@
 
   if (orbit && topAnime.length) renderOrbit();
 
-  /* ---------- records: module switch ---------- */
+  /* ---------- records: module navigation (全部模块初始即渲染，平铺展示) ---------- */
   var tabDefs = [
-    { id: 'anime', label: st.animeTabLabel || 'ANIME LIST', title: st.archiveTitle, desc: st.animeDescription },
-    { id: 'watchlist', label: st.watchlistTabLabel || 'BACKLOG', title: st.watchlistTitle, desc: st.watchlistDescription },
-    { id: 'blog', label: st.blogTabLabel || 'BLOG NOTES', title: st.blogTitle, desc: st.blogDescription }
+    { id: 'anime', label: st.animeTabLabel || 'ANIME LIST', panelId: 'records-anime' },
+    { id: 'watchlist', label: st.watchlistTabLabel || 'BACKLOG', panelId: 'records-watchlist' },
+    { id: 'blog', label: st.blogTabLabel || 'BLOG NOTES', panelId: 'records-blog' }
   ];
   var tabBar = document.getElementById('records-tabs');
-  var recordsTitle = document.getElementById('records-title');
-  var recordsDesc = document.getElementById('records-desc');
   var currentTab = 'anime';
 
-  function setTab(id) {
+  function setTab(id, opts) {
+    opts = opts || {};
     currentTab = id;
     tabBar.querySelectorAll('button[data-tab]').forEach(function (t) {
       t.classList.toggle('is-active', t.getAttribute('data-tab') === id);
       t.setAttribute('aria-selected', t.getAttribute('data-tab') === id ? 'true' : 'false');
     });
-    ['anime', 'watchlist', 'blog'].forEach(function (p) {
-      document.getElementById('panel-' + p).classList.toggle('active', p === id);
-    });
     var def = tabDefs.filter(function (d) { return d.id === id; })[0];
-    if (def) {
-      recordsTitle.textContent = def.title;
-      recordsDesc.textContent = def.desc || '';
+    if (def && opts.scroll !== false) {
+      var panel = document.getElementById(def.panelId);
+      if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    if (id === 'anime') renderAnime();
-    if (id === 'watchlist') renderWatchlist();
-    if (id === 'blog') renderBlog();
-    try {
-      var rec = document.getElementById('records');
-      if (rec) rec.setAttribute('data-active-tab', id);
-      history.replaceState(null, '', '#records-' + id);
-    } catch (e) { /* ignore */ }
   }
 
-  /* nav deep links: ANIME / BACKLOG / BLOG -> switch module + scroll */
+  /* nav deep links: ANIME / BACKLOG / BLOG -> 高亮并跳转（原生锚点滚动） */
   document.querySelectorAll('.main-nav a[data-tab]').forEach(function (a) {
     a.addEventListener('click', function () {
-      setTab(a.getAttribute('data-tab'));
+      setTab(a.getAttribute('data-tab'), { scroll: false });
     });
   });
 
@@ -435,9 +423,7 @@
     } else if (h.indexOf('#records-') === 0) {
       var tab = h.slice(9);
       if (['anime', 'watchlist', 'blog'].indexOf(tab) > -1) {
-        setTab(tab);
-        var rec = document.getElementById('records');
-        if (rec) rec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTab(tab, { scroll: false });
       }
     }
   }
@@ -445,16 +431,21 @@
 
   /* ---------- init ---------- */
   function init() {
+    /* 全部模块初始即渲染，平铺在页面下方 */
+    renderAnime();
+    renderWatchlist();
+    renderBlog();
     var initial = 'anime';
+    var scrollTo = null;
     try {
       var q = new URLSearchParams(window.location.search).get('tab');
-      if (q && ['anime', 'watchlist', 'blog'].indexOf(q) > -1) initial = q;
+      if (q && ['anime', 'watchlist', 'blog'].indexOf(q) > -1) { initial = q; scrollTo = q; }
       else {
         var h = window.location.hash;
         if (h.indexOf('#records-') === 0 && ['anime', 'watchlist', 'blog'].indexOf(h.slice(9)) > -1) initial = h.slice(9);
       }
     } catch (e) { /* ignore */ }
-    setTab(initial);
+    setTab(initial, { scroll: false });
     S.initBoot();
     S.initReveal();
     S.initTopbar();

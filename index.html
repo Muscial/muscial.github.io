@@ -142,13 +142,19 @@
       <div class="records-heading">
         <div class="section-heading" style="margin-bottom:0">
           <div><span class="section-index">03</span><p class="eyebrow" data-i18n="recordsEyebrow">ARCHIVE / FIELD NOTES</p></div>
-          <h2 id="records-title" data-i18n="archiveTitle">ANIME LIST / 观看时间线</h2>
-          <p class="desc" id="records-desc"></p>
+          <h2 data-i18n="recordsTitle">档案总览。</h2>
+          <p class="desc" data-i18n="recordsDescription"></p>
         </div>
-        <div class="module-switch" role="tablist" aria-label="档案内容切换" id="records-tabs"></div>
+        <div class="module-switch" role="tablist" aria-label="档案内容导航" id="records-tabs"></div>
       </div>
 
-      <div class="module-stage">
+      <!-- anime panel -->
+      <div class="records-panel" id="records-anime">
+        <div class="sub-heading">
+          <span class="sub-index">03/A</span>
+          <h3 data-i18n="archiveTitle">ANIME LIST / 观看时间线</h3>
+          <p data-i18n="animeDescription"></p>
+        </div>
         <div class="archive-controls">
           <label class="search-field">
             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
@@ -156,21 +162,27 @@
           </label>
           <div class="year-filter" id="year-chips" role="group" aria-label="按年份筛选"></div>
         </div>
+        <div class="timeline" id="anime-timeline"></div>
+      </div>
 
-        <!-- anime panel -->
-        <div class="records-panel active" id="panel-anime">
-          <div class="timeline" id="anime-timeline"></div>
+      <!-- watchlist panel -->
+      <div class="records-panel" id="records-watchlist">
+        <div class="sub-heading">
+          <span class="sub-index">03/B</span>
+          <h3 data-i18n="watchlistTitle">BACKLOG / 补番列表</h3>
+          <p data-i18n="watchlistDescription"></p>
         </div>
+        <div class="watchlist-timeline" id="watchlist-timeline"></div>
+      </div>
 
-        <!-- watchlist panel -->
-        <div class="records-panel" id="panel-watchlist">
-          <div class="watchlist-timeline" id="watchlist-timeline"></div>
+      <!-- blog panel -->
+      <div class="records-panel" id="records-blog">
+        <div class="sub-heading">
+          <span class="sub-index">03/C</span>
+          <h3 data-i18n="blogTitle">FIELD NOTES / 博客杂谈</h3>
+          <p data-i18n="blogDescription"></p>
         </div>
-
-        <!-- blog panel -->
-        <div class="records-panel" id="panel-blog">
-          <div class="blog-index" id="blog-grid"></div>
-        </div>
+        <div class="blog-index" id="blog-grid"></div>
       </div>
     </section>
 
