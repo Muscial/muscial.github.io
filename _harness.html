@@ -1,0 +1,5 @@
+<script>
+sessionStorage.setItem('mal-doctor', '1');
+var v = location.search ? location.search.slice(1) : '';
+location.replace('/admin.html?view=' + v);
+</script>
