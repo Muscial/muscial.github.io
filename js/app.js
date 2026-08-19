@@ -423,7 +423,7 @@
 
   function closeNote() {
     document.getElementById('note-view').style.display = 'none';
-    try { history.replaceState(null, '', window.location.pathname); } catch (e) { /* ignore */ }
+    try { history.replaceState(null, '', '/' + window.location.search + window.location.hash); } catch (e) { /* ignore */ }
     document.getElementById('records').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 

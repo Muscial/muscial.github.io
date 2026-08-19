@@ -14,7 +14,13 @@
   <meta name="theme-color" content="#04050c">
   <meta name="color-scheme" content="dark">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://muscial.github.io/">
   <link rel="stylesheet" href="css/style.css">
+  <script>
+    if (window.location.pathname.replace(/\/+$/, '') === '/index.html') {
+      window.location.replace('/' + window.location.search + window.location.hash);
+    }
+  </script>
 </head>
 <body>
   <div class="cosmos-stage" aria-hidden="true">

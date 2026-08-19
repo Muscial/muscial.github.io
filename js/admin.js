@@ -601,7 +601,7 @@
       var act = b.getAttribute('data-act');
       if (act === 'edit') blogEdit(slug);
       else if (act === 'del') blogDelete(slug);
-      else if (act === 'view') window.open('index.html#note-' + slug, '_blank');
+      else if (act === 'view') window.open('/#note-' + slug, '_blank');
     });
     $('#blog-new').addEventListener('click', function () { blogEdit(null); });
   }
