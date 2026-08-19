@@ -68,8 +68,9 @@
   var selected = 0;
 
   function coverHtml(a, cls, fbCls) {
+    var src = coverSrc(a.imageUrl, 200);
     return '<div class="' + (cls || '') + '">' +
-      (a.imageUrl ? '<img src="' + S.escapeHtml(a.imageUrl) + '" alt="" loading="lazy" decoding="async">' : '') +
+      (src ? '<img src="' + S.escapeHtml(src) + '" alt="" loading="lazy" decoding="async">' : '') +
       '<span class="' + (fbCls || 'cover-fallback') + '">' + S.avatarInitial(a.titleCn) + '</span></div>';
   }
 
@@ -223,6 +224,63 @@
 
   var STAR_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>';
 
+  /* 封面降采样：卡片仅需小图，按需取 r/200 或 r/300，大幅减少下载体积 */
+  function coverSrc(u, size) {
+    if (!u) return '';
+    return u.indexOf('/r/400/') > -1 ? u.replace('/r/400/', '/r/' + size + '/') : u;
+  }
+  var eagerLeft = 12;
+
+  /* 自定义懒加载：视口外 240px 才加载；IO 主用 + 滚动检测兜底，保证任何环境都生效 */
+  var lazyIO = null;
+  function swapLazyImg(img) {
+    if (!img.dataset.src) return;
+    img.addEventListener('error', function () { img.style.display = 'none'; }, { once: true });
+    img.src = img.dataset.src;
+    delete img.dataset.src;
+  }
+  function setupLazyImages(root) {
+    var loadNear = function () {
+      root.querySelectorAll('img[data-src]').forEach(function (img) {
+        if (!img.dataset.src) return;
+        var r = img.getBoundingClientRect();
+        if (r.width === 0 && r.height === 0) return; /* 尚未布局，跳过 */
+        if (r.top < (window.innerHeight || 900) + 300 && r.bottom > -300) {
+          swapLazyImg(img);
+        }
+      });
+    };
+    if ('IntersectionObserver' in window) {
+      if (!lazyIO) {
+        lazyIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            swapLazyImg(en.target);
+            lazyIO.unobserve(en.target);
+          });
+        }, { rootMargin: '240px 0px' });
+      }
+      root.querySelectorAll('img[data-src]').forEach(function (img) { lazyIO.observe(img); });
+    }
+    /* 滚动/缩放兜底（时间戳节流，不依赖 rAF），兼容 IO 不可用或被延迟的环境 */
+    var lastCheck = 0;
+    var onScroll = function () {
+      var now = Date.now();
+      if (now - lastCheck < 120) return;
+      lastCheck = now;
+      loadNear();
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    setTimeout(loadNear, 120);
+    /* 定时兜底：仍有未加载图片时周期性扫描（布局异步变化场景） */
+    var safety = setInterval(function () {
+      if (!root.querySelector('img[data-src]')) { clearInterval(safety); return; }
+      lastCheck = 0;
+      loadNear();
+    }, 700);
+  }
+
   function renderAnime() {
     var container = document.getElementById('anime-timeline');
     var list = data.anime.filter(matchesAnime);
@@ -254,12 +312,19 @@
       return '<section class="year-group">' +
         '<div class="year-rail"><span>' + S.escapeHtml(st.timelineYearLabel || 'TIMELINE YEAR') + '</span>' +
         '<h3>' + y + '</h3><p>' + String(items.length).padStart(2, '0') + ' ' + S.escapeHtml(st.timelineRecordsLabel || 'RECORDS') + '</p><i></i></div>' +
-        '<div class="anime-grid">' + items.map(function (a, ai) {
+        '<div class="anime-grid">' + items.map(function (a) {
           var sn = serialIndex[a.id];
-          var fp = ai < 12 ? ' fetchpriority="high" loading="eager"' : ' loading="lazy"';
+          var src = coverSrc(a.imageUrl, 200);
+          var imgAttr;
+          if (eagerLeft > 0) {
+            imgAttr = ' src="' + S.escapeHtml(src) + '" fetchpriority="high"';
+            eagerLeft--;
+          } else {
+            imgAttr = ' data-src="' + S.escapeHtml(src) + '"';
+          }
           return '<article class="anime-card" title="' + S.escapeHtml(a.titleCn) + (a.titleOriginal ? ' / ' + S.escapeHtml(a.titleOriginal) : '') + '">' +
             '<a class="anime-cover" href="' + S.escapeHtml(a.bangumiUrl) + '" target="_blank" rel="noopener" aria-label="' + S.escapeHtml(a.titleCn) + '，前往 Bangumi">' +
-            (a.imageUrl ? '<img src="' + S.escapeHtml(a.imageUrl) + '" alt="' + S.escapeHtml(a.titleCn) + ' 封面"' + fp + ' decoding="async">' : '') +
+            (src ? '<img alt="' + S.escapeHtml(a.titleCn) + ' 封面"' + imgAttr + ' decoding="async">' : '') +
             '<span class="cover-fallback">' + S.avatarInitial(a.titleCn) + '</span>' +
             '<span class="anime-serial">' + serial(sn) + '</span>' +
             '<span class="anime-score">' + STAR_SVG + ' ' + (a.score != null ? a.score : '—') + '</span>' +
@@ -268,6 +333,7 @@
         }).join('') + '</div></section>';
     }).join('');
     S.setupCoverFallbacks(container);
+    setupLazyImages(container);
   }
 
   /* ---------- watchlist ---------- */
@@ -298,9 +364,10 @@
         '<p>' + items.length + ' ' + S.escapeHtml(st.watchlistRecordsLabel || 'PENDING TITLES') + '</p><i></i></div>' +
         '<div class="watchlist-grid">' + items.map(function (w) {
           var exp = w.expectationScore != null ? w.expectationScore : 0;
+          var src = coverSrc(w.imageUrl, 300);
           return '<div class="watchlist-card">' +
             '<a class="watchlist-cover" href="' + S.escapeHtml(w.bangumiUrl) + '" target="_blank" rel="noopener">' +
-            (w.imageUrl ? '<img src="' + S.escapeHtml(w.imageUrl) + '" alt="' + S.escapeHtml(w.titleCn) + ' 封面" loading="lazy" decoding="async">' : '') +
+            (src ? '<img alt="' + S.escapeHtml(w.titleCn) + ' 封面" data-src="' + S.escapeHtml(src) + '" decoding="async">' : '') +
             '<span class="cover-fallback">' + S.avatarInitial(w.titleCn) + '</span>' +
             '<span class="watchlist-serial">MAL-W' + String(gi + 1).padStart(2, '0') + '</span>' +
             '<span class="expectation-score">' + exp.toFixed(1) + '</span>' +
@@ -323,6 +390,7 @@
         }).join('') + '</div></section>';
     }).join('');
     S.setupCoverFallbacks(container);
+    setupLazyImages(container);
   }
 
   /* ---------- blog ---------- */

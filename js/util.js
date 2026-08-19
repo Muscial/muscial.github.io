@@ -120,6 +120,7 @@
     imgs.forEach(function (img) {
       if (img.dataset.fbBound) return;
       img.dataset.fbBound = '1';
+      if (img.dataset.src) return; /* 懒加载图片由加载流程接管 */
       img.addEventListener('error', function () { img.style.display = 'none'; });
       if (img.complete && img.naturalWidth === 0) img.style.display = 'none';
     });
