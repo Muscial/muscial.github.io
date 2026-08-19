@@ -68,8 +68,9 @@
   var selected = 0;
 
   function coverHtml(a, cls, fbCls) {
-    return '<div class="' + (cls || '') + '"><img src="' + S.escapeHtml(a.imageUrl || '') + '" alt="" loading="lazy">' +
-      '<span class="' + (fbCls || 'cover-fallback') + '" style="display:none">' + S.avatarInitial(a.titleCn) + '</span></div>';
+    return '<div class="' + (cls || '') + '">' +
+      (a.imageUrl ? '<img src="' + S.escapeHtml(a.imageUrl) + '" alt="" loading="lazy" decoding="async">' : '') +
+      '<span class="' + (fbCls || 'cover-fallback') + '">' + S.avatarInitial(a.titleCn) + '</span></div>';
   }
 
   function renderOrbit() {
@@ -106,8 +107,8 @@
   function priorityCardHtml(a, i) {
     var note = a.note || a.summary || '';
     return '<div class="priority-core"><article class="priority-card transition-fade">' +
-      '<div class="priority-visual">' + (a.imageUrl ? '<img src="' + S.escapeHtml(a.imageUrl) + '" alt="' + S.escapeHtml(a.titleCn) + ' 封面" loading="lazy">' : '') +
-      '<span class="cover-fallback" style="display:' + (a.imageUrl ? 'none' : 'grid') + '">' + S.avatarInitial(a.titleCn) + '</span>' +
+      '<div class="priority-visual">' + (a.imageUrl ? '<img src="' + S.escapeHtml(a.imageUrl) + '" alt="' + S.escapeHtml(a.titleCn) + ' 封面" decoding="async">' : '') +
+      '<span class="cover-fallback">' + S.avatarInitial(a.titleCn) + '</span>' +
       '<div class="priority-rank">0' + (i + 1) + '</div></div>' +
       '<div class="priority-copy">' +
       '<span class="priority-kicker">' + S.escapeHtml(st.topSelectedLabel || 'SELECTED / PERSONAL PRIORITY') + '</span>' +
@@ -253,12 +254,13 @@
       return '<section class="year-group">' +
         '<div class="year-rail"><span>' + S.escapeHtml(st.timelineYearLabel || 'TIMELINE YEAR') + '</span>' +
         '<h3>' + y + '</h3><p>' + String(items.length).padStart(2, '0') + ' ' + S.escapeHtml(st.timelineRecordsLabel || 'RECORDS') + '</p><i></i></div>' +
-        '<div class="anime-grid">' + items.map(function (a) {
+        '<div class="anime-grid">' + items.map(function (a, ai) {
           var sn = serialIndex[a.id];
+          var fp = ai < 12 ? ' fetchpriority="high" loading="eager"' : ' loading="lazy"';
           return '<article class="anime-card" title="' + S.escapeHtml(a.titleCn) + (a.titleOriginal ? ' / ' + S.escapeHtml(a.titleOriginal) : '') + '">' +
             '<a class="anime-cover" href="' + S.escapeHtml(a.bangumiUrl) + '" target="_blank" rel="noopener" aria-label="' + S.escapeHtml(a.titleCn) + '，前往 Bangumi">' +
-            (a.imageUrl ? '<img src="' + S.escapeHtml(a.imageUrl) + '" alt="' + S.escapeHtml(a.titleCn) + ' 封面" loading="lazy">' : '') +
-            '<span class="cover-fallback" style="display:' + (a.imageUrl ? 'none' : 'grid') + '">' + S.avatarInitial(a.titleCn) + '</span>' +
+            (a.imageUrl ? '<img src="' + S.escapeHtml(a.imageUrl) + '" alt="' + S.escapeHtml(a.titleCn) + ' 封面"' + fp + ' decoding="async">' : '') +
+            '<span class="cover-fallback">' + S.avatarInitial(a.titleCn) + '</span>' +
             '<span class="anime-serial">' + serial(sn) + '</span>' +
             '<span class="anime-score">' + STAR_SVG + ' ' + (a.score != null ? a.score : '—') + '</span>' +
             '<span class="anime-card-copy"><small>' + y + '</small><strong>' + S.escapeHtml(a.titleCn) + '</strong></span>' +
@@ -298,8 +300,8 @@
           var exp = w.expectationScore != null ? w.expectationScore : 0;
           return '<div class="watchlist-card">' +
             '<a class="watchlist-cover" href="' + S.escapeHtml(w.bangumiUrl) + '" target="_blank" rel="noopener">' +
-            (w.imageUrl ? '<img src="' + S.escapeHtml(w.imageUrl) + '" alt="' + S.escapeHtml(w.titleCn) + ' 封面" loading="lazy">' : '') +
-            '<span class="cover-fallback" style="display:' + (w.imageUrl ? 'none' : 'grid') + '">' + S.avatarInitial(w.titleCn) + '</span>' +
+            (w.imageUrl ? '<img src="' + S.escapeHtml(w.imageUrl) + '" alt="' + S.escapeHtml(w.titleCn) + ' 封面" loading="lazy" decoding="async">' : '') +
+            '<span class="cover-fallback">' + S.avatarInitial(w.titleCn) + '</span>' +
             '<span class="watchlist-serial">MAL-W' + String(gi + 1).padStart(2, '0') + '</span>' +
             '<span class="expectation-score">' + exp.toFixed(1) + '</span>' +
             '</a>' +

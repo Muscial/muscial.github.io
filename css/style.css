@@ -242,7 +242,7 @@ button { font-family: inherit; cursor: pointer; }
   position: relative;
   box-shadow: 0 0 40px rgba(110, 231, 255, 0.15);
 }
-.avatar-crop img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-crop img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1; }
 .avatar-crop .avatar-fallback {
   position: absolute; inset: 0; display: grid; place-items: center;
   font-family: var(--mono); font-size: 44px; color: var(--accent);
@@ -321,13 +321,13 @@ button { font-family: inherit; cursor: pointer; }
 .priority-core {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
   width: min(380px, 88%); background: var(--panel); border: 1px solid var(--line-strong);
-  border-radius: 18px; padding: 20px; backdrop-filter: blur(8px);
+  border-radius: 18px; padding: 20px; 
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.5);
 }
 .priority-core .transition-fade { animation: cardfade 0.35s ease; }
 @keyframes cardfade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .priority-visual { position: relative; height: 210px; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
-.priority-visual img { width: 100%; height: 100%; object-fit: cover; }
+.priority-visual img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1; }
 .priority-visual .cover-fallback {
   position: absolute; inset: 0; display: grid; place-items: center;
   background: linear-gradient(135deg, #101b45, #0a0d22); color: var(--text-faint); font-family: var(--mono); font-size: 30px;
@@ -522,7 +522,7 @@ button { font-family: inherit; cursor: pointer; }
   background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 30px; margin-bottom: 56px;
 }
 .friends-avatar { width: 96px; height: 96px; border-radius: 50%; overflow: hidden; border: 1px solid var(--line-strong); flex-shrink: 0; position: relative; box-shadow: 0 0 26px rgba(110, 231, 255, 0.14); }
-.friends-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.friends-avatar img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1; }
 .friends-avatar .cover-fallback { position: absolute; inset: 0; display: grid; place-items: center; background: radial-gradient(circle at 30% 25%, #101b45, #070a18); font-family: var(--mono); font-size: 30px; color: var(--accent); }
 .friends-profile-info { flex: 1; min-width: 240px; }
 .friends-profile-info h2 { font-size: 24px; }
@@ -541,7 +541,7 @@ button { font-family: inherit; cursor: pointer; }
 .friend-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 12px 34px rgba(0,0,0,0.4); }
 .friend-card .fc-index { font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em; color: var(--text-faint); align-self: flex-start; }
 .friend-card .fc-avatar { width: 62px; height: 62px; border-radius: 50%; overflow: hidden; border: 1px solid var(--line-strong); flex-shrink: 0; position: relative; }
-.friend-card .fc-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.friend-card .fc-avatar img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1; }
 .friend-card .fc-avatar .cover-fallback { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(135deg, #101b45, #0a0d22); font-family: var(--mono); color: var(--accent-2); font-size: 18px; }
 .friend-card .fc-info { flex: 1; min-width: 0; }
 .friend-card .fc-id { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.24em; color: var(--accent); }
@@ -640,18 +640,18 @@ button { font-family: inherit; cursor: pointer; }
 .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, 112px); justify-content: start; align-items: start; gap: 18px; }
 .anime-card {
   position: relative; overflow: hidden; width: 112px; height: 160px;
-  border: 1px solid var(--line); background: var(--panel); backdrop-filter: blur(12px);
+  border: 1px solid var(--line); background: rgba(13, 17, 34, 0.94);
   clip-path: polygon(0 0, calc(100% - 13px) 0, 100% 13px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
   transition: transform 0.19s ease, border-color 0.19s ease, box-shadow 0.19s ease;
 }
 .anime-card:hover { transform: translateY(-4px); border-color: var(--line-strong); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45); }
 .anime-cover { position: absolute; inset: 0; display: block; background: var(--bg-soft); overflow: hidden; }
-.anime-cover img { width: 100%; height: 100%; object-fit: cover; }
+.anime-cover img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1; }
 .anime-cover .cover-fallback { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--mono); font-size: 26px; color: var(--text-faint); background: linear-gradient(135deg, #101b45, #0a0d22); }
 .anime-serial, .anime-score {
   position: absolute; top: 7px; z-index: 2;
   display: flex; align-items: center; gap: 3px; min-height: 20px; padding: 0 6px;
-  background: rgba(8, 11, 24, 0.72); backdrop-filter: blur(8px); border-radius: 6px;
+  background: rgba(8, 11, 24, 0.92); border-radius: 6px;
   font-family: var(--mono); font-size: 8px; letter-spacing: 0.06em; color: var(--text);
 }
 .anime-serial { left: 7px; }
@@ -676,17 +676,17 @@ button { font-family: inherit; cursor: pointer; }
 .watchlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 188px)); align-items: start; gap: 28px 22px; }
 .watchlist-card {
   position: relative; overflow: hidden; min-width: 0;
-  border: 1px solid var(--line); background: var(--panel); backdrop-filter: blur(18px);
+  border: 1px solid var(--line); background: rgba(13, 17, 34, 0.96);
   clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
   transition: transform 0.19s ease, border-color 0.19s ease, box-shadow 0.19s ease;
 }
 .watchlist-card:hover { transform: translateY(-4px); border-color: var(--line-strong); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45); }
 .watchlist-cover { position: relative; display: block; aspect-ratio: 7 / 10; overflow: hidden; background: var(--bg-soft); }
-.watchlist-cover img { width: 100%; height: 100%; object-fit: cover; }
+.watchlist-cover img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1; }
 .watchlist-cover .cover-fallback { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--mono); font-size: 22px; color: var(--text-faint); background: linear-gradient(135deg, #101b45, #0a0d22); }
 .watchlist-serial, .expectation-score {
   position: absolute; top: 8px; z-index: 2;
-  border: 1px solid var(--line); background: rgba(8, 11, 24, 0.72); backdrop-filter: blur(8px);
+  border: 1px solid var(--line); background: rgba(8, 11, 24, 0.72); 
   padding: 5px 8px; border-radius: 6px; font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.08em; color: var(--text);
 }
 .watchlist-serial { left: 8px; }
