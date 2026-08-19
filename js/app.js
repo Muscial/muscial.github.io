@@ -152,7 +152,19 @@
     if (id === 'anime') renderAnime();
     if (id === 'watchlist') renderWatchlist();
     if (id === 'blog') renderBlog();
+    try {
+      var rec = document.getElementById('records');
+      if (rec) rec.setAttribute('data-active-tab', id);
+      history.replaceState(null, '', '#records-' + id);
+    } catch (e) { /* ignore */ }
   }
+
+  /* nav deep links: ANIME / BACKLOG / BLOG -> switch module + scroll */
+  document.querySelectorAll('.main-nav a[data-tab]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      setTab(a.getAttribute('data-tab'));
+    });
+  });
 
   if (tabBar) {
     tabBar.innerHTML = tabDefs.map(function (d, i) {
@@ -420,6 +432,13 @@
     var h = window.location.hash;
     if (h.indexOf('#note-') === 0) {
       openNote(decodeURIComponent(h.slice(6)));
+    } else if (h.indexOf('#records-') === 0) {
+      var tab = h.slice(9);
+      if (['anime', 'watchlist', 'blog'].indexOf(tab) > -1) {
+        setTab(tab);
+        var rec = document.getElementById('records');
+        if (rec) rec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   }
   window.addEventListener('hashchange', handleHash);
@@ -430,6 +449,10 @@
     try {
       var q = new URLSearchParams(window.location.search).get('tab');
       if (q && ['anime', 'watchlist', 'blog'].indexOf(q) > -1) initial = q;
+      else {
+        var h = window.location.hash;
+        if (h.indexOf('#records-') === 0 && ['anime', 'watchlist', 'blog'].indexOf(h.slice(9)) > -1) initial = h.slice(9);
+      }
     } catch (e) { /* ignore */ }
     setTab(initial);
     S.initBoot();
