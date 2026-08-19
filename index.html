@@ -133,31 +133,38 @@
 
     <!-- records -->
     <section class="records section-frame reveal" id="records">
-      <div class="section-heading">
-        <div><span class="section-index">03</span><p class="eyebrow" data-i18n="recordsEyebrow">ARCHIVE / FIELD NOTES</p></div>
-        <h2 data-i18n="archiveTitle">ANIME LIST / 观看时间线</h2>
-        <p class="desc" id="records-desc"></p>
-      </div>
-      <div class="records-tabs" id="records-tabs"></div>
-
-      <!-- anime panel -->
-      <div class="records-panel active" id="panel-anime">
-        <div class="search-box">
-          <input type="text" id="anime-search" placeholder="">
-          <span aria-hidden="true" style="color:var(--text-faint)">⌕</span>
+      <div class="records-heading">
+        <div class="section-heading" style="margin-bottom:0">
+          <div><span class="section-index">03</span><p class="eyebrow" data-i18n="recordsEyebrow">ARCHIVE / FIELD NOTES</p></div>
+          <h2 id="records-title" data-i18n="archiveTitle">ANIME LIST / 观看时间线</h2>
+          <p class="desc" id="records-desc"></p>
         </div>
-        <div class="year-chips" id="year-chips"></div>
-        <div id="anime-timeline"></div>
+        <div class="module-switch" role="tablist" aria-label="档案内容切换" id="records-tabs"></div>
       </div>
 
-      <!-- watchlist panel -->
-      <div class="records-panel" id="panel-watchlist">
-        <div id="watchlist-timeline"></div>
-      </div>
+      <div class="module-stage">
+        <div class="archive-controls">
+          <label class="search-field">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+            <input type="text" id="anime-search" placeholder="">
+          </label>
+          <div class="year-filter" id="year-chips" role="group" aria-label="按年份筛选"></div>
+        </div>
 
-      <!-- blog panel -->
-      <div class="records-panel" id="panel-blog">
-        <div class="blog-grid" id="blog-grid"></div>
+        <!-- anime panel -->
+        <div class="records-panel active" id="panel-anime">
+          <div class="timeline" id="anime-timeline"></div>
+        </div>
+
+        <!-- watchlist panel -->
+        <div class="records-panel" id="panel-watchlist">
+          <div class="watchlist-timeline" id="watchlist-timeline"></div>
+        </div>
+
+        <!-- blog panel -->
+        <div class="records-panel" id="panel-blog">
+          <div class="blog-index" id="blog-grid"></div>
+        </div>
       </div>
     </section>
 

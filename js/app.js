@@ -124,28 +124,29 @@
 
   if (orbit && topAnime.length) renderOrbit();
 
-  /* ---------- records: tabs ---------- */
+  /* ---------- records: module switch ---------- */
   var tabDefs = [
-    { id: 'anime', label: st.animeTabLabel, title: st.archiveTitle, desc: st.animeDescription },
-    { id: 'watchlist', label: st.watchlistTabLabel, title: st.watchlistTitle, desc: st.watchlistDescription },
-    { id: 'blog', label: st.blogTabLabel, title: st.blogTitle, desc: st.blogDescription }
+    { id: 'anime', label: st.animeTabLabel || 'ANIME LIST', title: st.archiveTitle, desc: st.animeDescription },
+    { id: 'watchlist', label: st.watchlistTabLabel || 'BACKLOG', title: st.watchlistTitle, desc: st.watchlistDescription },
+    { id: 'blog', label: st.blogTabLabel || 'BLOG NOTES', title: st.blogTitle, desc: st.blogDescription }
   ];
   var tabBar = document.getElementById('records-tabs');
-  var recordsHeading = document.querySelector('.records .section-heading h2');
+  var recordsTitle = document.getElementById('records-title');
   var recordsDesc = document.getElementById('records-desc');
   var currentTab = 'anime';
 
   function setTab(id) {
     currentTab = id;
-    tabBar.querySelectorAll('.records-tab').forEach(function (t) {
-      t.classList.toggle('active', t.getAttribute('data-tab') === id);
+    tabBar.querySelectorAll('button[data-tab]').forEach(function (t) {
+      t.classList.toggle('is-active', t.getAttribute('data-tab') === id);
+      t.setAttribute('aria-selected', t.getAttribute('data-tab') === id ? 'true' : 'false');
     });
     ['anime', 'watchlist', 'blog'].forEach(function (p) {
       document.getElementById('panel-' + p).classList.toggle('active', p === id);
     });
     var def = tabDefs.filter(function (d) { return d.id === id; })[0];
     if (def) {
-      recordsHeading.textContent = def.title;
+      recordsTitle.textContent = def.title;
       recordsDesc.textContent = def.desc || '';
     }
     if (id === 'anime') renderAnime();
@@ -154,11 +155,23 @@
   }
 
   if (tabBar) {
-    tabBar.innerHTML = tabDefs.map(function (d) {
-      return '<button class="records-tab' + (d.id === 'anime' ? ' active' : '') + '" data-tab="' + d.id + '">' + d.label + '</button>';
-    }).join('');
-    tabBar.querySelectorAll('.records-tab').forEach(function (t) {
+    tabBar.innerHTML = tabDefs.map(function (d, i) {
+      return '<button role="tab" data-tab="' + d.id + '" class="' + (d.id === 'anime' ? 'is-active' : '') + '" aria-selected="' + (d.id === 'anime' ? 'true' : 'false') + '">' +
+        '<span>0' + (i + 1) + '</span> ' + d.label + '</button>';
+    }).join('') +
+      '<div class="module-arrows">' +
+      '<button id="tab-prev" aria-label="切换到上一模块">' + S.icon('left') + '</button>' +
+      '<button id="tab-next" aria-label="切换到下一模块">' + S.icon('right') + '</button>' +
+      '</div>';
+    tabBar.querySelectorAll('button[data-tab]').forEach(function (t) {
       t.addEventListener('click', function () { setTab(t.getAttribute('data-tab')); });
+    });
+    var idx = function () { return tabDefs.map(function (d) { return d.id; }).indexOf(currentTab); };
+    document.getElementById('tab-prev').addEventListener('click', function () {
+      setTab(tabDefs[(idx() - 1 + tabDefs.length) % tabDefs.length].id);
+    });
+    document.getElementById('tab-next').addEventListener('click', function () {
+      setTab(tabDefs[(idx() + 1) % tabDefs.length].id);
     });
   }
 
@@ -173,12 +186,12 @@
 
   var chipBar = document.getElementById('year-chips');
   if (chipBar) {
-    chipBar.innerHTML = '<button class="year-chip active" data-year="ALL">' + S.escapeHtml(st.allYearsLabel || 'ALL') + '</button>' +
-      years.map(function (y) { return '<button class="year-chip" data-year="' + y + '">' + y + '</button>'; }).join('');
-    chipBar.querySelectorAll('.year-chip').forEach(function (c) {
+    chipBar.innerHTML = '<button class="is-active" data-year="ALL">' + S.escapeHtml(st.allYearsLabel || 'ALL') + '</button>' +
+      years.map(function (y) { return '<button data-year="' + y + '">' + y + '</button>'; }).join('');
+    chipBar.querySelectorAll('button').forEach(function (c) {
       c.addEventListener('click', function () {
         activeYear = c.getAttribute('data-year');
-        chipBar.querySelectorAll('.year-chip').forEach(function (x) { x.classList.toggle('active', x === c); });
+        chipBar.querySelectorAll('button').forEach(function (x) { x.classList.toggle('is-active', x === c); });
         renderAnime();
       });
     });
@@ -207,6 +220,8 @@
     return (st.animeSerialPrefix || 'AAL-') + S.serializeNumber(i);
   }
 
+  var STAR_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>';
+
   function renderAnime() {
     var container = document.getElementById('anime-timeline');
     var list = data.anime.filter(matchesAnime);
@@ -218,38 +233,38 @@
     var yearsSorted = Object.keys(groups).sort(function (a, b) { return b - a; });
     var serialIndex = {};
     data.anime.forEach(function (a, i) { serialIndex[a.id] = i; });
-    var html = '';
     if (!yearsSorted.length) {
-      html = '<div class="no-results"><h4>' + S.escapeHtml(st.noResultsTitle || 'NO MATCHED RECORDS') + '</h4>' +
+      container.innerHTML = '<div class="no-results"><h4>' + S.escapeHtml(st.noResultsTitle || 'NO MATCHED RECORDS') + '</h4>' +
         '<p>' + S.escapeHtml(st.noResultsDescription || '') + '</p>' +
         '<button id="reset-filter">' + S.escapeHtml(st.resetFilterLabel || 'RESET FILTER') + '</button></div>';
-    } else {
-      html = yearsSorted.map(function (y) {
-        var items = groups[y];
-        return '<div class="timeline-year"><div class="timeline-year-head"><h3>' + y + '</h3>' +
-          '<small>' + items.length + ' ' + S.escapeHtml(st.timelineRecordsLabel || 'RECORDS') + '</small></div>' +
-          '<div class="record-grid">' + items.map(function (a) {
-            var sn = serialIndex[a.id];
-            return '<a class="record-card" href="' + S.escapeHtml(a.bangumiUrl) + '" target="_blank" rel="noopener">' +
-              coverHtml(a, 'record-cover') +
-              '<div class="record-info">' +
-              '<span class="record-serial">' + serial(sn) + '</span>' +
-              '<div class="record-meta"><span class="score">' + (a.score != null ? a.score : '—') + '</span> · ' + y + '</div>' +
-              '<div class="record-title">' + S.escapeHtml(a.titleCn) + '</div>' +
-              '</div></a>';
-          }).join('') + '</div></div>';
-      }).join('');
+      var reset = document.getElementById('reset-filter');
+      if (reset) {
+        reset.addEventListener('click', function () {
+          searchEl.value = ''; searchTerm = '';
+          activeYear = 'ALL';
+          chipBar.querySelectorAll('button').forEach(function (x) { x.classList.toggle('is-active', x.getAttribute('data-year') === 'ALL'); });
+          renderAnime();
+        });
+      }
+      return;
     }
-    container.innerHTML = html;
-    var reset = document.getElementById('reset-filter');
-    if (reset) {
-      reset.addEventListener('click', function () {
-        searchEl.value = ''; searchTerm = '';
-        activeYear = 'ALL';
-        chipBar.querySelectorAll('.year-chip').forEach(function (x) { x.classList.toggle('active', x.getAttribute('data-year') === 'ALL'); });
-        renderAnime();
-      });
-    }
+    container.innerHTML = yearsSorted.map(function (y) {
+      var items = groups[y];
+      return '<section class="year-group">' +
+        '<div class="year-rail"><span>' + S.escapeHtml(st.timelineYearLabel || 'TIMELINE YEAR') + '</span>' +
+        '<h3>' + y + '</h3><p>' + String(items.length).padStart(2, '0') + ' ' + S.escapeHtml(st.timelineRecordsLabel || 'RECORDS') + '</p><i></i></div>' +
+        '<div class="anime-grid">' + items.map(function (a) {
+          var sn = serialIndex[a.id];
+          return '<article class="anime-card" title="' + S.escapeHtml(a.titleCn) + (a.titleOriginal ? ' / ' + S.escapeHtml(a.titleOriginal) : '') + '">' +
+            '<a class="anime-cover" href="' + S.escapeHtml(a.bangumiUrl) + '" target="_blank" rel="noopener" aria-label="' + S.escapeHtml(a.titleCn) + '，前往 Bangumi">' +
+            (a.imageUrl ? '<img src="' + S.escapeHtml(a.imageUrl) + '" alt="' + S.escapeHtml(a.titleCn) + ' 封面" loading="lazy">' : '') +
+            '<span class="cover-fallback" style="display:' + (a.imageUrl ? 'none' : 'grid') + '">' + S.avatarInitial(a.titleCn) + '</span>' +
+            '<span class="anime-serial">' + serial(sn) + '</span>' +
+            '<span class="anime-score">' + STAR_SVG + ' ' + (a.score != null ? a.score : '—') + '</span>' +
+            '<span class="anime-card-copy"><small>' + y + '</small><strong>' + S.escapeHtml(a.titleCn) + '</strong></span>' +
+            '</a></article>';
+        }).join('') + '</div></section>';
+    }).join('');
     S.setupCoverFallbacks(container);
   }
 
@@ -270,30 +285,40 @@
         '<p>' + S.escapeHtml(st.watchlistEmptyDescription || '') + '</p></div>';
       return;
     }
-    container.innerHTML = keys.map(function (key) {
+    container.innerHTML = keys.map(function (key, gi) {
       var parts = key.split('-');
       var y = parts[0], m = parseInt(parts[1], 10);
       var season = S.seasonOf(m);
       var items = groups[key];
-      return '<div class="season-group"><div class="season-head"><h3>' + y + ' ' + season + ' ' + S.escapeHtml(st.watchlistSeasonSuffix || 'SEASON') + '</h3>' +
-        '<small>' + items.length + ' ' + S.escapeHtml(st.watchlistRecordsLabel || 'PENDING TITLES') + '</small></div>' +
-        '<div class="record-grid">' + items.map(function (w) {
+      return '<section class="watchlist-season">' +
+        '<div class="watchlist-rail"><span>' + S.escapeHtml(st.watchlistTimelineLabel || 'AIRING SEASON') + '</span>' +
+        '<h3>' + y + ' ' + season + '<br>' + S.escapeHtml(st.watchlistSeasonSuffix || 'SEASON') + '</h3>' +
+        '<p>' + items.length + ' ' + S.escapeHtml(st.watchlistRecordsLabel || 'PENDING TITLES') + '</p><i></i></div>' +
+        '<div class="watchlist-grid">' + items.map(function (w) {
           var exp = w.expectationScore != null ? w.expectationScore : 0;
-          return '<div class="watch-card">' + coverHtml(w, 'record-cover') +
-            '<div class="watch-info">' +
+          return '<div class="watchlist-card">' +
+            '<a class="watchlist-cover" href="' + S.escapeHtml(w.bangumiUrl) + '" target="_blank" rel="noopener">' +
+            (w.imageUrl ? '<img src="' + S.escapeHtml(w.imageUrl) + '" alt="' + S.escapeHtml(w.titleCn) + ' 封面" loading="lazy">' : '') +
+            '<span class="cover-fallback" style="display:' + (w.imageUrl ? 'none' : 'grid') + '">' + S.avatarInitial(w.titleCn) + '</span>' +
+            '<span class="watchlist-serial">MAL-W' + String(gi + 1).padStart(2, '0') + '</span>' +
+            '<span class="expectation-score">' + exp.toFixed(1) + '</span>' +
+            '</a>' +
+            '<div class="watchlist-card-copy">' +
+            '<div class="watchlist-expectation-core">' +
+            '<b>' + exp.toFixed(1) + '</b>' +
+            '<div class="exp-track"><i style="width:' + Math.max(2, exp * 10) + '%"></i></div>' +
+            '<small>' + S.escapeHtml(st.expectationLabel || 'EXPECTATION') + S.escapeHtml(st.expectationSuffix || '/ 10') + '</small>' +
+            '</div>' +
             '<div class="watch-title">' + S.escapeHtml(w.titleCn) + '</div>' +
             (w.titleOriginal ? '<div class="watch-original">' + S.escapeHtml(w.titleOriginal) + '</div>' : '') +
-            '<div class="watch-expect"><span class="exp-value">' + exp.toFixed(1) + '</span>' +
-            '<span class="exp-bar"><i style="width:' + Math.max(2, exp * 10) + '%"></i></span>' +
-            '<small>' + S.escapeHtml(st.expectationLabel || 'EXPECTATION') + S.escapeHtml(st.expectationSuffix || '/ 10') + '</small></div>' +
-            (w.expectationNote ? '<div class="watch-note"><b>' + S.escapeHtml(st.watchlistNoteLabel || 'PERSONAL NOTE') + '</b> ' + S.escapeHtml(w.expectationNote) + '</div>' : '') +
-            '<div class="watch-extra">' + (w.airDate ? S.escapeHtml(st.watchlistAirDateLabel || 'AIR DATE') + ' ' + w.airDate + ' · ' : '') +
+            (w.expectationNote ? '<div class="watch-note"><b>' + S.escapeHtml(st.watchlistNoteLabel || 'PERSONAL NOTE') + '</b>' + S.escapeHtml(w.expectationNote) + '</div>' : '') +
+            '<div class="watch-meta">' +
+            (w.airDate ? '<span>' + S.escapeHtml(st.watchlistAirDateLabel || 'AIR DATE') + ' ' + w.airDate + '</span>' : '') +
             '<span class="bgm-score">BGM ' + (w.bangumiScore != null ? w.bangumiScore : '—') + '</span>' +
-            (w.bgmRank ? ' · <span class="bgm-rank">#' + w.bgmRank + '</span>' : '') + '</div>' +
-            '<a href="' + S.escapeHtml(w.bangumiUrl) + '" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--accent);display:inline-block;margin-top:6px">' +
-            S.escapeHtml(st.topOpenSubjectLabel || 'OPEN SUBJECT') + '</a>' +
+            (w.bgmRank ? '<span>RANK #' + w.bgmRank + '</span>' : '') +
+            '</div>' +
             '</div></div>';
-        }).join('') + '</div></div>';
+        }).join('') + '</div></section>';
     }).join('');
     S.setupCoverFallbacks(container);
   }
@@ -301,23 +326,35 @@
   /* ---------- blog ---------- */
   function renderBlog() {
     var container = document.getElementById('blog-grid');
-    var posts = S.getPostsIndex();
+    var filePosts = S.getPostsIndex();
+    var dbPosts = (data.blogs || []).map(function (b) {
+      return {
+        slug: b.slug, title: b.title, date: (b.publishedAt || b.date || '').slice(0, 10),
+        category: b.category || '杂谈', published: b.published !== false,
+        content: b.content, excerpt: b.excerpt || ''
+      };
+    });
+    var posts = filePosts.concat(dbPosts).sort(function (a, b) { return b.date.localeCompare(a.date); });
     if (!posts.length) {
       container.innerHTML = '<div class="no-results"><h4>' + S.escapeHtml(st.blogEmptyTitle || 'NO FIELD NOTES') + '</h4>' +
         '<p>' + S.escapeHtml(st.blogEmptyDescription || '') + '</p></div>';
       return;
     }
-    container.innerHTML = posts.map(function (p, i) {
-      return '<button class="blog-card" data-slug="' + S.escapeHtml(p.slug) + '">' +
-        '<span class="blog-cat">' + S.escapeHtml(p.category || st.blogEntryLabel || 'FIELD NOTE') + '</span>' +
-        '<span class="blog-date">' + S.escapeHtml(p.date) + (p.published === false ? ' <span class="blog-draft-tag">' + S.escapeHtml(st.blogDraftLabel || 'DRAFT') + '</span>' : '') + '</span>' +
-        '<h3>' + S.escapeHtml(p.title) + '</h3>' +
-        '<p>' + S.escapeHtml(p.excerpt || '') + '</p>' +
-        '<span class="blog-more">READ &rarr;</span>' +
-        '</button>';
-    }).join('');
-    container.querySelectorAll('.blog-card').forEach(function (card) {
-      card.addEventListener('click', function () { openNote(card.getAttribute('data-slug')); });
+    container.innerHTML = '<div class="blog-index-head" style="background:rgba(148,163,255,.05);color:var(--text-faint)">' +
+      '<span class="blog-index-num">' + S.escapeHtml(st.blogIndexLabel || 'FIELD NOTE INDEX') + '</span>' +
+      '<span class="blog-index-title" style="font-size:9px;letter-spacing:.2em">TITLE</span>' +
+      '<span class="blog-index-date">DATE</span><span class="blog-index-cat">TAG</span><span class="blog-arrow"></span></div>' +
+      posts.map(function (p, i) {
+        return '<button class="blog-index-head" data-slug="' + S.escapeHtml(p.slug) + '">' +
+          '<span class="blog-index-num">' + String(i + 1).padStart(2, '0') + '</span>' +
+          '<span class="blog-index-title">' + S.escapeHtml(p.title) + (p.published === false ? ' <span class="blog-draft-tag">' + S.escapeHtml(st.blogDraftLabel || 'DRAFT') + '</span>' : '') + '</span>' +
+          '<span class="blog-index-date">' + S.escapeHtml(p.date || '') + '</span>' +
+          '<span class="blog-index-cat">' + S.escapeHtml(p.category || st.blogEntryLabel || 'FIELD NOTE') + '</span>' +
+          '<span class="blog-arrow">' + S.icon('arrow') + '</span>' +
+          '</button>';
+      }).join('');
+    container.querySelectorAll('.blog-index-head[data-slug]').forEach(function (row) {
+      row.addEventListener('click', function () { openNote(row.getAttribute('data-slug')); });
     });
   }
 
