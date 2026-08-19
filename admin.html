@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Doctor Console · Muscial Anime List</title>
+  <meta name="description" content="Muscial Anime List 管理终端">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#04050c">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .console-loading { display: flex; min-height: 100vh; align-items: center; justify-content: center; gap: 12px; color: var(--text-faint); font-family: var(--mono); font-size: 11px; letter-spacing: .3em; }
+    .spin { animation: spin 1s linear infinite; }
+    /* login */
+    .login-wrap { min-height: 100vh; display: grid; place-items: center; padding: 30px; }
+    .login-card { width: min(420px, 94vw); background: var(--panel); border: 1px solid var(--line-strong); border-radius: 18px; padding: 40px; text-align: center; }
+    .login-card .lock { width: 54px; height: 54px; margin: 0 auto 18px; border-radius: 50%; border: 1px solid var(--accent); display: grid; place-items: center; color: var(--accent); box-shadow: 0 0 22px var(--glow); }
+    .login-card h1 { font-size: 20px; letter-spacing: .14em; margin-bottom: 6px; }
+    .login-card .sub { font-family: var(--mono); font-size: 10px; letter-spacing: .3em; color: var(--text-faint); margin-bottom: 26px; }
+    .login-card input { width: 100%; background: rgba(4,5,12,.6); border: 1px solid var(--line); color: var(--text); padding: 13px 16px; border-radius: 10px; font-family: var(--mono); letter-spacing: .12em; outline: none; margin-bottom: 14px; text-align: center; }
+    .login-card input:focus { border-color: var(--accent); box-shadow: 0 0 14px rgba(110,231,255,.2); }
+    .login-err { color: var(--danger); font-size: 12px; min-height: 18px; margin-bottom: 8px; font-family: var(--mono); }
+    .login-hint { margin-top: 16px; font-family: var(--mono); font-size: 9.5px; letter-spacing: .08em; color: var(--text-faint); line-height: 1.8; }
+    /* console */
+    .console { display: none; min-height: 100vh; }
+    .console-side { position: fixed; top: 0; left: 0; bottom: 0; width: 210px; background: rgba(8,10,22,.92); border-right: 1px solid var(--line); padding: 22px 14px; display: flex; flex-direction: column; gap: 4px; z-index: 60; }
+    .console-side .side-brand { display: flex; align-items: center; gap: 10px; padding: 0 8px 18px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+    .console-side .side-brand strong { font-size: 14px; letter-spacing: .16em; }
+    .console-side .side-brand small { display: block; font-family: var(--mono); font-size: 8.5px; letter-spacing: .26em; color: var(--text-faint); }
+    .side-btn { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: none; border: 1px solid transparent; color: var(--text-dim); padding: 11px 12px; border-radius: 10px; font-size: 12px; letter-spacing: .1em; transition: all .2s; }
+    .side-btn:hover { color: var(--text); background: rgba(148,163,255,.06); }
+    .side-btn.active { color: var(--accent); border-color: rgba(110,231,255,.25); background: rgba(110,231,255,.08); }
+    .side-btn .n { font-family: var(--mono); font-size: 9px; color: var(--text-faint); }
+    .side-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 6px; padding-top: 14px; border-top: 1px solid var(--line); }
+    .console-main { margin-left: 210px; padding: 30px clamp(20px, 3vw, 40px) 60px; }
+    .console-main > h1 { font-size: 22px; letter-spacing: .08em; margin-bottom: 4px; }
+    .console-main > .crumb { font-family: var(--mono); font-size: 10px; letter-spacing: .3em; color: var(--accent); margin-bottom: 26px; }
+    .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; align-items: center; }
+    .cbtn { display: inline-flex; align-items: center; gap: 7px; background: rgba(110,231,255,.08); border: 1px solid rgba(110,231,255,.3); color: var(--accent); font-family: var(--mono); font-size: 11px; letter-spacing: .14em; padding: 9px 16px; border-radius: 10px; transition: all .2s; }
+    .cbtn:hover { box-shadow: 0 0 16px var(--glow); }
+    .cbtn.ghost { background: none; border-color: var(--line-strong); color: var(--text-dim); }
+    .cbtn.ghost:hover { color: var(--text); }
+    .cbtn.danger { background: rgba(248,113,113,.08); border-color: rgba(248,113,113,.35); color: var(--danger); }
+    .cbtn:disabled { opacity: .45; pointer-events: none; }
+    .cinput { background: rgba(4,5,12,.6); border: 1px solid var(--line); color: var(--text); padding: 10px 14px; border-radius: 10px; font-size: 13px; outline: none; }
+    .cinput:focus { border-color: var(--accent); }
+    .cinput.wide { flex: 1; min-width: 200px; }
+    /* tables */
+    .ctable-wrap { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    .ctable { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .ctable th { text-align: left; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--text-faint); padding: 13px 14px; border-bottom: 1px solid var(--line); background: rgba(148,163,255,.05); white-space: nowrap; }
+    .ctable td { padding: 10px 14px; border-bottom: 1px solid rgba(148,163,255,.07); vertical-align: middle; }
+    .ctable tr:last-child td { border-bottom: none; }
+    .ctable tr:hover td { background: rgba(148,163,255,.03); }
+    .ctable .mini-cover { width: 40px; height: 40px; border-radius: 8px; overflow: hidden; position: relative; }
+    .ctable .mini-cover img { width: 100%; height: 100%; object-fit: cover; }
+    .ctable .mini-cover .cover-fallback { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(135deg,#101b45,#0a0d22); font-family: var(--mono); font-size: 11px; color: var(--text-faint); }
+    .row-actions { display: flex; gap: 6px; }
+    .ra { background: none; border: 1px solid var(--line); border-radius: 8px; color: var(--text-dim); width: 30px; height: 30px; display: grid; place-items: center; transition: all .2s; }
+    .ra:hover { color: var(--accent); border-color: var(--line-strong); }
+    .ra.del:hover { color: var(--danger); border-color: rgba(248,113,113,.4); }
+    .tag { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; border: 1px solid var(--line-strong); border-radius: 999px; padding: 3px 9px; color: var(--text-dim); }
+    .tag.top { color: var(--accent); border-color: rgba(110,231,255,.4); }
+    .tag.draft { color: var(--danger); border-color: rgba(248,113,113,.4); }
+    .tag.ok { color: var(--ok); border-color: rgba(74,222,128,.4); }
+    /* modal */
+    .modal { position: fixed; inset: 0; z-index: 90; background: rgba(2,3,10,.7); backdrop-filter: blur(6px); display: none; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 40px 16px; }
+    .modal.open { display: flex; }
+    .modal-card { background: var(--panel-solid); border: 1px solid var(--line-strong); border-radius: 16px; width: min(680px, 100%); padding: 26px; box-shadow: 0 24px 80px rgba(0,0,0,.6); }
+    .modal-card.wide { width: min(900px, 100%); }
+    .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .modal-head h2 { font-size: 17px; letter-spacing: .1em; }
+    .modal-close { background: none; border: none; color: var(--text-faint); font-size: 20px; line-height: 1; }
+    .modal-close:hover { color: var(--text); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--text-faint); }
+    .form-field input, .form-field textarea, .form-field select { background: rgba(4,5,12,.7); border: 1px solid var(--line); color: var(--text); padding: 10px 12px; border-radius: 10px; font-size: 13px; outline: none; font-family: inherit; }
+    .form-field input:focus, .form-field textarea:focus { border-color: var(--accent); }
+    .form-field textarea { resize: vertical; min-height: 80px; font-family: var(--mono); font-size: 12px; line-height: 1.6; }
+    .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+    /* search results */
+    .bgm-results { margin-top: 14px; display: grid; gap: 8px; max-height: 320px; overflow-y: auto; }
+    .bgm-item { display: flex; gap: 12px; align-items: center; background: rgba(4,5,12,.6); border: 1px solid var(--line); border-radius: 10px; padding: 10px; cursor: pointer; transition: all .2s; }
+    .bgm-item:hover { border-color: var(--accent); }
+    .bgm-item img { width: 44px; height: 58px; border-radius: 8px; object-fit: cover; }
+    .bgm-item .bi-name { font-size: 13px; }
+    .bgm-item .bi-meta { font-family: var(--mono); font-size: 9.5px; color: var(--text-faint); letter-spacing: .06em; }
+    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px; }
+    .mini-stat { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+    .mini-stat .v { font-family: var(--mono); font-size: 24px; font-weight: 700; }
+    .mini-stat .k { font-family: var(--mono); font-size: 9px; letter-spacing: .24em; color: var(--text-faint); margin-top: 4px; }
+    .notice { background: rgba(167,139,250,.07); border: 1px solid rgba(167,139,250,.3); border-radius: 12px; padding: 14px 16px; font-size: 12.5px; color: var(--text-dim); margin-bottom: 18px; line-height: 1.7; }
+    .toast-wrap { position: fixed; bottom: 24px; right: 24px; z-index: 120; display: flex; flex-direction: column; gap: 8px; }
+    .toast { background: var(--panel-solid); border: 1px solid var(--line-strong); border-radius: 10px; padding: 11px 18px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--text); animation: toastin .3s ease; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+    .toast.err { border-color: rgba(248,113,113,.5); color: var(--danger); }
+    @keyframes toastin { from { opacity: 0; transform: translateY(10px); } }
+    .editor-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .editor-wrap textarea { min-height: 440px; width: 100%; }
+    .preview-pane { background: rgba(4,5,12,.5); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; overflow-y: auto; max-height: 520px; }
+    .preview-pane .note-body { font-size: 13.5px; }
+    .top10-rows { display: flex; flex-direction: column; gap: 8px; }
+    .top10-row { display: flex; gap: 10px; align-items: center; background: rgba(4,5,12,.6); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+    .top10-row .rank { font-family: var(--mono); font-size: 12px; color: var(--accent); width: 30px; }
+    .top10-row .tt-title { flex: 1; font-size: 13px; }
+    @media (max-width: 860px) {
+      .console-side { position: static; width: 100%; flex-direction: row; flex-wrap: wrap; padding: 12px; }
+      .console-side .side-brand { border: none; margin: 0; padding: 0 10px 0 0; }
+      .side-bottom { margin: 0 0 0 auto; padding: 0; border: none; flex-direction: row; }
+      .console-main { margin-left: 0; padding: 20px 14px 40px; }
+      .form-grid, .editor-wrap { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cosmos-stage" aria-hidden="true">
+    <canvas class="cosmos-canvas" id="cosmos-canvas"></canvas>
+    <div class="cosmos-vignette"></div>
+    <div class="cosmos-grain"></div>
+  </div>
+
+  <div class="console-loading" id="console-loading" role="status">
+    <svg class="spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+    <p>CONNECTING TO ARCHIVE CORE</p>
+  </div>
+
+  <!-- login -->
+  <div class="login-wrap" id="login-wrap" style="display:none">
+    <div class="login-card">
+      <div class="lock"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <h1>DOCTOR CONSOLE</h1>
+      <p class="sub">ARCHIVE ACCESS REQUIRED</p>
+      <input type="password" id="login-token" placeholder="ACCESS TOKEN" autocomplete="off">
+      <div class="login-err" id="login-err"></div>
+      <button class="cbtn" id="login-btn" style="width:100%;justify-content:center">AUTHENTICATE</button>
+      <p class="login-hint">令牌在 data/site-data.js 的 settings.adminToken 中配置。<br>静态站点鉴权仅作形式保护，请勿存放敏感数据。</p>
+      <p style="margin-top:10px"><a href="index.html" style="font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--text-faint)">&larr; RETURN TO ARCHIVE</a></p>
+    </div>
+  </div>
+
+  <!-- console -->
+  <div class="console" id="console">
+    <aside class="console-side">
+      <div class="side-brand">
+        <span class="brand-mark">M</span>
+        <div><strong>DOCTOR</strong><small>CONSOLE / MAL-00</small></div>
+      </div>
+      <button class="side-btn active" data-view="dashboard"><span class="n">01</span> DASHBOARD</button>
+      <button class="side-btn" data-view="anime"><span class="n">02</span> ANIME</button>
+      <button class="side-btn" data-view="watchlist"><span class="n">03</span> WATCHLIST</button>
+      <button class="side-btn" data-view="blog"><span class="n">04</span> BLOG</button>
+      <button class="side-btn" data-view="friends"><span class="n">05</span> FRIENDS</button>
+      <button class="side-btn" data-view="top"><span class="n">06</span> TOP 10</button>
+      <button class="side-btn" data-view="settings"><span class="n">07</span> SETTINGS</button>
+      <div class="side-bottom">
+        <a class="side-btn" href="index.html" style="text-decoration:none"><span class="n">↗</span> VIEW SITE</a>
+        <button class="side-btn" id="logout-btn" style="color:var(--danger)"><span class="n">✕</span> LOGOUT</button>
+      </div>
+    </aside>
+    <main class="console-main" id="console-main"></main>
+  </div>
+
+  <div class="toast-wrap" id="toast-wrap"></div>
+
+  <script src="js/util.js"></script>
+  <script src="js/markdown.js"></script>
+  <script src="data/site-data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

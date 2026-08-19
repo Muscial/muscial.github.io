@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>友链坐标 · Muscial Anime List</title>
+  <meta name="description" content="Muscial 的友链与个人档案。">
+  <meta name="robots" content="index">
+  <meta property="og:title" content="友链坐标 · MAL">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muscial.github.io/friends.html">
+  <meta name="theme-color" content="#04050c">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="cosmos-stage" aria-hidden="true">
+    <canvas class="cosmos-canvas" id="cosmos-canvas"></canvas>
+    <div class="cosmos-vignette"></div>
+    <div class="cosmos-grain"></div>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="返回首页">
+      <span class="brand-mark">M</span>
+      <span><strong data-i18n="siteName">Muscial</strong><small data-i18n="siteSubtitle">ANIME LIST / MAL</small></span>
+    </a>
+    <nav class="main-nav" aria-label="主导航">
+      <a href="index.html#overview" data-i18n="navOverview">OVERVIEW</a>
+      <a href="index.html#top10" data-i18n="navTop">TOP 10</a>
+      <a href="index.html#records" data-i18n="navAnime">ANIME</a>
+      <a href="index.html#records" data-i18n="navWatchlist">BACKLOG</a>
+      <a href="index.html#records" data-i18n="navBlog">BLOG</a>
+      <a href="friends.html" class="active" data-i18n="navFriends">FRIENDS</a>
+    </nav>
+    <div class="topbar-actions">
+      <span class="live-status"><i></i> <span data-i18n="statusPrefix">LOCAL /</span> <span data-i18n="systemStatus">ARCHIVE ONLINE</span></span>
+      <a href="admin.html" class="admin-entry" data-i18n-html="adminEntryLabel"></a>
+    </div>
+  </header>
+
+  <main class="site-shell">
+    <div class="friends-page">
+      <a class="friends-back" href="index.html"><span id="back-icon"></span> <span data-i18n="friendsBackLabel">RETURN TO ARCHIVE</span></a>
+
+      <div class="friends-hero">
+        <p class="eyebrow" data-i18n="friendsEyebrow">LINKED CONSTELLATIONS / 友链</p>
+        <h1 data-i18n="friendsTitle">保持连接。</h1>
+        <p data-i18n="friendsDescription"></p>
+      </div>
+
+      <div class="friends-profile" id="friends-profile"></div>
+
+      <div class="section-heading" style="padding:0">
+        <div><span class="section-index">04</span><p class="eyebrow" data-i18n="friendsDirectoryEyebrow">FRIENDSHIP DIRECTORY</p></div>
+        <h2 data-i18n="friendsDirectoryTitle">友链坐标</h2>
+        <p class="desc" data-i18n="friendsDirectoryDescription"></p>
+      </div>
+      <div class="friends-grid" id="friends-grid"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+
+  <script src="js/util.js"></script>
+  <script src="js/starfield.js"></script>
+  <script src="data/site-data.js"></script>
+  <script src="js/friends.js"></script>
+</body>
+</html>

@@ -1,612 +1,177 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta name="generator" content="Hugo 0.120.3">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    
-    <meta property="og:site_name" content="Muscial Blog">
-    <meta property="og:type" content="article">
-
-    
-    <meta property="og:image" content="https://muscial.github.io/img/bizhi.jpg">
-    <meta property="twitter:image" content="https://muscial.github.io/img/bizhi.jpg" />
-    
-
-    
-    <meta name="title" content="" />
-    <meta property="og:title" content="" />
-    <meta property="twitter:title" content="" />
-    
-
-    
-    <meta name="description" content="Muscial">
-    <meta property="og:description" content="Muscial" />
-    <meta property="twitter:description" content="Muscial" />
-    
-
-    
-    <meta property="twitter:card" content="summary" />
-    
-    
-
-    <meta name="keyword"  content="Muscial">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-
-    <title>Muscial Blog | Muscial的博客 | 保持冷静，奋不顾身</title>
-
-    <link rel="canonical" href="/">
-
-    
-    
-    
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    
-    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
-
-    
-    <link rel="stylesheet" href="/css/zanshang.css">
-
-    
-    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
-
-    
-    
-
-    
-    <script src="/js/jquery.min.js"></script>
-
-    
-    <script src="/js/bootstrap.min.js"></script>
-
-    
-    <script src="/js/hux-blog.min.js"></script>
-
-    
-    <script src="/js/lazysizes.min.js"></script>
-
-    
-    
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muscial Anime List · MAL</title>
+  <meta name="description" content="Muscial 的个人动画观看档案、年度时间线、动画漫谈与心中 Top 10。">
+  <meta name="keywords" content="Anime List,动画档案,Bangumi,MAL,Muscial">
+  <meta property="og:title" content="Muscial Anime List · MAL">
+  <meta property="og:description" content="Muscial 的个人动画观看档案、年度时间线、动画漫谈与心中 Top 10。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muscial.github.io/">
+  <meta property="og:image" content="https://muscial.github.io/og.svg">
+  <meta name="theme-color" content="#04050c">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+<body>
+  <div class="cosmos-stage" aria-hidden="true">
+    <canvas class="cosmos-canvas" id="cosmos-canvas"></canvas>
+    <div class="cosmos-vignette"></div>
+    <div class="cosmos-grain"></div>
+  </div>
 
-
-
-
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-
-    <div class="container-fluid">
-        
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Muscial Blog</a>
-        </div>
-
-        
-        
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">All Posts</a>
-                    </li>
-                    
-                        
-                        <li>
-                            <a href="/categories/tech">tech</a>
-                        </li>
-                        
-                    
-                    
-		    
-                        <li><a href="/archive/">ARCHIVE</a></li>
-                    
-                        <li><a href="/notes/">NOTES</a></li>
-                    
-                        <li><a href="/about/">ABOUT</a></li>
-                    
-
-                    
-		    <li>
-                        <a href="/search"><i class="fa fa-search"></i></a>
-		    </li>
-                    
-                </ul>
-            </div>
-        </div>
-        
+  <div class="boot-screen" role="status" aria-live="polite">
+    <span class="boot-corner boot-corner-a" data-i18n="bootCornerPrimary">MAL / STELLAR GATE</span>
+    <span class="boot-corner boot-corner-b" data-i18n="bootCornerSecondary">LOCAL MEMORY / READY</span>
+    <div class="boot-center">
+      <div class="boot-constellation" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <p class="eyebrow" data-i18n="bootEyebrow">STELLAR MEMORY INITIALIZATION</p>
+      <h1 data-i18n="bootTitle">Entering Muscial&#x2019;s World ...</h1>
+      <div class="boot-progress"><i></i></div>
+      <div class="boot-log">
+        <span data-i18n="bootLogPrimary">CALIBRATING DEPTH</span>
+        <span data-i18n="bootLogSecondary">LOCAL ARCHIVE ONLINE</span>
+      </div>
     </div>
-    
-</nav>
-<script>
-    
-    
-    
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+    <button class="boot-skip" data-i18n="bootSkipLabel">SKIP / 跳过</button>
+  </div>
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        
-            $navbar.className = " ";
-            
-            setTimeout(function(){
-                
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-
-
-<header class="intro-header" style="background-image: url('/img/bizhi.jpg')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Muscial Blog </h1>
-                    
-		    <span class="subheading"></span>
-                </div>
-            </div>
-        </div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="返回顶部">
+      <span class="brand-mark">M</span>
+      <span><strong data-i18n="siteName">Muscial</strong><small data-i18n="siteSubtitle">ANIME LIST / MAL</small></span>
+    </a>
+    <nav class="main-nav" aria-label="主导航">
+      <a href="#overview" data-i18n="navOverview">OVERVIEW</a>
+      <a href="#top10" data-i18n="navTop">TOP 10</a>
+      <a href="#records" data-i18n="navAnime">ANIME</a>
+      <a href="#records" data-i18n="navWatchlist">BACKLOG</a>
+      <a href="#records" data-i18n="navBlog">BLOG</a>
+      <a href="friends.html" data-i18n="navFriends">FRIENDS</a>
+    </nav>
+    <div class="topbar-actions">
+      <span class="live-status"><i></i> <span data-i18n="statusPrefix">LOCAL /</span> <span data-i18n="systemStatus">ARCHIVE ONLINE</span></span>
+      <a href="admin.html" class="admin-entry" data-i18n-html="adminEntryLabel"></a>
     </div>
-</header>
+  </header>
 
-
-
-  
-<div class="container">
-    <div class="row">
-        
-        
-   	    <div class="
-            col-lg-8 col-lg-offset-1
-            col-md-8 col-md-offset-1
-            col-sm-12
-            col-xs-12
-            post-container
-        ">
-            
-
-<div class="post-preview">
-    <a href="https://muscial.github.io/post/%E6%9C%89%E5%85%B3%E9%80%83%E9%80%B8%E7%9A%84%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/">
-        <h2 class="post-title">
-            有关docker逃逸的题目复现
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Cloud Security
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            有关docker逃逸的题目复现 前言 感谢swing师傅的rwctf环境支持 环境： https://github.com/WinMin/Be-a-Docker-Escaper/tree/main/Be-a-Docker-Escaper ebpf那道放一下，回头再来看吧 Be-a-docker-Escaper 挂载socket ，环境还没
-       
+  <main class="site-shell">
+    <!-- hero -->
+    <section class="hero" id="top">
+      <div class="hero-grid"></div>
+      <div class="hero-kana" aria-hidden="true">
+        <span data-i18n="heroKanaTitle">観測記録</span>
+        <b data-i18n="heroKanaMeta">ANIMATION / MEMORY / ORBIT</b>
+      </div>
+      <div class="hero-copy reveal reveal-1">
+        <div class="hero-route"><span data-i18n="heroRoute">ROUTE / MUSCIAL&#x2019;S CONSTELLATION / 00</span></div>
+        <p class="eyebrow" data-i18n="heroEyebrow">PERSONAL ANIME ARCHIVE / 个人看番档案</p>
+        <h1><span data-i18n="heroDisplayPrefix">MUSCIAL&#x2019;S</span><br><span data-i18n="heroDisplayTitle">ANIME</span> <b data-i18n="heroDisplayAccent">UNIVERSE</b></h1>
+        <h2 data-i18n="heroTitle">我好像看过不少番。</h2>
+        <p class="hero-description" data-i18n="heroDescription"></p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#records"><span data-i18n="heroPrimaryAction">ENTER</span></a>
+          <a class="button button-ghost" href="#top10">TOP 10</a>
         </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by Muscial on Monday, February 12, 2024
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://muscial.github.io/post/docker%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8%E5%85%A5%E9%97%A8/">
-        <h2 class="post-title">
-            Docker容器逃逸入门
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Cloud Security
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            Docker容器逃逸入门 前言 总结下比较传统的docker逃逸方式，大的ctf一般用不到（亲身体会 一些抽象的还没复现（runc 判断是否容器环境
-       
+        <div class="hero-footnotes">
+          <span data-i18n="heroLocation"></span>
+          <span data-i18n="heroMode"></span>
+          <span><span data-i18n="heroUpdateLabel">UPDATE</span> <span id="hero-update-year"></span></span>
         </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by Muscial on Sunday, February 11, 2024
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://muscial.github.io/post/wiz_iam/">
-        <h2 class="post-title">
-            WIZ IAM挑战赛wp
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Cloud Security
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            WIZ IAM挑战赛wp 前言 aws关于云安全的一个挑战赛，学的时候一直查官方文档，确实有的不好找。收获还是蛮多的 aws cil文档比概念文档好用（流汗了
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by Muscial on Saturday, January 27, 2024
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://muscial.github.io/post/%E4%BA%91%E6%9C%8D%E5%8A%A1/">
-        <h2 class="post-title">
-            云服务基础
-        </h2>
-	
-        <h3 class="post-subtitle">
-            Cloud Security
-        </h3>
-	
-        <div class="post-content-preview">
-	
-            云服务 前言 自己根据twiki总结的，很多地方没复现，没钱开实例，后续遇到了可以补一下 还有几个复杂的没看pgsql的ssrf待补吧 主要还是认识
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by Muscial on Saturday, January 27, 2024
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="https://muscial.github.io/post/test/">
-        <h2 class="post-title">
-            NKctf
-        </h2>
-	
-        <div class="post-content-preview">
-	
-            babyser &lt;?php error_reporting(0); class Welcome{ public $name; public $arg = &#39;oww!man!!&#39;; public function __construct(){ $this-&gt;name = &#39;ItS SO CREAZY&#39;; } public function __destruct(){ if($this-&gt;name == &#39;welcome_to_NKCTF&#39;){ echo $this-&gt;arg; } } } function waf($string){ if(preg_match(&#39;/f|l|a|g|\\*|\\?/i&#39;, $string)){ die(&#34;you are bad&#34;); } } class Happy{ public $shell; public $cmd; public function __invoke(){ $shell = $this-&gt;shell; $cmd = $this-&gt;cmd; waf($cmd); eval($shell($cmd)); } } class Hell0{ public $func; public function __toString(){ $function = $this-&gt;func; $function();
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by      &#34;&#34; on Monday, January 2, 2023
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
-
-            
-
-
-<ul class="pager">
-    
-    
-    <li class="next">
-        <a href="/page/2/">Older Posts &rarr;</a>
-    </li>
-    
-</ul>
-
-
-       	</div>
-        
-
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-	
-    <section class="visible-md visible-lg">
-	
-        <div class="short-about">
-            
-            <a href="/about">
-               <img src="/img/header.jpg" alt="avatar" style="cursor: pointer" />
-            </a>
-            
-            
-                <p>一名想开发游戏的web手</p>
-            
-           
-           <ul class="list-inline">
-               
-               <li>
-                   <a href="mailto:muscial@outlook.jp">
-                      <span class="fa-stack fa-lg">
-                          <i class="fa fa-circle fa-stack-2x"></i>
-                          <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                      </span>
-                   </a>
-               </li>
-               
-               
-               
-               
-               
-               
-               
-               <li>
-                   <a target="_blank" href="https://github.com/Muscial">
-                       <span class="fa-stack fa-lg">
-                           <i class="fas fa-circle fa-stack-2x"></i>
-                           <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                       </span>
-                   </a>
-               </li>
-               
-               
-               
-               
-               
-               
-            
-            
-               
-               
-               
-               
-                </ul>
+      </div>
+      <div class="hero-visual reveal reveal-2" aria-hidden="true">
+        <div class="astral-frame">
+          <i class="astral-ring ring-a"></i><i class="astral-ring ring-b"></i><i class="astral-ring ring-c"></i>
+          <span class="astral-axis axis-a"></span><span class="astral-axis axis-b"></span>
+          <div class="astral-avatar">
+            <div class="avatar-orbit orbit-inner"></div>
+            <div class="avatar-orbit orbit-outer"></div>
+            <div class="avatar-crop" id="hero-avatar">
+              <span class="avatar-fallback" id="hero-avatar-fallback" style="display:none"></span>
             </div>
-    </section>
-	
-    
-    
-    
-    
-    <section>
-        <hr class="hidden-sm hidden-xs">
-        <h5>FEATURED TAGS</h5>
-        <div class="tags">
-            
-            
-               
-            
-               
-            
+            <span data-i18n="avatarEyebrow">OBSERVER / MUSCIAL</span>
+            <b data-i18n="avatarName">MUSCIAL</b>
+          </div>
+          <div class="astral-coordinate coordinate-a" data-i18n="avatarCoordinatePrimary"></div>
+          <div class="astral-coordinate coordinate-b" data-i18n="avatarCoordinateSecondary"></div>
+          <div class="astral-star"><i></i><i></i></div>
         </div>
+      </div>
+      <div class="pointer-hint" data-i18n="pointerHint">MOVE POINTER / DRIFT THROUGH MEMORY</div>
     </section>
-    
 
-    
-    
-    <section>
-        <hr class="hidden-sm hidden-xs">
-        <h5>FRIENDS</h5>
-        <ul class="list-inline">
-            
-            <li><a target="_blank" href="https://3cly.github.io/link/">3cly的博客</a></li>
-            
-        </ul>
+    <!-- overview -->
+    <section class="overview section-frame reveal reveal-3" id="overview">
+      <div class="section-heading">
+        <div><span class="section-index">01</span><p class="eyebrow" data-i18n="overviewEyebrow">SYSTEM OVERVIEW</p></div>
+        <h2 data-i18n="overviewTitle">观看记录统计。</h2>
+        <p class="desc" data-i18n="personalNote"></p>
+      </div>
+      <div class="stats-grid" id="stats-grid"></div>
+      <div class="overview-note">
+        <span data-i18n="datasetLabel">INITIAL DATASET</span>
+        <i></i>
+        <small data-i18n="dataSourceLabel">DATA SOURCE / BANGUMI API + DOCTOR NOTES</small>
+      </div>
     </section>
-    
-    
-</div>
 
-	</div>
-</div>
+    <!-- top10 -->
+    <section class="top-section section-frame reveal reveal-4" id="top10">
+      <div class="section-heading">
+        <div><span class="section-index">02</span><p class="eyebrow" data-i18n="topEyebrow">PERSONAL PRIORITY / ORBIT</p></div>
+        <h2 data-i18n="topTitle">个人心中 TOP 10</h2>
+        <p class="desc" data-i18n="topDescription"></p>
+      </div>
+      <div class="priority-orbit" id="priority-orbit"></div>
+    </section>
 
+    <!-- records -->
+    <section class="records section-frame reveal" id="records">
+      <div class="section-heading">
+        <div><span class="section-index">03</span><p class="eyebrow" data-i18n="recordsEyebrow">ARCHIVE / FIELD NOTES</p></div>
+        <h2 data-i18n="archiveTitle">ANIME LIST / 观看时间线</h2>
+        <p class="desc" id="records-desc"></p>
+      </div>
+      <div class="records-tabs" id="records-tabs"></div>
 
-
-
-
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">                  
-                    
-                    <li>
-                        <a href="mailto:muscial@outlook.jp">
-                            <span class="fa-stack fa-lg">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-		           
-                    
-                    
-                    
-                    
-
-		            
-                    
-                    
-                    <li>
-                        <a target="_blank" href="https://github.com/Muscial">
-                            <span class="fa-stack fa-lg">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-		            
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-            
-            
-            
-           
-             </ul>
-		<p class="copyright text-muted">
-                    Copyright &copy; Muscial Blog 2024
-                    <br>
-                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
-                    </iframe>
-                </p>
-            </div>
+      <!-- anime panel -->
+      <div class="records-panel active" id="panel-anime">
+        <div class="search-box">
+          <input type="text" id="anime-search" placeholder="">
+          <span aria-hidden="true" style="color:var(--text-faint)">⌕</span>
         </div>
-    </div>
-</footer>
+        <div class="year-chips" id="year-chips"></div>
+        <div id="anime-timeline"></div>
+      </div>
 
+      <!-- watchlist panel -->
+      <div class="records-panel" id="panel-watchlist">
+        <div id="watchlist-timeline"></div>
+      </div>
 
+      <!-- blog panel -->
+      <div class="records-panel" id="panel-blog">
+        <div class="blog-grid" id="blog-grid"></div>
+      </div>
+    </section>
 
+    <!-- note view -->
+    <section class="note-view" id="note-view" style="display:none"></section>
+  </main>
 
-<script>
-    function loadAsync(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
+  <footer class="site-footer" id="site-footer"></footer>
 
-
-
-
-
-
-<script>
-    
-    if($('#tag_cloud').length !== 0){
-        loadAsync("/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-
-<script>
-    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-    function generateCatalog(selector) {
-
-        
-        
-        
-        
-            _containerSelector = 'div.post-container'
-        
-
-        
-        var P = $(_containerSelector), a, n, t, l, i, c;
-        a = P.find('h1,h2,h3,h4,h5,h6');
-
-        
-        $(selector).html('')
-
-        
-        a.each(function () {
-            n = $(this).prop('tagName').toLowerCase();
-            i = "#" + $(this).prop('id');
-            t = $(this).text();
-            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
-            l = $('<li class="' + n + '_nav"></li>').append(c);
-            $(selector).append(l);
-        });
-        return true;
-    }
-
-    generateCatalog(".catalog-body");
-
-    
-    $(".catalog-toggle").click((function (e) {
-        e.preventDefault();
-        $('.side-catalog').toggleClass("fold")
-    }))
-
-    
-
-
-    loadAsync("\/js\/jquery.nav.js", function () {
-        $('.catalog-body').onePageNav({
-            currentClass: "active",
-            changeHash: !1,
-            easing: "swing",
-            filter: "",
-            scrollSpeed: 700,
-            scrollOffset: 0,
-            scrollThreshold: .2,
-            begin: null,
-            end: null,
-            scrollChange: null,
-            padding: 80
-        });
-    });
-</script>
-
-
-
-
-
-
+  <script src="js/util.js"></script>
+  <script src="js/starfield.js"></script>
+  <script src="js/markdown.js"></script>
+  <script src="data/posts-index.js"></script>
+  <script src="data/site-data.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
