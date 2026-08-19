@@ -431,22 +431,22 @@
 
   /* ---------- init ---------- */
   function init() {
-    /* 全部模块初始即渲染，平铺在页面下方 */
-    renderAnime();
-    renderWatchlist();
-    renderBlog();
+    /* 启动屏最先执行：即使后续渲染出错也不会卡屏 */
+    S.initBoot();
+    /* 全部模块初始即渲染，平铺在页面下方；单个模块出错不影响其余部分 */
+    try { renderAnime(); } catch (e) { console.error('renderAnime failed', e); }
+    try { renderWatchlist(); } catch (e) { console.error('renderWatchlist failed', e); }
+    try { renderBlog(); } catch (e) { console.error('renderBlog failed', e); }
     var initial = 'anime';
-    var scrollTo = null;
     try {
       var q = new URLSearchParams(window.location.search).get('tab');
-      if (q && ['anime', 'watchlist', 'blog'].indexOf(q) > -1) { initial = q; scrollTo = q; }
+      if (q && ['anime', 'watchlist', 'blog'].indexOf(q) > -1) initial = q;
       else {
         var h = window.location.hash;
         if (h.indexOf('#records-') === 0 && ['anime', 'watchlist', 'blog'].indexOf(h.slice(9)) > -1) initial = h.slice(9);
       }
     } catch (e) { /* ignore */ }
     setTab(initial, { scroll: false });
-    S.initBoot();
     S.initReveal();
     S.initTopbar();
     S.applyFooter(data);
